@@ -13,3 +13,15 @@ export class Board {
     return "TODO";
   }
 }
+
+export const createBoardCells = (rows: number, columns: number) => {
+  let cells = []
+  for (let i = 0; i < rows; i++) {
+    let row: Array<string> = []
+    for (let j = 0; j < columns; j++) {
+      row.push('.')
+    }
+    cells.push(row)
+  }
+  return cells
+}

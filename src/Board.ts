@@ -21,6 +21,11 @@ export class Board {
     }
     return boardString
   }
+
+  // drop = () => {
+  //   const middleIndex = 
+  //   insertIntoBoardCells(0, )
+  // }
 }
 
 export const createBoardCells = (rows: number, columns: number) => {

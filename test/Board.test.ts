@@ -6,10 +6,11 @@ describe("Board util function", () => {
     const emptyBoardCells = [
         ['.','.','.'],
         ['.','.','.'],
+        ['.','.','.'],
         ['.','.','.']
     ]
     test("createBoardCells creates an empty board", () => {
-        const boardCells = createBoardCells(3,3)
+        const boardCells = createBoardCells(3,4)
         expect(boardCells).to.eql(emptyBoardCells)
     })
 

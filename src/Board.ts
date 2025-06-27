@@ -6,11 +6,20 @@ export class Board {
   constructor(width: number, height: number) {
     this.width = width;
     this.height = height;
-    this.cells = []
+    this.cells = createBoardCells(width, height)
   }
 
   toString() {
-    return "TODO";
+    let boardString = ''
+    for (const row of this.cells) {
+      let rowString = ''
+      for (const rowCell of row) {
+        rowString = rowString.concat(rowCell)
+      }
+      rowString = rowString.concat('\n')
+      boardString = boardString.concat(rowString)
+    }
+    return boardString
   }
 }
 

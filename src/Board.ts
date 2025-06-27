@@ -6,7 +6,7 @@ export class Board {
   constructor(width: number, height: number) {
     this.width = width;
     this.height = height;
-    this.cells = createBoardCells(width, height)
+    this.cells = createBoardCells(height, width)
   }
 
   toString() {

@@ -10,7 +10,7 @@ describe("Board util function", () => {
         ['.','.','.']
     ]
     test("createBoardCells creates an empty board", () => {
-        const boardCells = createBoardCells(3,4)
+        const boardCells = createBoardCells(4,3)
         expect(boardCells).to.eql(emptyBoardCells)
     })
 

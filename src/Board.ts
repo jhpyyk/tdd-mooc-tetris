@@ -22,10 +22,10 @@ export class Board {
     return boardString
   }
 
-  // drop = () => {
-  //   const middleIndex = 
-  //   insertIntoBoardCells(0, )
-  // }
+  drop = (element: string) => {
+    const middleIndex = Math.floor(this.width / 2)
+    this.cells = insertIntoBoardCells(this.cells, 0, middleIndex, element)
+  }
 }
 
 export const createBoardCells = (rows: number, columns: number) => {

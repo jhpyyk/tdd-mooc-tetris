@@ -20,7 +20,7 @@ describe("Board util function", () => {
             ['.','.','.'],
             ['.','X','.']
         ]
-        const resultBoard = insertIntoBoard(board, 2, 1, 'X')
-        expect(resultBoard).to.eql(board)
+        const resultBoardCells = insertIntoBoardCells(board.cells, 2, 1, 'X')
+        expect(resultBoardCells).to.eql(boardCellsWithXInTwoOne)
     })
 })

@@ -36,6 +36,6 @@ export const createBoardCells = (rows: number, columns: number) => {
 }
 
 export const insertIntoBoard = (board: Board, row: number, column: number, elementToInsert: string): Board => {
-  board.cells[row].splice(column, 0, elementToInsert)
+  board.cells[row].splice(column, 1, elementToInsert)
   return board
 }

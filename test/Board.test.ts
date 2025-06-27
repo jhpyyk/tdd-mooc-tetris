@@ -1,5 +1,5 @@
 import { describe, test } from "vitest";
-import { Board, createBoardCells, insertIntoBoard } from "../src/Board";
+import { Board, createBoardCells, insertIntoBoardCells } from "../src/Board";
 import { expect } from "chai";
 
 describe("Board util function", () => {

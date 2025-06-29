@@ -26,6 +26,15 @@ export class Board {
     const middleIndex = Math.floor(this.width / 2)
     this.cells = insertIntoBoardCells(this.cells, 0, middleIndex, element)
   }
+
+  tick = () => {
+    const lastRow = this.height - 1
+    for (let i = lastRow; i > 0; i--) {
+      this.cells[i] = this.cells[i - 1] // move every row downwards
+    }
+    const newFirstRow = ['.','.','.']
+    this.cells[0] = newFirstRow
+  }
 }
 
 export const createBoardCells = (rows: number, columns: number) => {

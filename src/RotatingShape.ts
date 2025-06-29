@@ -27,10 +27,16 @@ export class RotatingShape {
     }
 
     rotateRight = () => {
-        
+        this.cells = transpose(this.cells)
+        this.cells = reverseRows(this.cells)
+        return new RotatingShape(this.cells)
     }
 }
 
+
+const reverseRows = (matrix: Array<Array<string>>): Array<Array<string>> => {
+    return matrix.map(row => row.reverse())
+}
 const transpose = (matrix: Array<Array<string>>): Array<Array<string>> => {
   return matrix[0].map((_col, i) => matrix.map(row => row[i]));
 }

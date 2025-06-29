@@ -22,13 +22,8 @@ export class Board {
     for (const row of this.cells) {
       let rowString = "";
       for (const rowCell of row) {
-        if (rowCell === "empty") {
-          rowString = rowString.concat(".");
-        } else if (rowCell === "falling" && this.fallingShape) {
-          rowString = rowString.concat(this.fallingShape);
-        } else if (isShape(rowCell)) {
-          rowString = rowString.concat(rowCell);
-        }
+        const cellString = formatCellString(rowCell, this.fallingShape)
+        rowString = rowString.concat(cellString)
       }
       rowString = rowString.concat("\n");
       boardString = boardString.concat(rowString);
@@ -67,6 +62,19 @@ export class Board {
       return false;
     }
   };
+}
+
+const formatCellString = (cell: CellState, fallingShape: Shape | null) => {
+  if (cell === "empty") {
+    return '.'
+  } else if (cell === "falling" && fallingShape) {
+    return fallingShape
+  } else if (cell == "falling" && !fallingShape) {
+    throw Error(`Cannot format falling cell ${cell}, because fallingShape is null`)
+  } else if (isShape(cell)) {
+    return cell
+  }
+  throw Error(`Cannot format cell value ${cell} to string`)
 }
 
 const createEmptyRow = (width: number): Row => {

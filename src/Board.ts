@@ -48,11 +48,14 @@ export class Board {
     }
 
     const lastRow = this.height - 1;
-    for (let i = lastRow; i > 0; i--) {
-      this.cells[i] = this.cells[i - 1]; // move every row downwards
+    for (let row = lastRow; row >= 0; row--) {
+      for (let col = 0; col < this.width; col++) {
+        if (this.cells[row][col] === "falling" && isFallingAbleToMoveDown(this.cells, row, col)) {
+          this.cells[row+1][col] = "falling"
+          this.cells[row][col] = "empty"
+        }
+      }
     }
-    const newFirstRow = createEmptyRow(this.width);
-    this.cells[0] = newFirstRow;
   };
 
   hasFalling = () => {
@@ -62,6 +65,10 @@ export class Board {
       return false;
     }
   };
+}
+
+const isFallingAbleToMoveDown = (cells: Cells, row: number, col: number) => {
+  return cells[row+1] && cells[row+1][col] === "empty"
 }
 
 const formatCellString = (cell: CellState, fallingShape: Shape | null) => {

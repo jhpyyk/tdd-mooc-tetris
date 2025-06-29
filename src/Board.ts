@@ -56,7 +56,7 @@ export class Board {
     for (let i = lastRow; i > 0; i--) {
       this.cells[i] = this.cells[i - 1]; // move every row downwards
     }
-    const newFirstRow = createEmptyRow(3);
+    const newFirstRow = createEmptyRow(this.width);
     this.cells[0] = newFirstRow;
   };
 

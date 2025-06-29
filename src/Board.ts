@@ -113,14 +113,6 @@ export const insertIntoBoardCells = (
   return boardCells;
 };
 
-const lastRowHasFalling = (cells: Cells): boolean => {
-  const lastRow = cells[cells.length - 1];
-  if (lastRow.some((el) => el === "falling")) {
-    return true;
-  }
-  return false;
-};
-
 const lockFallingCells = (cells: Cells, fallingShape: Shape): Cells => {
   for (let i = 0; i < cells.length; i++) {
     for (let j = 0; j < cells[i].length; j++) {

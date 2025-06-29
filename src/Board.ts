@@ -41,6 +41,10 @@ export class Board {
     const newFirstRow = createEmptyRow(3)
     this.cells[0] = newFirstRow
   }
+
+  hasFalling = () => {
+    return this.falling
+  }
 }
 
 const createEmptyRow = (width: number): Array<string> => {

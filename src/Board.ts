@@ -32,18 +32,23 @@ export class Board {
     for (let i = lastRow; i > 0; i--) {
       this.cells[i] = this.cells[i - 1] // move every row downwards
     }
-    const newFirstRow = ['.','.','.']
+    const newFirstRow = createEmptyRow(3)
     this.cells[0] = newFirstRow
   }
+}
+
+const createEmptyRow = (width: number): Array<string> => {
+  let row: Array<string> = []
+  for (let i = 0; i < width; i++) {
+    row.push('.')
+  }
+  return row
 }
 
 export const createBoardCells = (rows: number, columns: number) => {
   let cells = []
   for (let i = 0; i < rows; i++) {
-    let row: Array<string> = []
-    for (let j = 0; j < columns; j++) {
-      row.push('.')
-    }
+    const row = createEmptyRow(columns)
     cells.push(row)
   }
   return cells

@@ -8,13 +8,13 @@ export class Board {
   width;
   height;
   cells: Cells;
-  fallingShape: Shape | null;
+  fallingShape: Shape;
 
   constructor(width: number, height: number) {
     this.width = width;
     this.height = height;
     this.cells = createBoardCells(height, width);
-    this.fallingShape = null;
+    this.fallingShape = 'X';
   }
 
   toString() {
@@ -32,7 +32,7 @@ export class Board {
   }
 
   drop = (element: Shape) => {
-    if (this.fallingShape) {
+    if (this.hasFalling()) {
       throw new Error("already falling");
     }
     const middleIndex = Math.floor(this.width / 2);
@@ -54,7 +54,6 @@ export class Board {
           this.cells[row][col] = "empty"
         } else if (this.cells[row][col] === "falling" && !isFallingAbleToMoveDown(this.cells, row, col)) {
           this.cells = lockFallingCells(this.cells, this.fallingShape)
-          this.fallingShape = null
         }
       }
     }
@@ -76,14 +75,12 @@ const isFallingAbleToMoveDown = (cells: Cells, row: number, col: number) => {
   return cells[row+1] && cells[row+1][col] === "empty"
 }
 
-const formatCellString = (cell: CellState, fallingShape: Shape | null) => {
+const formatCellString = (cell: CellState, fallingShape: Shape) => {
   if (cell === "empty") {
     return '.'
-  } else if (cell === "falling" && fallingShape) {
+  } else if (cell === "falling") {
     return fallingShape
-  } else if (cell == "falling" && !fallingShape) {
-    throw Error(`Cannot format falling cell ${cell}, because fallingShape is null`)
-  } else if (isShape(cell)) {
+  }  else if (isShape(cell)) {
     return cell
   }
   throw Error(`Cannot format cell value ${cell} to string`)
@@ -135,9 +132,6 @@ const lockFallingCells = (cells: Cells, fallingShape: Shape): Cells => {
   return cells;
 };
 
-const isShape = (str: string | null): str is Shape => {
-  if (!str) {
-    return false;
-  }
+const isShape = (str: string): str is Shape => {
   return shapes.includes(str as Shape);
 };

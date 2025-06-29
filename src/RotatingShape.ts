@@ -27,9 +27,15 @@ export class RotatingShape {
     }
 
     rotateRight = () => {
-        this.cells = transpose(this.cells)
-        this.cells = reverseRows(this.cells)
-        return new RotatingShape(this.cells)
+        const transposedCells = transpose(this.cells)
+        const reversedCells = reverseRows(transposedCells)
+        return new RotatingShape(reversedCells)
+    }
+
+    rotateLeft = () => {
+        const reversedCells = reverseRows(this.cells)
+        const transposedCells = transpose(reversedCells)
+        return new RotatingShape(transposedCells)
     }
 }
 

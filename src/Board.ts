@@ -94,7 +94,7 @@ const createEmptyRow = (width: number): Row => {
   return row;
 };
 
-export const createBoardCells = (rows: number, columns: number) => {
+const createBoardCells = (rows: number, columns: number) => {
   let cells = [];
   for (let i = 0; i < rows; i++) {
     const row = createEmptyRow(columns);
@@ -103,7 +103,7 @@ export const createBoardCells = (rows: number, columns: number) => {
   return cells;
 };
 
-export const insertIntoBoardCells = (
+const insertIntoBoardCells = (
   boardCells: Cells,
   row: number,
   column: number,

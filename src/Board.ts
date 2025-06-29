@@ -1,4 +1,6 @@
-type Shape = "X" | "Y"
+
+const shapes = ['X', 'Y'] as const
+type Shape = typeof shapes[number]
 type CellState = "empty" | "falling" | Shape
 type Row = Array<CellState>
 type Cells = Array<Row>
@@ -22,10 +24,12 @@ export class Board {
       let rowString = ''
       for (const rowCell of row) {
         if (rowCell === 'empty') {
-        rowString = rowString.concat('.')
-      } else if(rowCell === "falling" && this.fallingShape) {
-        rowString = rowString.concat(this.fallingShape)
-      }
+          rowString = rowString.concat('.')
+        } else if(rowCell === "falling" && this.fallingShape) {
+          rowString = rowString.concat(this.fallingShape)
+        } else if (isShape(rowCell)) {
+          rowString = rowString.concat(rowCell)        
+        }
       }
       rowString = rowString.concat('\n')
       boardString = boardString.concat(rowString)
@@ -43,6 +47,12 @@ export class Board {
   }
 
   tick = () => {
+    if (lastRowHasFalling(this.cells) && this.fallingShape) {
+      this.cells = lockFallingCells(this.cells, this.fallingShape)
+      this.fallingShape = null
+      return
+    }
+
     const lastRow = this.height - 1
     for (let i = lastRow; i > 0; i--) {
       this.cells[i] = this.cells[i - 1] // move every row downwards
@@ -81,3 +91,29 @@ export const insertIntoBoardCells = (boardCells: Cells, row: number, column: num
   boardCells[row].splice(column, 1, elementToInsert)
   return boardCells
 }
+
+const lastRowHasFalling = (cells: Cells): boolean => {
+  const lastRow = cells[cells.length-1]
+  if (lastRow.some(el => el === "falling")) {
+    return true
+  }
+  return false
+}
+
+const lockFallingCells = (cells: Cells, fallingShape: Shape): Cells => {
+  for (let i=0; i<cells.length; i++) {
+    for (let j=0; j<cells[i].length; j++) {
+      if (cells[i][j] === "falling") {
+        cells[i][j] = fallingShape
+      }
+    }
+  }
+  return cells
+}
+
+const isShape = (str: string | null): str is Shape => {
+  if (!str) {
+    return false
+  }
+   return shapes.includes(str as Shape)
+} 

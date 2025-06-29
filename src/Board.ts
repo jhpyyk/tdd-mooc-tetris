@@ -41,10 +41,9 @@ export class Board {
   };
 
   tick = () => {
-    if (lastRowHasFalling(this.cells) && this.fallingShape) {
-      this.cells = lockFallingCells(this.cells, this.fallingShape);
-      this.fallingShape = null;
-      return;
+    if (!this.fallingShape) {
+      console.log("no falling shape")
+      return
     }
 
     const lastRow = this.height - 1;
@@ -53,6 +52,9 @@ export class Board {
         if (this.cells[row][col] === "falling" && isFallingAbleToMoveDown(this.cells, row, col)) {
           this.cells[row+1][col] = "falling"
           this.cells[row][col] = "empty"
+        } else if (this.cells[row][col] === "falling" && !isFallingAbleToMoveDown(this.cells, row, col)) {
+          this.cells = lockFallingCells(this.cells, this.fallingShape)
+          this.fallingShape = null
         }
       }
     }

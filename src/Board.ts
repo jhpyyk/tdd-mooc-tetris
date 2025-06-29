@@ -1,7 +1,9 @@
+type BlockState = "empty" | "falling" | "locked"
+
 export class Board {
   width;
   height;
-  cells: Array<Array<string>>;
+  cells: Array<Array<BlockState>>;
   fallingShape: string | null;
 
   constructor(width: number, height: number) {
@@ -55,8 +57,8 @@ export class Board {
   }
 }
 
-const createEmptyRow = (width: number): Array<string> => {
-  let row: Array<string> = []
+const createEmptyRow = (width: number): Array<BlockState> => {
+  let row: Array<BlockState> = []
   for (let i = 0; i < width; i++) {
     row.push('empty')
   }
@@ -72,7 +74,7 @@ export const createBoardCells = (rows: number, columns: number) => {
   return cells
 }
 
-export const insertIntoBoardCells = (boardCells: Array<Array<string>>, row: number, column: number, elementToInsert: string): Array<Array<string>> => {
+export const insertIntoBoardCells = (boardCells: Array<Array<BlockState>>, row: number, column: number, elementToInsert: BlockState): Array<Array<BlockState>> => {
   boardCells[row].splice(column, 1, elementToInsert)
   return boardCells
 }

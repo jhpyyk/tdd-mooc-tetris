@@ -1,6 +1,6 @@
 type Shape = "X" | "Y"
-type BlockState = "empty" | "falling" | Shape
-type Row = Array<BlockState>
+type CellState = "empty" | "falling" | Shape
+type Row = Array<CellState>
 type Cells = Array<Row>
 
 export class Board {
@@ -77,7 +77,7 @@ export const createBoardCells = (rows: number, columns: number) => {
   return cells
 }
 
-export const insertIntoBoardCells = (boardCells: Cells, row: number, column: number, elementToInsert: BlockState): Cells => {
+export const insertIntoBoardCells = (boardCells: Cells, row: number, column: number, elementToInsert: CellState): Cells => {
   boardCells[row].splice(column, 1, elementToInsert)
   return boardCells
 }

@@ -1,4 +1,5 @@
-type BlockState = "empty" | "falling" | "locked"
+type Shape = "X" | "Y"
+type BlockState = "empty" | "falling" | Shape
 type Row = Array<BlockState>
 type Cells = Array<Row>
 
@@ -6,7 +7,7 @@ export class Board {
   width;
   height;
   cells: Cells;
-  fallingShape: string | null;
+  fallingShape: Shape | null;
 
   constructor(width: number, height: number) {
     this.width = width;
@@ -32,7 +33,7 @@ export class Board {
     return boardString
   }
 
-  drop = (element: string) => {
+  drop = (element: Shape) => {
     if (this.fallingShape) {
       throw new Error("already falling")
     }

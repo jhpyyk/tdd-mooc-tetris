@@ -2,13 +2,13 @@ export class Board {
   width;
   height;
   cells: Array<Array<string>>;
-  falling: boolean;
+  fallingShape: string | null;
 
   constructor(width: number, height: number) {
     this.width = width;
     this.height = height;
     this.cells = createBoardCells(height, width)
-    this.falling = false
+    this.fallingShape = null
   }
 
   toString() {
@@ -16,7 +16,11 @@ export class Board {
     for (const row of this.cells) {
       let rowString = ''
       for (const rowCell of row) {
-        rowString = rowString.concat(rowCell)
+        if (rowCell === 'empty') {
+        rowString = rowString.concat('.')
+      } else if(rowCell === "falling" && this.fallingShape) {
+        rowString = rowString.concat(this.fallingShape)
+      }
       }
       rowString = rowString.concat('\n')
       boardString = boardString.concat(rowString)
@@ -25,12 +29,12 @@ export class Board {
   }
 
   drop = (element: string) => {
-    if (this.falling) {
+    if (this.fallingShape) {
       throw new Error("already falling")
     }
     const middleIndex = Math.floor(this.width / 2)
-    this.falling = true
-    this.cells = insertIntoBoardCells(this.cells, 0, middleIndex, element)
+    this.fallingShape = element
+    this.cells = insertIntoBoardCells(this.cells, 0, middleIndex, "falling")
   }
 
   tick = () => {
@@ -43,14 +47,18 @@ export class Board {
   }
 
   hasFalling = () => {
-    return this.falling
+    if (this.fallingShape) {
+      return true
+    } else {
+      return false
+    }
   }
 }
 
 const createEmptyRow = (width: number): Array<string> => {
   let row: Array<string> = []
   for (let i = 0; i < width; i++) {
-    row.push('.')
+    row.push('empty')
   }
   return row
 }

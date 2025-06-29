@@ -2,11 +2,13 @@ export class Board {
   width;
   height;
   cells: Array<Array<string>>;
+  falling: boolean;
 
   constructor(width: number, height: number) {
     this.width = width;
     this.height = height;
     this.cells = createBoardCells(height, width)
+    this.falling = false
   }
 
   toString() {
@@ -23,7 +25,11 @@ export class Board {
   }
 
   drop = (element: string) => {
+    if (this.falling) {
+      throw new Error("already falling")
+    }
     const middleIndex = Math.floor(this.width / 2)
+    this.falling = true
     this.cells = insertIntoBoardCells(this.cells, 0, middleIndex, element)
   }
 

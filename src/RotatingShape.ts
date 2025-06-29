@@ -10,7 +10,6 @@ export class RotatingShape {
             let trimmedRow = row.trim().split('')
             resultRows = resultRows.concat([trimmedRow])
         }
-        console.log(new RotatingShape(resultRows))
         return new RotatingShape(resultRows)
     }
 
@@ -26,4 +25,12 @@ export class RotatingShape {
         }
         return shapeString;
     }
+
+    rotateRight = () => {
+        
+    }
+}
+
+const transpose = (matrix: Array<Array<string>>): Array<Array<string>> => {
+  return matrix[0].map((_col, i) => matrix.map(row => row[i]));
 }

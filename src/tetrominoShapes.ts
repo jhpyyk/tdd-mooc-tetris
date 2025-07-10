@@ -1,12 +1,20 @@
 import { rotateCounterClockwise } from "./Shape"
 
-export const rotateNTimes = (matrix: Array<Array<string>>, n: number): Array<Array<string>> => {
+const rotateNTimes = (matrix: Array<Array<string>>, n: number): Array<Array<string>> => {
     let rotated = matrix;
     for (let i = 0; i < n; i++) {
         rotated = rotateCounterClockwise(rotated);
     }
     return rotated;
 };
+
+const createOrientations = (matrix: Array<Array<string>>, orientations: number): Array<Array<Array<string>>> => {
+    let orientationArray: Array<Array<Array<string>>> = []
+    for (let i = 0; i<orientations; i++) {
+        orientationArray = orientationArray.concat(rotateNTimes(matrix, i))
+    }
+    return orientationArray
+}
 
 
 export const TETROMINO_T_SHAPE = [
@@ -15,7 +23,7 @@ export const TETROMINO_T_SHAPE = [
     ['.','.','.'],
 ]
 
-// export const TETROMINO_T = [rotateNTimes(TETROMINO_T_SHAPE, 0), rotateNTimes] 
+export const TETROMINO_T = createOrientations(TETROMINO_T_SHAPE, 4) 
 
 export const TETROMINO_S = [
     ['.','S','S'],

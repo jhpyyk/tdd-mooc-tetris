@@ -1,9 +1,9 @@
-import { rotateCounterClockwise } from "./Shape"
+import { rotateClockwise } from "./Shape"
 
 const rotateNTimes = (matrix: Array<Array<string>>, n: number): Array<Array<string>> => {
     let rotated = matrix;
     for (let i = 0; i < n; i++) {
-        rotated = rotateCounterClockwise(rotated);
+        rotated = rotateClockwise(rotated);
     }
     return rotated;
 };
@@ -11,8 +11,9 @@ const rotateNTimes = (matrix: Array<Array<string>>, n: number): Array<Array<stri
 const createOrientations = (matrix: Array<Array<string>>, orientations: number): Array<Array<Array<string>>> => {
     let orientationArray: Array<Array<Array<string>>> = []
     for (let i = 0; i<orientations; i++) {
-        orientationArray = orientationArray.concat(rotateNTimes(matrix, i))
+        orientationArray.push(rotateNTimes(matrix, i))
     }
+    console.log(orientationArray)
     return orientationArray
 }
 

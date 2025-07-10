@@ -2,25 +2,29 @@ import Shape, { reverseRows, rotateClockwise, rotateCounterClockwise, transpose 
 import { TETROMINO_I, TETROMINO_J, TETROMINO_L, TETROMINO_O, TETROMINO_S, TETROMINO_T, TETROMINO_T_SHAPE, TETROMINO_Z } from "./tetrominoShapes";
 
 type TetrominoShape = Array<Array<string>>
+type TetrominoOrientations = Array<TetrominoShape>
 
 export class Tetromino implements Shape {
     static I_SHAPE = new Tetromino(TETROMINO_I)
     static O_SHAPE = new Tetromino(TETROMINO_O)
-    static T_SHAPE = new Tetromino(TETROMINO_T_SHAPE)
+    static T_SHAPE = new Tetromino(TETROMINO_T, 0)
     static J_SHAPE = new Tetromino(TETROMINO_J)
     static L_SHAPE = new Tetromino(TETROMINO_L)
     static S_SHAPE = new Tetromino(TETROMINO_S)
     static Z_SHAPE = new Tetromino(TETROMINO_Z)
 
-    cells: TetrominoShape;
+    orientationNumber: number;
 
-    constructor(cells: TetrominoShape) {
-        this.cells = cells
+    tetrominoOrientations: TetrominoOrientations
+
+    constructor(tetromino: TetrominoOrientations, orientation: number) {
+        this.tetrominoOrientations = tetromino
+        this.orientationNumber = orientation
     }
 
     toString = () => {
         let shapeString = "";
-        for (const row of this.cells) {
+        for (const row of this.tetrominoOrientations[this.orientationNumber]) {
             let rowString = "";
             for (const rowCell of row) {
             rowString = rowString.concat(rowCell)
@@ -32,12 +36,18 @@ export class Tetromino implements Shape {
     }
 
     rotateRight = () => {
-        const rotated = rotateClockwise(this.cells)
-        return new Tetromino(rotated)
+        let newOrientation = this.orientationNumber + 1
+        if (newOrientation > this.tetrominoOrientations.length - 1) {
+            newOrientation = 0
+        }
+        return new Tetromino(this.tetrominoOrientations, newOrientation)
     }
 
     rotateLeft = () => {
-        const rotated = rotateCounterClockwise(this.cells)
-        return new Tetromino(rotated)
+        let newOrientation = this.orientationNumber - 1
+        if (newOrientation < 0) {
+            newOrientation = this.tetrominoOrientations.length - 1 
+        }
+        return new Tetromino(this.tetrominoOrientations, newOrientation)
     }
 }

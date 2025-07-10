@@ -52,15 +52,12 @@ export class Board {
       return
     }
 
-    const lastRow = this.height - 1;
-    for (let row = lastRow; row >= 0; row--) {
-      for (let col = 0; col < this.width; col++) {
-        if (this.cells[row][col] === "f" && !isFallingAbleToMoveDown(this.cells, row, col)) {
-          this.cells = lockFallingCells(this.cells, this.fallingShape)
-          return
-        }
-      }
+    
+    if (!isAllFallingCellsAbleToMoveDown(this.cells)) {
+      this.cells = lockFallingCells(this.cells, this.fallingShape)
+      return
     }
+    const lastRow = this.height - 1;
     for (let row = lastRow; row >= 0; row--) {
       for (let col = 0; col < this.width; col++) {
         if (this.cells[row][col] === "f" && isFallingAbleToMoveDown(this.cells, row, col)) {
@@ -87,7 +84,7 @@ const isFallingAbleToMoveDown = (cells: Cells, row: number, col: number) => {
   return cells[row+1] && ['.', 'f'].includes(cells[row+1][col])
 }
 
-const isAllFallingCellsAbleToMoveDown = (cells: Cells) => {
+const isAllFallingCellsAbleToMoveDown = (cells: Cells): boolean => {
   const lastRow = cells.length - 1;
   const width = cells[0].length
     for (let row = lastRow; row >= 0; row--) {
@@ -97,6 +94,7 @@ const isAllFallingCellsAbleToMoveDown = (cells: Cells) => {
         }
       }
     }
+    return true
 }
 
 const formatCellString = (cell: CellState, fallingShape: Shape | undefined) => {

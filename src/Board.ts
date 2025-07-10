@@ -1,6 +1,6 @@
-const shapes = ["X", "Y"] as const;
-type Shape = (typeof shapes)[number];
-type CellState = "empty" | "falling" | Shape;
+const shapeChars = ["X", "Y"] as const;
+type ShapeChar = (typeof shapeChars)[number];
+type CellState = "empty" | "falling" | ShapeChar;
 type Row = Array<CellState>;
 type Cells = Array<Row>;
 
@@ -8,7 +8,7 @@ export class Board {
   width;
   height;
   cells: Cells;
-  fallingShape: Shape;
+  fallingShape: ShapeChar;
 
   constructor(width: number, height: number) {
     this.width = width;
@@ -31,7 +31,7 @@ export class Board {
     return boardString;
   }
 
-  drop = (element: Shape) => {
+  drop = (element: ShapeChar) => {
     if (this.hasFalling()) {
       throw new Error("already falling");
     }
@@ -75,7 +75,7 @@ const isFallingAbleToMoveDown = (cells: Cells, row: number, col: number) => {
   return cells[row+1] && cells[row+1][col] === "empty"
 }
 
-const formatCellString = (cell: CellState, fallingShape: Shape) => {
+const formatCellString = (cell: CellState, fallingShape: ShapeChar) => {
   if (cell === "empty") {
     return '.'
   } else if (cell === "falling") {
@@ -113,7 +113,7 @@ const insertIntoBoardCells = (
   return boardCells;
 };
 
-const lockFallingCells = (cells: Cells, fallingShape: Shape): Cells => {
+const lockFallingCells = (cells: Cells, fallingShape: ShapeChar): Cells => {
   for (let i = 0; i < cells.length; i++) {
     for (let j = 0; j < cells[i].length; j++) {
       if (cells[i][j] === "falling") {
@@ -124,6 +124,6 @@ const lockFallingCells = (cells: Cells, fallingShape: Shape): Cells => {
   return cells;
 };
 
-const isShape = (str: string): str is Shape => {
-  return shapes.includes(str as Shape);
+const isShape = (str: string): str is ShapeChar => {
+  return shapeChars.includes(str as ShapeChar);
 };

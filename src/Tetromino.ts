@@ -3,13 +3,16 @@ import { TETROMINO_T } from "./tetrominoShapes";
 
 type TetrominoShape = Array<Array<string>>
 
-class Tetromino implements Shape {
+export class Tetromino implements Shape {
+
+    static T_SHAPE = new Tetromino(TETROMINO_T)
     cells: TetrominoShape;
+
     constructor(cells: TetrominoShape) {
         this.cells = cells
     }
 
-    T_SHAPE = new Tetromino(TETROMINO_T)
+    
 
     toString = () => {
         let shapeString = "";
@@ -36,5 +39,3 @@ class Tetromino implements Shape {
         return new Tetromino(transposedCells)
     }
 }
-
-export default Tetromino

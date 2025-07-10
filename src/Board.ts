@@ -55,11 +55,11 @@ export class Board {
     const lastRow = this.height - 1;
     for (let row = lastRow; row >= 0; row--) {
       for (let col = 0; col < this.width; col++) {
-        if (this.cells[row][col] === "f" && isFallingAbleToMoveDown(this.cells, row, col)) {
+        if (this.cells[row][col] === "f" && !isFallingAbleToMoveDown(this.cells, row, col)) {
+          this.cells = lockFallingCells(this.cells, this.fallingShape)
+        } else if (this.cells[row][col] === "f" && isFallingAbleToMoveDown(this.cells, row, col)) {
           this.cells[row+1][col] = "f"
           this.cells[row][col] = "."
-        } else if (this.cells[row][col] === "f" && !isFallingAbleToMoveDown(this.cells, row, col)) {
-          this.cells = lockFallingCells(this.cells, this.fallingShape)
         }
       }
     }

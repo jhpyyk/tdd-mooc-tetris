@@ -1,12 +1,12 @@
-import Shape, { ShapeCells } from "./Shape";
+import {Shape, ShapeCells } from "./Shape";
 
 type BlockOrientations = Array<ShapeCells>
 
-export const BLOCK_SHAPE_X = [
+export const BLOCK_SHAPE_X: BlockOrientations = [
     [['X']]
 ]
 
-export const BLOCK_SHAPE_Y = [
+export const BLOCK_SHAPE_Y:BlockOrientations = [
     [['Y']]
 ]
 

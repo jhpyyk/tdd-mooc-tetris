@@ -1,5 +1,5 @@
 import { OneByOneBlock } from "./OneByOneBlock";
-import Shape, { isShapeChar, ShapeChar } from "./Shape";
+import { Shape,isShapeChar, ShapeChar } from "./Shape";
 import { Tetromino } from "./Tetromino";
 
 type CellState = "f" | ShapeChar;

@@ -3,7 +3,7 @@ export type ShapeChar = (typeof shapeChars)[number];
 
 export type ShapeCells = Array<Array<ShapeChar>>
 
-interface Shape {
+export interface Shape {
     cells: ShapeCells
 
     toString: () => string
@@ -13,7 +13,6 @@ interface Shape {
     rotateLeft: () => Shape
 }
 
-export default Shape;
 export const reverseRows = (matrix: ShapeCells): ShapeCells => {
     return matrix.map(row => row.reverse());
 };

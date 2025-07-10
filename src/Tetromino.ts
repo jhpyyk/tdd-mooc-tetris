@@ -1,4 +1,4 @@
-import Shape, { reverseRows, rotateClockwise, rotateCounterClockwise, ShapeCells, transpose } from "./Shape";
+import { Shape, ShapeCells} from "./Shape";
 import { TETROMINO_I, TETROMINO_J, TETROMINO_L, TETROMINO_O, TETROMINO_S, TETROMINO_T, TETROMINO_T_SHAPE, TETROMINO_Z } from "./tetrominoShapes";
 
 type TetrominoOrientations = Array<ShapeCells>

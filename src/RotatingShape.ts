@@ -1,9 +1,11 @@
-export class RotatingShape {
+import Shape from "./Shape";
+
+export class RotatingShape implements Shape {
     cells: Array<Array<string>>;
     constructor(cells: Array<Array<string>>) {
         this.cells = cells
     }
-    static fromString = (str: string) => {
+    static fromString = (str: string): RotatingShape => {
         const rows = str.split('\n')
         let resultRows: Array<Array<string>> = []
         for (const row of rows) {

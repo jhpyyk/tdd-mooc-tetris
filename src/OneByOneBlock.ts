@@ -3,7 +3,7 @@ import Shape from "./Shape";
 type BlockShape = Array<Array<string>>
 type BlockOrientations = Array<BlockShape>
 
-const BLOCK_SHAPE = [
+export const BLOCK_SHAPE = [
     [['X']]
 ]
 

@@ -2,7 +2,7 @@ import { OneByOneBlock } from "./OneByOneBlock";
 import Shape, { isShapeChar, ShapeChar } from "./Shape";
 import { Tetromino } from "./Tetromino";
 
-type CellState = "e" | "f" | ShapeChar;
+type CellState = "f" | ShapeChar;
 type Row = Array<CellState>;
 type Cells = Array<Row>;
 
@@ -57,7 +57,7 @@ export class Board {
       for (let col = 0; col < this.width; col++) {
         if (this.cells[row][col] === "f" && isFallingAbleToMoveDown(this.cells, row, col)) {
           this.cells[row+1][col] = "f"
-          this.cells[row][col] = "e"
+          this.cells[row][col] = "."
         } else if (this.cells[row][col] === "f" && !isFallingAbleToMoveDown(this.cells, row, col)) {
           this.cells = lockFallingCells(this.cells, this.fallingShape)
         }
@@ -78,11 +78,11 @@ export class Board {
 }
 
 const isFallingAbleToMoveDown = (cells: Cells, row: number, col: number) => {
-  return cells[row+1] && cells[row+1][col] === "e"
+  return cells[row+1] && cells[row+1][col] === "."
 }
 
 const formatCellString = (cell: CellState, fallingShape: Shape | undefined) => {
-  if (cell === "e") {
+  if (cell === ".") {
     return '.'
   } else if (cell === "f") {
     if (!fallingShape) {
@@ -98,7 +98,7 @@ const formatCellString = (cell: CellState, fallingShape: Shape | undefined) => {
 const createEmptyRow = (width: number): Row => {
   let row: Row = [];
   for (let i = 0; i < width; i++) {
-    row.push("e");
+    row.push(".");
   }
   return row;
 };
@@ -134,13 +134,12 @@ const lockFallingCells = (cells: Cells, fallingShape: Shape): Cells => {
 };
 
 const getShapeByChar = (char: ShapeChar): Shape => {
-  switch (char) {
-    case "X":
-      return OneByOneBlock.BLOCK_X
-    case "Y":
-      return OneByOneBlock.BLOCK_Y
-    case "T":
-      return Tetromino.T_SHAPE
+  if (char === "X") {
+    return OneByOneBlock.BLOCK_X
+  } else if (char === "Y") {
+    return OneByOneBlock.BLOCK_Y
+  } else {
+    throw Error(`Cannot get shape from char ${char}`)
   }
 }
 

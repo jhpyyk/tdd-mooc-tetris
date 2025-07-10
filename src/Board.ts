@@ -57,7 +57,13 @@ export class Board {
       for (let col = 0; col < this.width; col++) {
         if (this.cells[row][col] === "f" && !isFallingAbleToMoveDown(this.cells, row, col)) {
           this.cells = lockFallingCells(this.cells, this.fallingShape)
-        } else if (this.cells[row][col] === "f" && isFallingAbleToMoveDown(this.cells, row, col)) {
+          return
+        }
+      }
+    }
+    for (let row = lastRow; row >= 0; row--) {
+      for (let col = 0; col < this.width; col++) {
+        if (this.cells[row][col] === "f" && isFallingAbleToMoveDown(this.cells, row, col)) {
           this.cells[row+1][col] = "f"
           this.cells[row][col] = "."
         }
@@ -78,7 +84,7 @@ export class Board {
 }
 
 const isFallingAbleToMoveDown = (cells: Cells, row: number, col: number) => {
-  return cells[row+1] && cells[row+1][col] === "."
+  return cells[row+1] && ['.', 'f'].includes(cells[row+1][col])
 }
 
 const formatCellString = (cell: CellState, fallingShape: Shape | undefined) => {

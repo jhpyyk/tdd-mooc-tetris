@@ -72,3 +72,5 @@ export const TETROMINO_O_SHAPE = [
     ['.','O','O'],
     ['.','.','.'],
 ]
+
+export const TETROMINO_O = createOrientations(TETROMINO_O_SHAPE, 1) 

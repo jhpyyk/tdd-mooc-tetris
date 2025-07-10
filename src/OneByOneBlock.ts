@@ -1,7 +1,6 @@
 import Shape, { ShapeCells } from "./Shape";
 
-type BlockShape = Array<Array<string>>
-type BlockOrientations = Array<BlockShape>
+type BlockOrientations = Array<ShapeCells>
 
 export const BLOCK_SHAPE_X = [
     [['X']]

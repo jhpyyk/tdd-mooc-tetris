@@ -1,8 +1,7 @@
 import Shape, { reverseRows, rotateClockwise, rotateCounterClockwise, ShapeCells, transpose } from "./Shape";
 import { TETROMINO_I, TETROMINO_J, TETROMINO_L, TETROMINO_O, TETROMINO_S, TETROMINO_T, TETROMINO_T_SHAPE, TETROMINO_Z } from "./tetrominoShapes";
 
-type TetrominoShape = Array<Array<string>>
-type TetrominoOrientations = Array<TetrominoShape>
+type TetrominoOrientations = Array<ShapeCells>
 
 export class Tetromino implements Shape {
     static I_SHAPE = new Tetromino(TETROMINO_I, 0)

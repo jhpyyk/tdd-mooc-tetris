@@ -1,4 +1,7 @@
-export type ShapeCells = Array<Array<string>>
+const shapeChars = ["X", "Y", "T"] as const;
+export type ShapeChar = (typeof shapeChars)[number];
+
+export type ShapeCells = Array<Array<ShapeChar>>
 
 interface Shape {
     cells: ShapeCells
@@ -29,4 +32,8 @@ export const rotateCounterClockwise = (matrix: Array<Array<string>>): Array<Arra
     const transposedCells = transpose(reversedCells)
     return transposedCells
 }
+
+export const isShapeChar = (str: string): str is ShapeChar => {
+  return shapeChars.includes(str as ShapeChar);
+};
 

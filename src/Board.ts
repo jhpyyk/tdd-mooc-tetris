@@ -1,9 +1,7 @@
 import { OneByOneBlock } from "./OneByOneBlock";
-import Shape from "./Shape";
+import Shape, { isShapeChar, ShapeChar } from "./Shape";
 import { Tetromino } from "./Tetromino";
 
-const shapeChars = ["X", "Y", "T"] as const;
-type ShapeChar = (typeof shapeChars)[number];
 type CellState = "e" | "f" | ShapeChar;
 type Row = Array<CellState>;
 type Cells = Array<Row>;
@@ -135,10 +133,6 @@ const lockFallingCells = (cells: Cells, fallingShape: Shape): Cells => {
   return cells;
 };
 
-const isShapeChar = (str: string): str is ShapeChar => {
-  return shapeChars.includes(str as ShapeChar);
-};
-
 const getShapeByChar = (char: ShapeChar): Shape => {
   switch (char) {
     case "X":
@@ -149,3 +143,10 @@ const getShapeByChar = (char: ShapeChar): Shape => {
       return Tetromino.T_SHAPE
   }
 }
+
+
+// const insertShapeIntoBoardCells = (boardCells: Cells, row: number, column: number, shape: Shape): Cells => {
+//   for (const shapeRow of shape.cells) {
+//     boardCells[row].splice(column, shapeRow.length, ...shapeRow as CellState)
+//   }
+// }

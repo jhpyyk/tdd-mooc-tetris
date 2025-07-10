@@ -1,4 +1,4 @@
-import Shape, { reverseRows, transpose } from "./Shape";
+import Shape, { reverseRows, rotateClockwise, rotateCounterClockwise, transpose } from "./Shape";
 import { TETROMINO_I, TETROMINO_J, TETROMINO_L, TETROMINO_O, TETROMINO_S, TETROMINO_T, TETROMINO_Z } from "./tetrominoShapes";
 
 type TetrominoShape = Array<Array<string>>
@@ -32,14 +32,12 @@ export class Tetromino implements Shape {
     }
 
     rotateRight = () => {
-        const transposedCells = transpose(this.cells)
-        const reversedCells = reverseRows(transposedCells)
-        return new Tetromino(reversedCells)
+        const rotated = rotateClockwise(this.cells)
+        return new Tetromino(rotated)
     }
 
     rotateLeft = () => {
-        const reversedCells = reverseRows(this.cells)
-        const transposedCells = transpose(reversedCells)
-        return new Tetromino(transposedCells)
+        const rotated = rotateCounterClockwise(this.cells)
+        return new Tetromino(rotated)
     }
 }

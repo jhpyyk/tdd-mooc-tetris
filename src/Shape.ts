@@ -14,10 +14,14 @@ export const transpose = (matrix: Array<Array<string>>): Array<Array<string>> =>
     return matrix[0].map((_col, i) => matrix.map(row => row[i]));
 };
 
-export const TETROMINO_SHAPE = {
-    T_SHAPE: [
-        ['.','T','.'],
-        ['T','T','T'],
-        ['.','.','.'],
-    ]
-} as const
+export const rotateClockwise = (matrix: Array<Array<string>>): Array<Array<string>> => {
+    const transposedCells = transpose(matrix)
+    const reversedCells = reverseRows(transposedCells)
+    return reversedCells
+}
+
+export const rotateCounterClockwise = (matrix: Array<Array<string>>): Array<Array<string>> => {
+    const reversedCells = reverseRows(matrix)
+    const transposedCells = transpose(reversedCells)
+    return transposedCells
+} 

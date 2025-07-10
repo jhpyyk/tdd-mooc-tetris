@@ -1,4 +1,8 @@
+export type ShapeCells = Array<Array<string>>
+
 interface Shape {
+    cells: ShapeCells
+
     toString: () => string
 
     rotateRight: () => Shape

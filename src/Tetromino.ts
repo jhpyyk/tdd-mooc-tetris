@@ -1,4 +1,4 @@
-import Shape, { reverseRows, rotateClockwise, rotateCounterClockwise, transpose } from "./Shape";
+import Shape, { reverseRows, rotateClockwise, rotateCounterClockwise, ShapeCells, transpose } from "./Shape";
 import { TETROMINO_I, TETROMINO_J, TETROMINO_L, TETROMINO_O, TETROMINO_S, TETROMINO_T, TETROMINO_T_SHAPE, TETROMINO_Z } from "./tetrominoShapes";
 
 type TetrominoShape = Array<Array<string>>
@@ -17,9 +17,12 @@ export class Tetromino implements Shape {
 
     tetrominoOrientations: TetrominoOrientations
 
+    cells: ShapeCells
+
     constructor(tetromino: TetrominoOrientations, orientation: number) {
         this.tetrominoOrientations = tetromino
         this.orientationNumber = orientation
+        this.cells = this.tetrominoOrientations[this.orientationNumber]
     }
 
     toString = () => {

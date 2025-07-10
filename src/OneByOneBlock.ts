@@ -1,4 +1,4 @@
-import Shape from "./Shape";
+import Shape, { ShapeCells } from "./Shape";
 
 type BlockShape = Array<Array<string>>
 type BlockOrientations = Array<BlockShape>
@@ -18,10 +18,12 @@ export class OneByOneBlock implements Shape {
 
     blockOrientations: BlockOrientations
     orientationNumber: number
+    cells: ShapeCells
 
     constructor(block: BlockOrientations, orientation: number) {
         this.blockOrientations = block
         this.orientationNumber = orientation
+        this.cells = this.blockOrientations[this.orientationNumber]
     }
 
     toString = () => {

@@ -87,6 +87,18 @@ const isFallingAbleToMoveDown = (cells: Cells, row: number, col: number) => {
   return cells[row+1] && ['.', 'f'].includes(cells[row+1][col])
 }
 
+const isAllFallingCellsAbleToMoveDown = (cells: Cells) => {
+  const lastRow = cells.length - 1;
+  const width = cells[0].length
+    for (let row = lastRow; row >= 0; row--) {
+      for (let col = 0; col < width; col++) {
+        if (cells[row][col] === "f" && !isFallingAbleToMoveDown(cells, row, col)) {
+          return false
+        }
+      }
+    }
+}
+
 const formatCellString = (cell: CellState, fallingShape: Shape | undefined) => {
   if (cell === ".") {
     return '.'

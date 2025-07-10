@@ -1,4 +1,4 @@
-import Shape from "./Shape";
+import Shape, { reverseRows, transpose } from "./Shape";
 
 export class RotatingShape implements Shape {
     cells: Array<Array<string>>;
@@ -39,12 +39,4 @@ export class RotatingShape implements Shape {
         const transposedCells = transpose(reversedCells)
         return new RotatingShape(transposedCells)
     }
-}
-
-
-const reverseRows = (matrix: Array<Array<string>>): Array<Array<string>> => {
-    return matrix.map(row => row.reverse())
-}
-const transpose = (matrix: Array<Array<string>>): Array<Array<string>> => {
-  return matrix[0].map((_col, i) => matrix.map(row => row[i]));
 }

@@ -1,7 +1,8 @@
 import { OneByOneBlock } from "./OneByOneBlock";
 import Shape from "./Shape";
+import { Tetromino } from "./Tetromino";
 
-const shapeChars = ["X", "Y"] as const;
+const shapeChars = ["X", "Y", "T"] as const;
 type ShapeChar = (typeof shapeChars)[number];
 type CellState = "e" | "f" | ShapeChar;
 type Row = Array<CellState>;
@@ -144,5 +145,7 @@ const getShapeByChar = (char: ShapeChar): Shape => {
       return OneByOneBlock.BLOCK_X
     case "Y":
       return OneByOneBlock.BLOCK_Y
+    case "T":
+      return Tetromino.T_SHAPE
   }
 }

@@ -13,3 +13,11 @@ export const reverseRows = (matrix: Array<Array<string>>): Array<Array<string>> 
 export const transpose = (matrix: Array<Array<string>>): Array<Array<string>> => {
     return matrix[0].map((_col, i) => matrix.map(row => row[i]));
 };
+
+export const TETROMINO_SHAPE = {
+    T_SHAPE: [
+        ['.','T','.'],
+        ['T','T','T'],
+        ['.','.','.'],
+    ]
+} as const

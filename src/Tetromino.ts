@@ -1,10 +1,16 @@
 import Shape, { reverseRows, transpose } from "./Shape";
+import { TETROMINO_T } from "./tetrominoShapes";
+
+type TetrominoShape = Array<Array<string>>
 
 class Tetromino implements Shape {
-    cells: Array<Array<string>>;
-    constructor(cells: Array<Array<string>>) {
+    cells: TetrominoShape;
+    constructor(cells: TetrominoShape) {
         this.cells = cells
     }
+
+    T_SHAPE = new Tetromino(TETROMINO_T)
+
     toString = () => {
         let shapeString = "";
         for (const row of this.cells) {

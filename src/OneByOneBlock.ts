@@ -1,4 +1,4 @@
-import {Shape, ShapeCells } from "./Shape";
+import {Shape, ShapeCells, ShapeChar } from "./Shape";
 
 type BlockOrientations = Array<ShapeCells>
 
@@ -12,17 +12,19 @@ export const BLOCK_SHAPE_Y:BlockOrientations = [
 
 export class OneByOneBlock implements Shape {
 
-    static BLOCK_X = new OneByOneBlock(BLOCK_SHAPE_X, 0)
-    static BLOCK_Y = new OneByOneBlock(BLOCK_SHAPE_Y, 0)
+    static BLOCK_X = new OneByOneBlock(BLOCK_SHAPE_X, 0, 'X')
+    static BLOCK_Y = new OneByOneBlock(BLOCK_SHAPE_Y, 0, 'Y')
 
     blockOrientations: BlockOrientations
     orientationNumber: number
     cells: ShapeCells
+    shapeChar: ShapeChar
 
-    constructor(block: BlockOrientations, orientation: number) {
+    constructor(block: BlockOrientations, orientation: number, shapeChar: ShapeChar) {
         this.blockOrientations = block
         this.orientationNumber = orientation
         this.cells = this.blockOrientations[this.orientationNumber]
+        this.shapeChar = shapeChar
     }
 
     toString = () => {
@@ -30,10 +32,10 @@ export class OneByOneBlock implements Shape {
     }
 
     rotateLeft = () => {
-        return new OneByOneBlock(this.blockOrientations, this.orientationNumber)
+        return new OneByOneBlock(this.blockOrientations, this.orientationNumber, this.shapeChar)
     }
 
     rotateRight = () => {
-        return new OneByOneBlock(this.blockOrientations, this.orientationNumber)
+        return new OneByOneBlock(this.blockOrientations, this.orientationNumber, this.shapeChar)
     }
 }

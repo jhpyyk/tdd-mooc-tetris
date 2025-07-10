@@ -4,6 +4,8 @@ export type ShapeChar = (typeof shapeChars)[number];
 export type ShapeCells = Array<Array<ShapeChar>>
 
 export interface Shape {
+    shapeChar: ShapeChar
+
     cells: ShapeCells
 
     toString: () => string

@@ -42,8 +42,8 @@ export class Board {
       this.fallingShape = element
     }
 
-    const middleIndex = Math.floor(this.width / 2);
-    this.cells = insertIntoBoardCells(this.cells, 0, middleIndex, "f");
+    const columnIndex = Math.floor((this.width - this.fallingShape.cells.length) / 2 )
+    this.cells = insertFallingCharsIntoBoardCells(this.cells, 0, columnIndex, this.fallingShape);
   };
 
   tick = () => {
@@ -88,7 +88,7 @@ const formatCellString = (cell: CellState, fallingShape: Shape | undefined) => {
     if (!fallingShape) {
       throw Error("fallingShape is undefined")
     }
-    return fallingShape.toString()
+    return fallingShape.shapeChar
   }  else if (isShapeChar(cell)) {
     return cell
   }
@@ -126,7 +126,7 @@ const lockFallingCells = (cells: Cells, fallingShape: Shape): Cells => {
   for (let i = 0; i < cells.length; i++) {
     for (let j = 0; j < cells[i].length; j++) {
       if (cells[i][j] === "f") {
-        cells[i][j] = fallingShape.toString() as ShapeChar;
+        cells[i][j] = fallingShape.shapeChar
       }
     }
   }
@@ -143,9 +143,23 @@ const getShapeByChar = (char: ShapeChar): Shape => {
   }
 }
 
+const getShapeCharFromShape = (shape: Shape) => {
 
-// const insertShapeIntoBoardCells = (boardCells: Cells, row: number, column: number, shape: Shape): Cells => {
-//   for (const shapeRow of shape.cells) {
-//     boardCells[row].splice(column, shapeRow.length, ...shapeRow as CellState)
-//   }
-// }
+}
+
+
+const insertFallingCharsIntoBoardCells = (boardCells: Cells, row: number, column: number, shape: Shape): Cells => {
+  const shapeWithF = shape.cells.map(row => {
+    return row.map(cell => {
+      if (cell !== '.') {
+        return 'f'
+      } else {
+        return cell
+      }
+    })
+  })
+  shapeWithF.forEach((shapeRow, index) => {
+    boardCells[row + index].splice(column, shapeRow.length, ...shapeRow)
+  })
+  return boardCells
+}

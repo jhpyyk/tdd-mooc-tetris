@@ -1,4 +1,4 @@
-const shapeChars = ["X", "Y", "T"] as const;
+const shapeChars = ["X", "Y", "I","O","T","S","Z","L","J","."] as const;
 export type ShapeChar = (typeof shapeChars)[number];
 
 export type ShapeCells = Array<Array<ShapeChar>>

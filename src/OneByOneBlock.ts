@@ -3,13 +3,18 @@ import Shape from "./Shape";
 type BlockShape = Array<Array<string>>
 type BlockOrientations = Array<BlockShape>
 
-export const BLOCK_SHAPE = [
+export const BLOCK_SHAPE_X = [
     [['X']]
+]
+
+export const BLOCK_SHAPE_Y = [
+    [['Y']]
 ]
 
 export class OneByOneBlock implements Shape {
 
-    BLOCK = new OneByOneBlock(BLOCK_SHAPE, 0)
+    static BLOCK_X = new OneByOneBlock(BLOCK_SHAPE_X, 0)
+    static BLOCK_Y = new OneByOneBlock(BLOCK_SHAPE_Y, 0)
 
     blockOrientations: BlockOrientations
     orientationNumber: number

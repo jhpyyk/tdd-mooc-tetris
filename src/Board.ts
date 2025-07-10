@@ -1,3 +1,6 @@
+import { OneByOneBlock } from "./OneByOneBlock";
+import Shape from "./Shape";
+
 const shapeChars = ["X", "Y"] as const;
 type ShapeChar = (typeof shapeChars)[number];
 type CellState = "empty" | "falling" | ShapeChar;
@@ -8,13 +11,12 @@ export class Board {
   width;
   height;
   cells: Cells;
-  fallingShape: ShapeChar;
+  fallingShape: Shape | undefined;
 
   constructor(width: number, height: number) {
     this.width = width;
     this.height = height;
     this.cells = createBoardCells(height, width);
-    this.fallingShape = 'X';
   }
 
   toString() {
@@ -36,7 +38,7 @@ export class Board {
       throw new Error("already falling");
     }
     const middleIndex = Math.floor(this.width / 2);
-    this.fallingShape = element;
+    this.fallingShape = getShapeByChar(element)
     this.cells = insertIntoBoardCells(this.cells, 0, middleIndex, "falling");
   };
 
@@ -75,11 +77,14 @@ const isFallingAbleToMoveDown = (cells: Cells, row: number, col: number) => {
   return cells[row+1] && cells[row+1][col] === "empty"
 }
 
-const formatCellString = (cell: CellState, fallingShape: ShapeChar) => {
+const formatCellString = (cell: CellState, fallingShape: Shape | undefined) => {
   if (cell === "empty") {
     return '.'
   } else if (cell === "falling") {
-    return fallingShape
+    if (!fallingShape) {
+      throw Error("fallingShape is undefined")
+    }
+    return fallingShape.toString()
   }  else if (isShape(cell)) {
     return cell
   }
@@ -113,11 +118,11 @@ const insertIntoBoardCells = (
   return boardCells;
 };
 
-const lockFallingCells = (cells: Cells, fallingShape: ShapeChar): Cells => {
+const lockFallingCells = (cells: Cells, fallingShape: Shape): Cells => {
   for (let i = 0; i < cells.length; i++) {
     for (let j = 0; j < cells[i].length; j++) {
       if (cells[i][j] === "falling") {
-        cells[i][j] = fallingShape;
+        cells[i][j] = fallingShape.toString() as ShapeChar;
       }
     }
   }
@@ -127,3 +132,12 @@ const lockFallingCells = (cells: Cells, fallingShape: ShapeChar): Cells => {
 const isShape = (str: string): str is ShapeChar => {
   return shapeChars.includes(str as ShapeChar);
 };
+
+const getShapeByChar = (char: ShapeChar): Shape => {
+  switch (char) {
+    case "X":
+      return OneByOneBlock.BLOCK_X
+    case "Y":
+      return OneByOneBlock.BLOCK_Y
+  }
+}

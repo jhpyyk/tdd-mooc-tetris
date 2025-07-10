@@ -37,13 +37,13 @@ export class Board {
     if (this.hasFalling()) {
       throw new Error("already falling");
     }
-    const middleIndex = Math.floor(this.width / 2);
     if (typeof element === 'string') {
       this.fallingShape = getShapeByChar(element)
     } else {
       this.fallingShape = element
     }
-    
+
+    const middleIndex = Math.floor(this.width / 2);
     this.cells = insertIntoBoardCells(this.cells, 0, middleIndex, "falling");
   };
 

@@ -13,7 +13,6 @@ const createOrientations = (matrix: Array<Array<string>>, orientations: number):
     for (let i = 0; i<orientations; i++) {
         orientationArray.push(rotateNTimes(matrix, i))
     }
-    console.log(orientationArray)
     return orientationArray
 }
 
@@ -26,29 +25,37 @@ export const TETROMINO_T_SHAPE = [
 
 export const TETROMINO_T = createOrientations(TETROMINO_T_SHAPE, 4) 
 
-export const TETROMINO_S = [
+export const TETROMINO_S_SHAPE = [
     ['.','S','S'],
     ['S','S','.'],
     ['.','.','.'],
 ]
 
-export const TETROMINO_Z = [
+export const TETROMINO_S = createOrientations(TETROMINO_S_SHAPE, 4) 
+
+export const TETROMINO_Z_SHAPE = [
     ['Z','Z','.'],
     ['.','Z','Z'],
     ['.','.','.'],
 ]
 
-export const TETROMINO_L = [
+export const TETROMINO_Z = createOrientations(TETROMINO_Z_SHAPE, 4) 
+
+export const TETROMINO_L_SHAPE = [
     ['.','.','L'],
     ['L','L','L'],
     ['.','.','.'],
 ]
 
-export const TETROMINO_J = [
+export const TETROMINO_L = createOrientations(TETROMINO_L_SHAPE, 4) 
+
+export const TETROMINO_J_SHAPE = [
     ['.','.','J'],
     ['J','J','J'],
     ['.','.','.'],
 ]
+
+export const TETROMINO_J = createOrientations(TETROMINO_J_SHAPE, 4) 
 
 export const TETROMINO_I = [
     ['.','.','.','.','.'],

@@ -5,13 +5,13 @@ type TetrominoShape = Array<Array<string>>
 type TetrominoOrientations = Array<TetrominoShape>
 
 export class Tetromino implements Shape {
-    static I_SHAPE = new Tetromino(TETROMINO_I)
-    static O_SHAPE = new Tetromino(TETROMINO_O)
+    static I_SHAPE = new Tetromino(TETROMINO_I, 0)
+    static O_SHAPE = new Tetromino(TETROMINO_O, 0)
     static T_SHAPE = new Tetromino(TETROMINO_T, 0)
-    static J_SHAPE = new Tetromino(TETROMINO_J)
-    static L_SHAPE = new Tetromino(TETROMINO_L)
-    static S_SHAPE = new Tetromino(TETROMINO_S)
-    static Z_SHAPE = new Tetromino(TETROMINO_Z)
+    static J_SHAPE = new Tetromino(TETROMINO_J, 0)
+    static L_SHAPE = new Tetromino(TETROMINO_L, 0)
+    static S_SHAPE = new Tetromino(TETROMINO_S, 0)
+    static Z_SHAPE = new Tetromino(TETROMINO_Z, 0)
 
     orientationNumber: number;
 

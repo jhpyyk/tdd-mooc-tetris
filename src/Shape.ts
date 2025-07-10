@@ -26,10 +26,3 @@ export const rotateCounterClockwise = (matrix: Array<Array<string>>): Array<Arra
     return transposedCells
 }
 
-export const rotateNTimes = (matrix: Array<Array<string>>, n: number): Array<Array<string>> => {
-    let rotated = matrix
-    for (let i = 0; i<n; i++) {
-        rotated = rotateCounterClockwise(rotated)
-    }
-    return rotated
-}

@@ -1,8 +1,21 @@
-export const TETROMINO_T = [
+import { rotateCounterClockwise } from "./Shape"
+
+export const rotateNTimes = (matrix: Array<Array<string>>, n: number): Array<Array<string>> => {
+    let rotated = matrix;
+    for (let i = 0; i < n; i++) {
+        rotated = rotateCounterClockwise(rotated);
+    }
+    return rotated;
+};
+
+
+export const TETROMINO_T_SHAPE = [
     ['.','T','.'],
     ['T','T','T'],
     ['.','.','.'],
 ]
+
+// export const TETROMINO_T = [rotateNTimes(TETROMINO_T_SHAPE, 0), rotateNTimes] 
 
 export const TETROMINO_S = [
     ['.','S','S'],

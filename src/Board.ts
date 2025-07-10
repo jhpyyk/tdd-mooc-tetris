@@ -33,12 +33,17 @@ export class Board {
     return boardString;
   }
 
-  drop = (element: ShapeChar) => {
+  drop = (element: ShapeChar | Shape) => {
     if (this.hasFalling()) {
       throw new Error("already falling");
     }
     const middleIndex = Math.floor(this.width / 2);
-    this.fallingShape = getShapeByChar(element)
+    if (typeof element === 'string') {
+      this.fallingShape = getShapeByChar(element)
+    } else {
+      this.fallingShape = element
+    }
+    
     this.cells = insertIntoBoardCells(this.cells, 0, middleIndex, "falling");
   };
 
@@ -85,7 +90,7 @@ const formatCellString = (cell: CellState, fallingShape: Shape | undefined) => {
       throw Error("fallingShape is undefined")
     }
     return fallingShape.toString()
-  }  else if (isShape(cell)) {
+  }  else if (isShapeChar(cell)) {
     return cell
   }
   throw Error(`Cannot format cell value ${cell} to string`)
@@ -129,7 +134,7 @@ const lockFallingCells = (cells: Cells, fallingShape: Shape): Cells => {
   return cells;
 };
 
-const isShape = (str: string): str is ShapeChar => {
+const isShapeChar = (str: string): str is ShapeChar => {
   return shapeChars.includes(str as ShapeChar);
 };
 

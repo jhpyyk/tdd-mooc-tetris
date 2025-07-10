@@ -3,7 +3,7 @@ import Shape from "./Shape";
 
 const shapeChars = ["X", "Y"] as const;
 type ShapeChar = (typeof shapeChars)[number];
-type CellState = "empty" | "falling" | ShapeChar;
+type CellState = "e" | "f" | ShapeChar;
 type Row = Array<CellState>;
 type Cells = Array<Row>;
 
@@ -44,7 +44,7 @@ export class Board {
     }
 
     const middleIndex = Math.floor(this.width / 2);
-    this.cells = insertIntoBoardCells(this.cells, 0, middleIndex, "falling");
+    this.cells = insertIntoBoardCells(this.cells, 0, middleIndex, "f");
   };
 
   tick = () => {
@@ -56,10 +56,10 @@ export class Board {
     const lastRow = this.height - 1;
     for (let row = lastRow; row >= 0; row--) {
       for (let col = 0; col < this.width; col++) {
-        if (this.cells[row][col] === "falling" && isFallingAbleToMoveDown(this.cells, row, col)) {
-          this.cells[row+1][col] = "falling"
-          this.cells[row][col] = "empty"
-        } else if (this.cells[row][col] === "falling" && !isFallingAbleToMoveDown(this.cells, row, col)) {
+        if (this.cells[row][col] === "f" && isFallingAbleToMoveDown(this.cells, row, col)) {
+          this.cells[row+1][col] = "f"
+          this.cells[row][col] = "e"
+        } else if (this.cells[row][col] === "f" && !isFallingAbleToMoveDown(this.cells, row, col)) {
           this.cells = lockFallingCells(this.cells, this.fallingShape)
         }
       }
@@ -69,7 +69,7 @@ export class Board {
   hasFalling = () => {
     for (const row of this.cells) {
       for (const col of row) {
-        if (col === "falling") {
+        if (col === "f") {
           return true
         }
       }
@@ -79,13 +79,13 @@ export class Board {
 }
 
 const isFallingAbleToMoveDown = (cells: Cells, row: number, col: number) => {
-  return cells[row+1] && cells[row+1][col] === "empty"
+  return cells[row+1] && cells[row+1][col] === "e"
 }
 
 const formatCellString = (cell: CellState, fallingShape: Shape | undefined) => {
-  if (cell === "empty") {
+  if (cell === "e") {
     return '.'
-  } else if (cell === "falling") {
+  } else if (cell === "f") {
     if (!fallingShape) {
       throw Error("fallingShape is undefined")
     }
@@ -99,7 +99,7 @@ const formatCellString = (cell: CellState, fallingShape: Shape | undefined) => {
 const createEmptyRow = (width: number): Row => {
   let row: Row = [];
   for (let i = 0; i < width; i++) {
-    row.push("empty");
+    row.push("e");
   }
   return row;
 };
@@ -126,7 +126,7 @@ const insertIntoBoardCells = (
 const lockFallingCells = (cells: Cells, fallingShape: Shape): Cells => {
   for (let i = 0; i < cells.length; i++) {
     for (let j = 0; j < cells[i].length; j++) {
-      if (cells[i][j] === "falling") {
+      if (cells[i][j] === "f") {
         cells[i][j] = fallingShape.toString() as ShapeChar;
       }
     }

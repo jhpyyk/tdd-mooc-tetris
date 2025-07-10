@@ -57,7 +57,7 @@ export const TETROMINO_J_SHAPE = [
 
 export const TETROMINO_J = createOrientations(TETROMINO_J_SHAPE, 4) 
 
-export const TETROMINO_I = [
+export const TETROMINO_I_SHAPE = [
     ['.','.','.','.','.'],
     ['.','.','.','.','.'],
     ['I','I','I','I','.'],
@@ -65,7 +65,9 @@ export const TETROMINO_I = [
     ['.','.','.','.','.'],
 ]
 
-export const TETROMINO_O = [
+export const TETROMINO_I = createOrientations(TETROMINO_I_SHAPE, 2) 
+
+export const TETROMINO_O_SHAPE = [
     ['.','O','O'],
     ['.','O','O'],
     ['.','.','.'],

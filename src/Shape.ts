@@ -14,20 +14,20 @@ interface Shape {
 }
 
 export default Shape;
-export const reverseRows = (matrix: Array<Array<string>>): Array<Array<string>> => {
+export const reverseRows = (matrix: ShapeCells): ShapeCells => {
     return matrix.map(row => row.reverse());
 };
-export const transpose = (matrix: Array<Array<string>>): Array<Array<string>> => {
+export const transpose = (matrix: ShapeCells): ShapeCells => {
     return matrix[0].map((_col, i) => matrix.map(row => row[i]));
 };
 
-export const rotateClockwise = (matrix: Array<Array<string>>): Array<Array<string>> => {
+export const rotateClockwise = (matrix: ShapeCells): ShapeCells => {
     const transposedCells = transpose(matrix)
     const reversedCells = reverseRows(transposedCells)
     return reversedCells
 }
 
-export const rotateCounterClockwise = (matrix: Array<Array<string>>): Array<Array<string>> => {
+export const rotateCounterClockwise = (matrix: ShapeCells): ShapeCells => {
     const reversedCells = reverseRows(matrix)
     const transposedCells = transpose(reversedCells)
     return transposedCells

@@ -1,6 +1,5 @@
 import { OneByOneBlock } from "./OneByOneBlock";
 import { Shape,isShapeChar, ShapeChar } from "./Shape";
-import { Tetromino } from "./Tetromino";
 
 type CellState = "f" | ShapeChar;
 type Row = Array<CellState>;
@@ -133,16 +132,6 @@ const createBoardCells = (rows: number, columns: number) => {
   return cells;
 };
 
-const insertIntoBoardCells = (
-  boardCells: Cells,
-  row: number,
-  column: number,
-  elementToInsert: CellState
-): Cells => {
-  boardCells[row].splice(column, 1, elementToInsert);
-  return boardCells;
-};
-
 const lockFallingCells = (cells: Cells, fallingShape: Shape): Cells => {
   for (let i = 0; i < cells.length; i++) {
     for (let j = 0; j < cells[i].length; j++) {
@@ -163,11 +152,6 @@ const getShapeByChar = (char: ShapeChar): Shape => {
     throw Error(`Cannot get shape from char ${char}`)
   }
 }
-
-const getShapeCharFromShape = (shape: Shape) => {
-
-}
-
 
 const insertFallingCharsIntoBoardCells = (boardCells: Cells, row: number, column: number, shape: Shape): Cells => {
   const shapeWithF = shape.cells.map(row => {

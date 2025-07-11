@@ -103,7 +103,7 @@ describe("Moving falling tetrominoes ", () => {
       expect(board.toString()).to.equalShape(edgeZ)
     })
 
-    test('cannot be moved down when on the bottom edge of the board', () => {
+    test('cannot be moved down when on the bottom edge of the board and stops moving', () => {
       const edgeZ =
         `
         ..........
@@ -117,6 +117,10 @@ describe("Moving falling tetrominoes ", () => {
       board.moveDown()
       board.moveDown()
       board.moveDown()
+      board.moveDown()
+
+      expect(board.toString()).to.equalShape(edgeZ)
+
       board.moveDown()
 
       expect(board.toString()).to.equalShape(edgeZ)

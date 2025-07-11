@@ -3,12 +3,6 @@ import { expect } from "chai";
 import { Board } from "../src/Board.ts";
 import { Tetromino } from "../src/Tetromino.ts";
 
-const fallToBottom = (board: Board) => {
-    for (let i = 0; i < 10; i++) {
-        board.tick();
-    }
-};
-
 describe("Moving falling tetrominoes ", () => {
     let board: Board;
 
@@ -28,7 +22,15 @@ describe("Moving falling tetrominoes ", () => {
         );
     });
 
-    test.skip("can be moved left", () => {
-        expect(board.toString());
+    test("can be moved left", async () => {
+        board.moveLeft()
+        expect(board.toString()).to.equalShape(
+          `..ZZ......
+           ...ZZ.....
+           ..........
+           ..........
+           ..........
+           ..........`
+        )
     });
 });

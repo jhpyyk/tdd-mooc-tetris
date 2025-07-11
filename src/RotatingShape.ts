@@ -1,6 +1,6 @@
-import Shape, { reverseRows, transpose } from "./Shape";
+import {ShapeCells, reverseRows, transpose } from "./Shape";
 
-export class RotatingShape implements Shape {
+export class RotatingShape{
     cells: Array<Array<string>>;
     constructor(cells: Array<Array<string>>) {
         this.cells = cells
@@ -29,13 +29,13 @@ export class RotatingShape implements Shape {
     }
 
     rotateRight = () => {
-        const transposedCells = transpose(this.cells)
+        const transposedCells = transpose(this.cells as ShapeCells)
         const reversedCells = reverseRows(transposedCells)
         return new RotatingShape(reversedCells)
     }
 
     rotateLeft = () => {
-        const reversedCells = reverseRows(this.cells)
+        const reversedCells = reverseRows(this.cells as ShapeCells)
         const transposedCells = transpose(reversedCells)
         return new RotatingShape(transposedCells)
     }

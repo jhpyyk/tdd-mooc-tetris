@@ -83,14 +83,15 @@ describe("Moving falling tetrominoes ", () => {
     test('cannot be moved right when on the right edge of the board', () => {
       const edgeZ =
         `
-        ........ZZ
         .......ZZ.
+        ........ZZ
         ..........
         ..........
         ..........
         ..........
         `
       
+      board.moveRight()
       board.moveRight()
       board.moveRight()
       board.moveRight()

@@ -76,6 +76,10 @@ export class Board {
     moveRight = () => {
         this.cells = moveAllFallingCellsRight(this.cells)
     }
+
+    moveDown = () => {
+        this.cells = moveAllFallingCellsDown(this.cells)
+    }
 }
 
 const moveAllFallingCellsLeft = (cells: Cells) => {
@@ -107,6 +111,7 @@ const moveAllFallingCellsRight = (cells: Cells) => {
     }
     return cells
 }
+
 
 const isFallingAbleToMoveDown = (cells: Cells, row: number, col: number) => {
     return cells[row + 1] && [".", "f"].includes(cells[row + 1][col]);

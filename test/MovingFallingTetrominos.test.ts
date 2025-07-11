@@ -102,4 +102,27 @@ describe("Moving falling tetrominoes ", () => {
 
       expect(board.toString()).to.equalShape(edgeZ)
     })
+
+    test('cannot be moved down when on the bottom edge of the board', () => {
+      const edgeZ =
+        `
+        ..........
+        ..........
+        ..........
+        ..........
+        ...ZZ.....
+        ....ZZ....
+        `
+      
+      board.moveDown()
+      board.moveDown()
+      board.moveDown()
+      board.moveDown()
+
+      expect(board.toString()).to.equalShape(edgeZ)
+
+      board.moveDown()
+
+      expect(board.toString()).to.equalShape(edgeZ)
+    })
 });

@@ -45,4 +45,16 @@ describe("Moving falling tetrominoes ", () => {
            ..........`
         )
     });
+
+    test("can be moved down", async () => {
+        board.moveDown()
+        expect(board.toString()).to.equalShape(
+          `..........
+           ...ZZ.....
+           ....ZZ....
+           ..........
+           ..........
+           ..........`
+        )
+    });
 });

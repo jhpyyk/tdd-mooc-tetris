@@ -57,4 +57,26 @@ describe("Moving falling tetrominoes ", () => {
            ..........`
         )
     });
+
+    test('cannot be moved left when on the left edge of the board', () => {
+      const edgeZ =
+        `
+        ZZ........
+        .ZZ.......
+        ..........
+        ..........
+        ..........
+        ..........
+        `
+      
+      board.moveLeft()
+      board.moveLeft()
+      board.moveLeft()
+
+      expect(board.toString()).to.equalShape(edgeZ)
+
+      board.moveLeft()
+
+      expect(board.toString()).to.equalShape(edgeZ)
+    })
 });

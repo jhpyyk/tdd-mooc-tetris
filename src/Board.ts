@@ -3,7 +3,7 @@ import { Shape, isShapeChar, ShapeChar } from "./Shape";
 
 type CellState = "f" | ShapeChar;
 type Row = Array<CellState>;
-type Cells = Array<Row>;
+export type Cells = Array<Row>;
 
 export class Board {
     width;
@@ -68,6 +68,25 @@ export class Board {
         }
         return false;
     };
+
+    moveLeft = () => {
+        this.cells = moveAllFallingCellsLeft(this.cells)
+    }
+}
+
+const moveAllFallingCellsLeft = (cells: Cells) => {
+    const height = cells.length
+    const width = cells[0].length;
+
+    for (let row = 0; row < height; row++) {
+        for (let col = 0; col < width; col++) {
+            if (cells[row][col] === "f") {
+                cells[row][col - 1 ] = "f";
+                cells[row][col] = ".";
+            }
+        }
+    }
+    return cells
 }
 
 const isFallingAbleToMoveDown = (cells: Cells, row: number, col: number) => {

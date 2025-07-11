@@ -85,6 +85,14 @@ export class Board {
     }
 
     moveDown = () => {
+        if (!this.fallingShape) {
+            console.log("no falling shape");
+            return;
+        }
+
+        if (!isAllFallingCellsAbleToMoveDown(this.cells)) {
+            this.cells = lockFallingCells(this.cells, this.fallingShape);
+        }
         this.cells = moveAllFallingCellsDown(this.cells)
     }
 }

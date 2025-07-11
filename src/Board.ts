@@ -18,6 +18,19 @@ export class Board {
         this.cells = createBoardCells(height, width);
     }
 
+    static fromString = (str: string): Board => {
+        const trimmed = str.trim()
+        const rows = trimmed.split("\n");
+        let resultRows: Cells = [];
+        for (const row of rows) {
+            let trimmedRow = row.trim().split("");
+            resultRows = resultRows.concat([trimmedRow as Row]);
+        }
+        let board = new Board(resultRows.length, resultRows[0].length);
+        board.cells = resultRows
+        return board
+    }
+
     toString() {
         let boardString = "";
         for (const row of this.cells) {

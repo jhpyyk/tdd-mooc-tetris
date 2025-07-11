@@ -78,6 +78,9 @@ export class Board {
     }
 
     moveRight = () => {
+        if (!isAllFallingCellsAbleToMoveRight(this.cells)) {
+            return
+        }
         this.cells = moveAllFallingCellsRight(this.cells)
     }
 
@@ -85,6 +88,23 @@ export class Board {
         this.cells = moveAllFallingCellsDown(this.cells)
     }
 }
+
+const isFallingAbleToMoveRight = (cells: Cells, row: number, col: number) => {
+    return cells[row][col + 1] && [".", "f"].includes(cells[row][col + 1]);
+};
+
+const isAllFallingCellsAbleToMoveRight = (cells: Cells): boolean => {
+    const height = cells.length;
+    const width = cells[0].length;
+    for (let row = 0; row < height; row++) {
+        for (let col = 0; col < width; col++) {
+            if (cells[row][col] === "f" && !isFallingAbleToMoveRight(cells, row, col)) {
+                return false;
+            }
+        }
+    }
+    return true;
+};
 
 const isFallingAbleToMoveLeft = (cells: Cells, row: number, col: number) => {
     return cells[row][col - 1] && [".", "f"].includes(cells[row][col - 1]);

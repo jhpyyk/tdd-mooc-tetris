@@ -8,15 +8,15 @@
 It's time to write your own tests. Here are some example test names, which should be enough to cover all the corner
 cases:
 
-- a falling tetromino can be moved left
-- a falling tetromino can be moved right
-- a falling tetromino can be moved down
-- it cannot be moved left beyond the board
-- it cannot be moved right beyond the board
-- it cannot be moved down beyond the board (will stop falling)
-- it cannot be moved left through other blocks
-- it cannot be moved right through other blocks
-- it cannot be moved down through other blocks (will stop falling)
+-   a falling tetromino can be moved left
+-   a falling tetromino can be moved right
+-   a falling tetromino can be moved down
+-   it cannot be moved left beyond the board
+-   it cannot be moved right beyond the board
+-   it cannot be moved down beyond the board (will stop falling)
+-   it cannot be moved left through other blocks
+-   it cannot be moved right through other blocks
+-   it cannot be moved down through other blocks (will stop falling)
 
 Remember to follow the [three laws of TDD](https://tdd.mooc.fi/1-tdd#three-laws-of-tdd) and not write more than one
 failing test before making it pass.

@@ -5,3 +5,9 @@ export const moveLeftNTimes = (board: Board, n: number) => {
         board.moveLeft()
     }
 }
+
+export const moveRightNTimes = (board: Board, n: number) => {
+    for (let i=0; i<n; i++) {
+        board.moveRight()
+    }
+}

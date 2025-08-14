@@ -2,7 +2,7 @@ import { beforeEach, describe, test } from "vitest";
 import { expect } from "chai";
 import { Board } from "../src/Board.ts";
 import { Tetromino } from "../src/Tetromino.ts";
-import { moveLeftNTimes } from "./testUtils.ts";
+import { moveLeftNTimes, moveRightNTimes } from "./testUtils.ts";
 
 describe("Moving falling tetrominoes ", () => {
     let board: Board;
@@ -165,7 +165,7 @@ describe("Moving falling tetrominoes ", () => {
   test('cannot move left through other blocks', () => {
     moveLeftNTimes(board, 10)
 
-    const sBlockedByI =
+    const sBlockedByILeft =
       `
       I.SS.....I
       ISS......I
@@ -175,6 +175,22 @@ describe("Moving falling tetrominoes ", () => {
       IIIIIIIIII
       `
 
-    expect(board.toString()).to.equalShape(sBlockedByI)
+    expect(board.toString()).to.equalShape(sBlockedByILeft)
+  })
+
+  test('cannot move right through other blocks', () => {
+    moveRightNTimes(board, 10)
+
+    const sBlockedByIRight =
+      `
+      I......SSI
+      I.....SS.I
+      I........I
+      I........I
+      I........I
+      IIIIIIIIII
+      `
+
+    expect(board.toString()).to.equalShape(sBlockedByIRight)
   })
 })

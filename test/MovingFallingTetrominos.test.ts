@@ -162,7 +162,7 @@ describe("Moving falling tetrominoes ", () => {
     )
   })
 
-  test.skip('cannot move left through other blocks', () => {
+  test('cannot move left through other blocks', () => {
     moveLeftNTimes(board, 10)
 
     const sBlockedByI =

@@ -17,4 +17,20 @@ describe('Board ', () => {
 
         expect(board.toString()).to.equalShape(emptySixByTen)
     })
+
+    test('can be created with arbitrary cells', () => {
+        const arbitrary =
+            `
+            Z....
+            Z..S.
+            .....
+            .T.I.
+            ...Z.
+            `
+
+        const board = Board.fromString(arbitrary)
+
+        expect(board.toString()).to.equalShape(arbitrary)
+
+    })
 })

@@ -2,6 +2,7 @@ import { beforeEach, describe, test } from "vitest";
 import { expect } from "chai";
 import { Board } from "../src/Board.ts";
 import { Tetromino } from "../src/Tetromino.ts";
+import { moveLeftNTimes } from "./testUtils.ts";
 
 describe("Moving falling tetrominoes ", () => {
     let board: Board;
@@ -130,3 +131,51 @@ describe("Moving falling tetrominoes ", () => {
       expect(board.toString()).to.equalShape(edgeZ)
     })
 });
+
+describe("Moving falling tetrominoes ", () => {
+  let board: Board;
+
+  beforeEach(() => {
+    board = Board.fromString(
+      `
+      I........I
+      I........I
+      I........I
+      I........I
+      I........I
+      IIIIIIIIII
+      `
+    )
+  })
+
+  test('tests have the correct setup', () => {
+    board.drop(Tetromino.Z_SHAPE)
+
+    expect(board.toString()).to.equalShape(
+      `
+      I..ZZ....I
+      I...ZZ...I
+      I........I
+      I........I
+      I........I
+      IIIIIIIIII
+      `
+    )
+  })
+  
+  test.skip('cannot move left through other blocks', () => {
+    board.drop(Tetromino.S_SHAPE)
+
+    const sBlockedByI =
+      `
+      I.SS.....I
+      ISS......I
+      I........I
+      I........I
+      I........I
+      IIIIIIIIII
+      `
+
+    expect(board.toString()).to.equalShape(`.`)
+  })
+})

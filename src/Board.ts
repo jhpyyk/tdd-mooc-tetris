@@ -26,7 +26,7 @@ export class Board {
             let trimmedRow = row.trim().split("");
             resultRows = resultRows.concat([trimmedRow as Row]);
         }
-        let board = new Board(resultRows.length, resultRows[0].length);
+        let board = new Board(resultRows[0].length, resultRows.length);
         board.cells = resultRows
         return board
     }

@@ -146,15 +146,14 @@ describe("Moving falling tetrominoes ", () => {
       IIIIIIIIII
       `
     )
+    board.drop(Tetromino.S_SHAPE)
   })
 
   test('tests have the correct setup', () => {
-    board.drop(Tetromino.Z_SHAPE)
-
     expect(board.toString()).to.equalShape(
       `
-      I..ZZ....I
-      I...ZZ...I
+      I...SS...I
+      I..SS....I
       I........I
       I........I
       I........I
@@ -162,9 +161,9 @@ describe("Moving falling tetrominoes ", () => {
       `
     )
   })
-  
+
   test.skip('cannot move left through other blocks', () => {
-    board.drop(Tetromino.S_SHAPE)
+    moveLeftNTimes(board, 10)
 
     const sBlockedByI =
       `
@@ -176,6 +175,6 @@ describe("Moving falling tetrominoes ", () => {
       IIIIIIIIII
       `
 
-    expect(board.toString()).to.equalShape(`.`)
+    expect(board.toString()).to.equalShape(sBlockedByI)
   })
 })

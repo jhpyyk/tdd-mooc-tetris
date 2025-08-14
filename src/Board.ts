@@ -60,7 +60,7 @@ export class Board {
         const columnIndex = Math.floor((this.width - this.fallingShape.cells.length) / 2);
         this.fallingPosRow = 0
         this.fallingPosCol = columnIndex
-        this.cells = insertFallingCharsIntoBoardCells(this.cells, 0, columnIndex, this.fallingShape);
+        this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingPosRow, this.fallingPosCol, this.fallingShape);
     };
 
     tick = () => {
@@ -217,18 +217,21 @@ const getShapeByChar = (char: ShapeChar): Shape => {
     }
 };
 
+const isShapeCellEmpty = (shape: Shape, row: number, col: number) => {
+    return shape.cells[row][col] === '.'
+}
+
+const isBoardCellEmpty = (boardCells: Cells, row: number, col: number) => {
+    return boardCells[row][col] === '.'
+}
+
 const insertFallingCharsIntoBoardCells = (boardCells: Cells, row: number, column: number, shape: Shape): Cells => {
-    const shapeWithF = shape.cells.map((row) => {
-        return row.map((cell) => {
-            if (cell !== ".") {
-                return "f";
-            } else {
-                return cell;
+    for (let rowIdx=0; rowIdx < shape.cells.length; rowIdx++) {
+        for (let colIdx=0; colIdx < shape.cells[0].length; colIdx++) {
+            if (!isShapeCellEmpty(shape, rowIdx, colIdx) && isBoardCellEmpty(boardCells, row + rowIdx, column + colIdx)) {
+                boardCells[row + rowIdx][column + colIdx] = 'f'
             }
-        });
-    });
-    shapeWithF.forEach((shapeRow, index) => {
-        boardCells[row + index].splice(column, shapeRow.length, ...shapeRow);
-    });
+        }
+    }
     return boardCells;
 };

@@ -2,7 +2,7 @@ import { beforeEach, describe, test } from "vitest";
 import { expect } from "chai";
 import { Board } from "../src/Board.ts";
 import { Tetromino } from "../src/Tetromino.ts";
-import { moveLeftNTimes, moveRightNTimes } from "./testUtils.ts";
+import { moveDownNTimes, moveLeftNTimes, moveRightNTimes } from "./testUtils.ts";
 
 describe("Moving falling tetrominoes ", () => {
     let board: Board;
@@ -192,5 +192,30 @@ describe("Moving falling tetrominoes ", () => {
       `
 
     expect(board.toString()).to.equalShape(sBlockedByIRight)
+  })
+
+
+  test('cannot move down through other blocks and stops falling', () => {
+    moveDownNTimes(board, 10)
+
+    const sBlockedByIDown =
+      `
+      I........I
+      I........I
+      I........I
+      I...SS...I
+      I..SS....I
+      IIIIIIIIII
+      `
+
+    expect(board.toString()).to.equalShape(sBlockedByIDown)
+
+    moveLeftNTimes(board, 3)
+
+    expect(board.toString()).to.equalShape(sBlockedByIDown)
+
+    moveRightNTimes(board, 3)
+
+    expect(board.toString()).to.equalShape(sBlockedByIDown)
   })
 })

@@ -7,10 +7,12 @@ type Row = Array<CellState>;
 export type Cells = Array<Row>;
 
 export class Board {
-    width;
-    height;
+    width: number;
+    height: number;
     cells: Cells;
     fallingShape: Shape | undefined;
+    fallingPosRow: number | undefined;
+    fallingPosCol: number | undefined;
 
     constructor(width: number, height: number) {
         this.width = width;

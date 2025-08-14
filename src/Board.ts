@@ -56,8 +56,10 @@ export class Board {
         } else {
             this.fallingShape = element;
         }
-
+        
         const columnIndex = Math.floor((this.width - this.fallingShape.cells.length) / 2);
+        this.fallingPosRow = 0
+        this.fallingPosCol = columnIndex
         this.cells = insertFallingCharsIntoBoardCells(this.cells, 0, columnIndex, this.fallingShape);
     };
 

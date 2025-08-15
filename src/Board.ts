@@ -81,14 +81,10 @@ export class Board {
     };
 
     hasFalling = () => {
-        for (const row of this.cells) {
-            for (const col of row) {
-                if (col === "f") {
-                    return true;
-                }
-            }
+        if (!this.fallingShape) {
+            return false 
         }
-        return false;
+        return true
     };
 
     moveLeft = () => {

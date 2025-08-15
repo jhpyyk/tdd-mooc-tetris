@@ -138,7 +138,7 @@ describe("Moving falling tetrominoes ", () => {
   beforeEach(() => {
     board = Board.fromString(
       `
-      I........I
+      III....III
       I........I
       I........I
       I........I
@@ -152,7 +152,7 @@ describe("Moving falling tetrominoes ", () => {
   test('tests have the correct setup', () => {
     expect(board.toString()).to.equalShape(
       `
-      I...SS...I
+      III.SS.III
       I..SS....I
       I........I
       I........I
@@ -167,8 +167,8 @@ describe("Moving falling tetrominoes ", () => {
 
     const sBlockedByILeft =
       `
+      IIISS..III
       I.SS.....I
-      ISS......I
       I........I
       I........I
       I........I
@@ -183,8 +183,8 @@ describe("Moving falling tetrominoes ", () => {
 
     const sBlockedByIRight =
       `
-      I......SSI
-      I.....SS.I
+      III..SSIII
+      I...SS...I
       I........I
       I........I
       I........I
@@ -200,7 +200,7 @@ describe("Moving falling tetrominoes ", () => {
 
     const sBlockedByIDown =
       `
-      I........I
+      III....III
       I........I
       I........I
       I...SS...I

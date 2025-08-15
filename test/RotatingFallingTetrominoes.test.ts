@@ -26,9 +26,7 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
     });
 
     test("left in empty space", () => {
-
         board.rotateLeft()
-
         expect(board.toString()).to.equalShape(
             `
             ..........
@@ -39,9 +37,7 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             ..........
             `
         )
-
         board.rotateLeft()
-
         expect(board.toString()).to.equalShape(
             `
             ..........
@@ -52,9 +48,7 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             ..........
             `
         )
-
         board.rotateLeft()
-
         expect(board.toString()).to.equalShape(
             `
             ..........
@@ -68,9 +62,7 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
     })
 
     test("right in empty space", () => {
-
         board.rotateRight()
-
         expect(board.toString()).to.equalShape(
             `
             ..........
@@ -81,9 +73,7 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             ..........
             `
         )
-
         board.rotateRight()
-
         expect(board.toString()).to.equalShape(
             `
             ..........
@@ -94,9 +84,7 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             ..........
             `
         )
-
         board.rotateRight()
-
         expect(board.toString()).to.equalShape(
             `
             ..........
@@ -108,6 +96,4 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             `
         )
     })
-
-    
 })

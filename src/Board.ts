@@ -125,14 +125,14 @@ export class Board {
     }
 }
 
-const isFallingAbleToMoveRight = (cells: Cells, shape: Shape, shapeRow:number, shapeCol: number, row: number, col: number) => {
+const isShapeAbleToMove = (cells: Cells, shape: Shape, shapeRow:number, shapeCol: number, row: number, col: number, moveRows: number, moveCols: number) =>{
     if (isShapeCellEmpty(shape, shapeRow, shapeCol)) {
         return true
     }
-    if (isShapeCellExists(shape, shapeRow, shapeCol + 1) && !isShapeCellEmpty(shape, shapeRow, shapeCol + 1)) {
+    if (isShapeCellExists(shape, shapeRow + moveRows, shapeCol + moveCols) && !isShapeCellEmpty(shape, shapeRow + moveRows, shapeCol + moveCols)) {
         return true
     }
-    if (isBoardCellEmpty(cells, row + shapeRow, col + shapeCol +1)) {
+    if (isBoardCellEmpty(cells, row + shapeRow + moveRows, col + shapeCol + moveCols)) {
         return true
     }
     return false
@@ -141,7 +141,7 @@ const isFallingAbleToMoveRight = (cells: Cells, shape: Shape, shapeRow:number, s
 const isAllFallingCellsAbleToMoveRight = (cells: Cells, shape: Shape, row: number, col: number) => {
     for (let shapeRow=0; shapeRow < shape.cells.length; shapeRow++) {
         for (let shapeCol=0; shapeCol < shape.cells[0].length; shapeCol++) {
-            if (!isFallingAbleToMoveRight(cells, shape, shapeRow, shapeCol, row, col)) {
+            if (!isShapeAbleToMove(cells, shape, shapeRow, shapeCol, row, col, 0, 1)) {
                 return false
             }
         } 

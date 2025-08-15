@@ -12,11 +12,12 @@ export class Board {
     fallingShape: Shape | undefined;
     fallingPosRow: number | undefined;
     fallingPosCol: number | undefined;
+    hiddenLayers: number = 1
 
     constructor(width: number, height: number) {
         this.width = width;
-        this.height = height;
-        this.cells = createBoardCells(height, width);
+        this.height = height + this.hiddenLayers;
+        this.cells = createBoardCells(this.height, this.width);
     }
 
     static fromString = (str: string): Board => {
@@ -28,13 +29,13 @@ export class Board {
             resultRows = resultRows.concat([trimmedRow as Row]);
         }
         let board = new Board(resultRows[0].length, resultRows.length);
-        board.cells = resultRows
+        board.cells = board.cells.toSpliced(board.hiddenLayers, board.cells.length - board.hiddenLayers, ...resultRows)
         return board
     }
 
     toString() {
         let boardString = "";
-        for (const row of this.cells) {
+        for (const row of this.cells.toSpliced(0, this.hiddenLayers)) {
             let rowString = "";
             for (const rowCell of row) {
                 rowString = rowString.concat(rowCell);
@@ -56,7 +57,7 @@ export class Board {
         }
         
         const columnIndex = Math.floor((this.width - this.fallingShape.cells.length) / 2);
-        this.fallingPosRow = 0
+        this.fallingPosRow = 0 + this.hiddenLayers
         this.fallingPosCol = columnIndex
         this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol);
     };

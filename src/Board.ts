@@ -1,7 +1,7 @@
 import { OneByOneBlock } from "./OneByOneBlock";
-import { Shape, isShapeChar, ShapeChar } from "./Shape";
+import { Shape, ShapeChar } from "./Shape";
 
-type CellState = "f" | ShapeChar;
+type CellState = ShapeChar;
 type Row = Array<CellState>;
 export type Cells = Array<Row>;
 

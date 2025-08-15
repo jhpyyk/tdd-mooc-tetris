@@ -91,14 +91,23 @@ export class Board {
         if (!isAllFallingCellsAbleToMoveLeft(this.cells)) {
             return
         }
-        this.cells = moveAllFallingCellsLeft(this.cells)
+        if (!this.fallingShape|| this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
+            return
+        }
+        this.cells = eraseFallingShape(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
+        this.fallingPosCol = this.fallingPosCol - 1
+        this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
     }
 
     moveRight = () => {
         if (!isAllFallingCellsAbleToMoveRight(this.cells)) {
             return
         }
+        if (!this.fallingShape|| this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
+            return
+        }
         this.cells = moveAllFallingCellsRight(this.cells)
+        this.fallingPosCol = this.fallingPosCol + 1
     }
 
     moveDown = () => {
@@ -109,8 +118,16 @@ export class Board {
 
         if (!isAllFallingCellsAbleToMoveDown(this.cells)) {
             this.cells = lockFallingCells(this.cells, this.fallingShape);
+            this.fallingShape = undefined
+            this.fallingPosCol = undefined
+            this.fallingPosRow = undefined
+            return
+        }
+        if (!this.fallingShape|| this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
+            return
         }
         this.cells = moveAllFallingCellsDown(this.cells)
+        this.fallingPosRow = this.fallingPosRow + 1
     }
 }
 

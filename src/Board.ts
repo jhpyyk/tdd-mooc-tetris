@@ -67,7 +67,7 @@ export class Board {
             return;
         }
 
-        if (!isAllFallingCellsAbleToMoveDown(this.cells)) {
+        if (!isAllFallingCellsAbleToMoveDown(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)) {
             this.cells = lockFallingCells(this.cells, this.fallingShape);
             this.fallingShape = undefined
             this.fallingPosCol = undefined
@@ -111,20 +111,17 @@ export class Board {
     }
 
     moveDown = () => {
-        if (!this.fallingShape) {
-            return;
+        if (!this.fallingShape|| this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
+            return
         }
-
-        if (!isAllFallingCellsAbleToMoveDown(this.cells)) {
+        if (!isAllFallingCellsAbleToMoveDown(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)) {
             this.cells = lockFallingCells(this.cells, this.fallingShape);
             this.fallingShape = undefined
             this.fallingPosCol = undefined
             this.fallingPosRow = undefined
             return
         }
-        if (!this.fallingShape|| this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
-            return
-        }
+        
         this.cells = eraseFallingShape(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
         this.fallingPosRow = this.fallingPosRow + 1
         this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
@@ -179,20 +176,27 @@ const isAllFallingCellsAbleToMoveLeft = (cells: Cells, shape: Shape, row: number
     return true;
 };
 
-const isFallingAbleToMoveDown = (cells: Cells, row: number, col: number) => {
-    return cells[row + 1] && [".", "f"].includes(cells[row + 1][col]);
-};
-
-const isAllFallingCellsAbleToMoveDown = (cells: Cells): boolean => {
-    const lastRow = cells.length - 1;
-    const width = cells[0].length;
-    for (let row = lastRow; row >= 0; row--) {
-        for (let col = 0; col < width; col++) {
-            if (cells[row][col] === "f" && !isFallingAbleToMoveDown(cells, row, col)) {
-                return false;
-            }
-        }
+const isFallingAbleToMoveDown = (cells: Cells, shape: Shape, shapeRow:number, shapeCol: number, row: number, col: number) => {
+    if (isShapeCellEmpty(shape, shapeRow, shapeCol)) {
+        return true
     }
+    if (isShapeCellExists(shape, shapeRow + 1, shapeCol) && !isShapeCellEmpty(shape, shapeRow + 1, shapeCol)) {
+        return true
+    }
+    if (isBoardCellEmpty(cells, row + shapeRow + 1, col + shapeCol)) {
+        return true
+    }
+    return false
+}
+
+const isAllFallingCellsAbleToMoveDown = (cells: Cells, shape: Shape, row: number, col: number) => {
+    for (let shapeRow=0; shapeRow < shape.cells.length; shapeRow++) {
+        for (let shapeCol=0; shapeCol < shape.cells[0].length; shapeCol++) {
+            if (!isFallingAbleToMoveDown(cells, shape, shapeRow, shapeCol, row, col)) {
+                return false
+            }
+        } 
+    } 
     return true;
 };
 

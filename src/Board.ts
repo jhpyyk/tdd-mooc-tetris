@@ -68,7 +68,6 @@ export class Board {
         }
 
         if (!isAllFallingCellsAbleToMoveDown(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)) {
-            this.cells = lockFallingCells(this.cells, this.fallingShape);
             this.fallingShape = undefined
             this.fallingPosCol = undefined
             this.fallingPosRow = undefined
@@ -115,7 +114,6 @@ export class Board {
             return
         }
         if (!isAllFallingCellsAbleToMoveDown(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)) {
-            this.cells = lockFallingCells(this.cells, this.fallingShape);
             this.fallingShape = undefined
             this.fallingPosCol = undefined
             this.fallingPosRow = undefined
@@ -231,17 +229,6 @@ const createBoardCells = (rows: number, columns: number) => {
     return cells;
 };
 
-const lockFallingCells = (cells: Cells, fallingShape: Shape): Cells => {
-    for (let i = 0; i < cells.length; i++) {
-        for (let j = 0; j < cells[i].length; j++) {
-            if (cells[i][j] === "f") {
-                cells[i][j] = fallingShape.shapeChar;
-            }
-        }
-    }
-    return cells;
-};
-
 const getShapeByChar = (char: ShapeChar): Shape => {
     if (char === "X") {
         return OneByOneBlock.BLOCK_X;
@@ -283,7 +270,7 @@ const insertFallingCharsIntoBoardCells = (boardCells: Cells, shape: Shape, row: 
     for (let rowIdx=0; rowIdx < shape.cells.length; rowIdx++) {
         for (let colIdx=0; colIdx < shape.cells[0].length; colIdx++) {
             if (!isShapeCellEmpty(shape, rowIdx, colIdx) && isBoardCellEmpty(boardCells, row + rowIdx, column + colIdx)) {
-                boardCells[row + rowIdx][column + colIdx] = 'f'
+                boardCells[row + rowIdx][column + colIdx] = shape.shapeChar
             }
         }
     }

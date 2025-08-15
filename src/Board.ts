@@ -1,5 +1,6 @@
 import { OneByOneBlock } from "./OneByOneBlock";
 import { Shape, ShapeChar } from "./Shape";
+import { Tetromino } from "./Tetromino";
 
 type CellState = ShapeChar;
 type Row = Array<CellState>;
@@ -12,7 +13,7 @@ export class Board {
     fallingShape: Shape | undefined;
     fallingPosRow: number | undefined;
     fallingPosCol: number | undefined;
-    hiddenLayers: number = 1
+    hiddenLayers: number = 2
 
     constructor(width: number, height: number) {
         this.width = width;
@@ -59,6 +60,12 @@ export class Board {
         const columnIndex = Math.floor((this.width - this.fallingShape.cells.length) / 2);
         this.fallingPosRow = 0 + this.hiddenLayers
         this.fallingPosCol = columnIndex
+
+        if (this.fallingShape.shapeChar === "I") {
+            this.fallingPosRow = this.fallingPosRow - 2
+            this.fallingPosCol = this.fallingPosCol + 1
+        }
+
         this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol);
     };
 

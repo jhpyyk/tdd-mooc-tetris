@@ -123,6 +123,19 @@ export class Board {
         this.fallingPosRow = this.fallingPosRow + 1
         this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
     }
+    
+    private moveShape = (moveRows: number, moveCols: number) => {
+        if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
+            return
+        }
+        if (!isShapeAbleToMove(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol, moveRows, moveCols)) {
+            return
+        }
+        this.cells = eraseFallingShape(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
+        this.fallingPosRow = this.fallingPosRow - moveRows
+        this.fallingPosCol = this.fallingPosCol - moveCols
+        this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
+    } 
 }
 
 const isShapeCellAbleToMove = (cells: Cells, shape: Shape, shapeRow:number, shapeCol: number, row: number, col: number, moveRows: number, moveCols: number) =>{

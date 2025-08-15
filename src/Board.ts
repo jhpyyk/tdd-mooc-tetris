@@ -1,4 +1,3 @@
-import { moveAllFallingCellsDown, moveAllFallingCellsLeft, moveAllFallingCellsRight } from "./moveFunctitons";
 import { OneByOneBlock } from "./OneByOneBlock";
 import { Shape, isShapeChar, ShapeChar } from "./Shape";
 

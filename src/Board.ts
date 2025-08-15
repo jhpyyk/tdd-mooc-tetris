@@ -87,6 +87,15 @@ export class Board {
         }
     }
 
+    rotateLeft = () => {
+        if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
+            return false
+        }
+        this.cells = eraseFallingShape(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
+        this.fallingShape = this.fallingShape.rotateLeft()
+        this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
+    }
+
     private moveShape = (moveRows: number, moveCols: number) => {
         if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
             return false

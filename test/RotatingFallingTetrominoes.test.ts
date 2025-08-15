@@ -25,8 +25,7 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
         );
     });
 
-    test.skip("left in empty space", () => {
-        board.moveDown()
+    test("left in empty space", () => {
 
         board.rotateLeft()
 

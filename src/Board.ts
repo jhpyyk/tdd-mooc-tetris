@@ -64,15 +64,20 @@ export class Board {
     };
 
     tick = () => {
-        if (!this.fallingShape) {
+        if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
             console.log("no falling shape");
             return;
         }
 
         if (!isAllFallingCellsAbleToMoveDown(this.cells)) {
             this.cells = lockFallingCells(this.cells, this.fallingShape);
+            this.fallingShape = undefined
+            this.fallingPosCol = undefined
+            this.fallingPosRow = undefined
         } else {
-            this.cells = moveAllFallingCellsDown(this.cells);
+            this.cells = eraseFallingShape(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
+            this.fallingPosRow = this.fallingPosRow + 1
+            this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
         }
     };
 
@@ -91,7 +96,7 @@ export class Board {
         if (!isAllFallingCellsAbleToMoveLeft(this.cells)) {
             return
         }
-        if (!this.fallingShape|| this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
+        if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
             return
         }
         this.cells = eraseFallingShape(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
@@ -237,17 +242,21 @@ const getShapeByChar = (char: ShapeChar): Shape => {
 };
 
 const isShapeCellEmpty = (shape: Shape, row: number, col: number) => {
-    return shape.cells[row][col] === '.'
+    return shape.cells[row] && shape.cells[row][col] && shape.cells[row][col] === '.'
 }
 
 const isBoardCellEmpty = (boardCells: Cells, row: number, col: number) => {
-    return boardCells[row][col] === '.'
+    return boardCells[row] && boardCells[row][col] && boardCells[row][col] === '.'
+}
+
+const isBoardCellExists = (boardCells: Cells, row: number, col: number) => {
+    return boardCells[row] && boardCells[row][col]
 }
 
 const eraseFallingShape = (boardCells: Cells, shape: Shape, row: number, column: number): Cells => {
     for (let rowIdx=0; rowIdx < shape.cells.length; rowIdx++) {
         for (let colIdx=0; colIdx < shape.cells[0].length; colIdx++) {
-            if (!isShapeCellEmpty(shape, rowIdx, colIdx)) {
+            if (!isShapeCellEmpty(shape, rowIdx, colIdx) && isBoardCellExists(boardCells, row + rowIdx, column + colIdx)) {
                 boardCells[row + rowIdx][column + colIdx] = '.'
             }
         }

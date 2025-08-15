@@ -88,7 +88,7 @@ export class Board {
         if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
             return
         }
-        if (!isAllFallingCellsAbleToMoveLeft(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)) {
+        if (!isShapeAbleToMove(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol, 0, -1)) {
             return
         }
         this.cells = eraseFallingShape(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
@@ -148,17 +148,6 @@ const isShapeAbleToMove = (cells: Cells, shape: Shape, row: number, col: number,
     } 
     return true;
 }
-
-const isAllFallingCellsAbleToMoveLeft = (cells: Cells, shape: Shape, row: number, col: number) => {
-    for (let shapeRow=0; shapeRow < shape.cells.length; shapeRow++) {
-        for (let shapeCol=0; shapeCol < shape.cells[0].length; shapeCol++) {
-            if (!isShapeCellAbleToMove(cells, shape, shapeRow, shapeCol, row, col, 0, -1)) {
-                return false
-            }
-        } 
-    } 
-    return true;
-};
 
 const isAllFallingCellsAbleToMoveDown = (cells: Cells, shape: Shape, row: number, col: number) => {
     for (let shapeRow=0; shapeRow < shape.cells.length; shapeRow++) {

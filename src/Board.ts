@@ -89,15 +89,7 @@ export class Board {
     }
 
     moveRight = () => {
-        if (!this.fallingShape|| this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
-            return
-        }
-        if (!isShapeAbleToMove(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol, 0, 1)) {
-            return
-        }
-        this.cells = eraseFallingShape(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
-        this.fallingPosCol = this.fallingPosCol + 1
-        this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
+       this.moveShape(0, 1)
     }
 
     moveDown = () => {

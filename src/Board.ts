@@ -64,7 +64,6 @@ export class Board {
 
     tick = () => {
         if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
-            console.log("no falling shape");
             return;
         }
 
@@ -100,10 +99,10 @@ export class Board {
     }
 
     moveRight = () => {
-        if (!isAllFallingCellsAbleToMoveRight(this.cells)) {
+        if (!this.fallingShape|| this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
             return
         }
-        if (!this.fallingShape|| this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
+        if (!isAllFallingCellsAbleToMoveRight(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)) {
             return
         }
         this.cells = eraseFallingShape(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
@@ -113,7 +112,6 @@ export class Board {
 
     moveDown = () => {
         if (!this.fallingShape) {
-            console.log("no falling shape");
             return;
         }
 
@@ -133,20 +131,27 @@ export class Board {
     }
 }
 
-const isFallingAbleToMoveRight = (cells: Cells, row: number, col: number) => {
-    return cells[row][col + 1] && [".", "f"].includes(cells[row][col + 1]);
-};
-
-const isAllFallingCellsAbleToMoveRight = (cells: Cells): boolean => {
-    const height = cells.length;
-    const width = cells[0].length;
-    for (let row = 0; row < height; row++) {
-        for (let col = 0; col < width; col++) {
-            if (cells[row][col] === "f" && !isFallingAbleToMoveRight(cells, row, col)) {
-                return false;
-            }
-        }
+const isFallingAbleToMoveRight = (cells: Cells, shape: Shape, shapeRow:number, shapeCol: number, row: number, col: number) => {
+    if (isShapeCellEmpty(shape, shapeRow, shapeCol)) {
+        return true
     }
+    if (isShapeCellExists(shape, shapeRow, shapeCol + 1) && !isShapeCellEmpty(shape, shapeRow, shapeCol + 1)) {
+        return true
+    }
+    if (isBoardCellEmpty(cells, row + shapeRow, col + shapeCol +1)) {
+        return true
+    }
+    return false
+}
+
+const isAllFallingCellsAbleToMoveRight = (cells: Cells, shape: Shape, row: number, col: number) => {
+    for (let shapeRow=0; shapeRow < shape.cells.length; shapeRow++) {
+        for (let shapeCol=0; shapeCol < shape.cells[0].length; shapeCol++) {
+            if (!isFallingAbleToMoveRight(cells, shape, shapeRow, shapeCol, row, col)) {
+                return false
+            }
+        } 
+    } 
     return true;
 };
 
@@ -238,6 +243,10 @@ const getShapeByChar = (char: ShapeChar): Shape => {
 
 const isShapeCellEmpty = (shape: Shape, row: number, col: number) => {
     return shape.cells[row] && shape.cells[row][col] && shape.cells[row][col] === '.'
+}
+
+const isShapeCellExists = (shape: Shape, row: number, col: number) => {
+    return shape.cells[row] && shape.cells[row][col]
 }
 
 const isBoardCellEmpty = (boardCells: Cells, row: number, col: number) => {

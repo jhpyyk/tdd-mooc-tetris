@@ -37,8 +37,7 @@ export class Board {
         for (const row of this.cells) {
             let rowString = "";
             for (const rowCell of row) {
-                const cellString = formatCellString(rowCell, this.fallingShape);
-                rowString = rowString.concat(cellString);
+                rowString = rowString.concat(rowCell);
             }
             rowString = rowString.concat("\n");
             boardString = boardString.concat(rowString);
@@ -196,20 +195,6 @@ const isAllFallingCellsAbleToMoveDown = (cells: Cells, shape: Shape, row: number
         } 
     } 
     return true;
-};
-
-const formatCellString = (cell: CellState, fallingShape: Shape | undefined) => {
-    if (cell === ".") {
-        return ".";
-    } else if (cell === "f") {
-        if (!fallingShape) {
-            throw Error("fallingShape is undefined");
-        }
-        return fallingShape.shapeChar;
-    } else if (isShapeChar(cell)) {
-        return cell;
-    }
-    throw Error(`Cannot format cell value ${cell} to string`);
 };
 
 const createEmptyRow = (width: number): Row => {

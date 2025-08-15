@@ -62,19 +62,7 @@ export class Board {
     };
 
     tick = () => {
-        if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
-            return;
-        }
-
-        if (!isShapeAbleToMove(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol, 1, 0)) {
-            this.fallingShape = undefined
-            this.fallingPosCol = undefined
-            this.fallingPosRow = undefined
-        } else {
-            this.cells = eraseFallingShape(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
-            this.fallingPosRow = this.fallingPosRow + 1
-            this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
-        }
+        this.moveDown()
     };
 
     hasFalling = () => {
@@ -93,33 +81,31 @@ export class Board {
     }
 
     moveDown = () => {
-        if (!this.fallingShape|| this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
-            return
+        const successful = this.moveShape(1, 0)
+        if (!successful) {
+            this.lockShape()
         }
-        if (!isShapeAbleToMove(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol, 1, 0)) {
-            this.fallingShape = undefined
-            this.fallingPosCol = undefined
-            this.fallingPosRow = undefined
-            return
-        }
-        
-        this.cells = eraseFallingShape(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
-        this.fallingPosRow = this.fallingPosRow + 1
-        this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
     }
 
     private moveShape = (moveRows: number, moveCols: number) => {
         if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
-            return
+            return false
         }
         if (!isShapeAbleToMove(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol, moveRows, moveCols)) {
-            return
+            return false
         }
         this.cells = eraseFallingShape(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
         this.fallingPosRow = this.fallingPosRow + moveRows
         this.fallingPosCol = this.fallingPosCol + moveCols
         this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
-    } 
+        return true
+    }
+
+    private lockShape = () => {
+        this.fallingShape = undefined
+        this.fallingPosRow = undefined
+        this.fallingPosCol = undefined
+    }
 }
 
 const isShapeCellAbleToMove = (cells: Cells, shape: Shape, shapeRow:number, shapeCol: number, row: number, col: number, moveRows: number, moveCols: number) =>{

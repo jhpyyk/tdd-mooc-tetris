@@ -160,23 +160,10 @@ const isAllFallingCellsAbleToMoveLeft = (cells: Cells, shape: Shape, row: number
     return true;
 };
 
-const isFallingAbleToMoveDown = (cells: Cells, shape: Shape, shapeRow:number, shapeCol: number, row: number, col: number) => {
-    if (isShapeCellEmpty(shape, shapeRow, shapeCol)) {
-        return true
-    }
-    if (isShapeCellExists(shape, shapeRow + 1, shapeCol) && !isShapeCellEmpty(shape, shapeRow + 1, shapeCol)) {
-        return true
-    }
-    if (isBoardCellEmpty(cells, row + shapeRow + 1, col + shapeCol)) {
-        return true
-    }
-    return false
-}
-
 const isAllFallingCellsAbleToMoveDown = (cells: Cells, shape: Shape, row: number, col: number) => {
     for (let shapeRow=0; shapeRow < shape.cells.length; shapeRow++) {
         for (let shapeCol=0; shapeCol < shape.cells[0].length; shapeCol++) {
-            if (!isFallingAbleToMoveDown(cells, shape, shapeRow, shapeCol, row, col)) {
+            if (!isShapeAbleToMove(cells, shape, shapeRow, shapeCol, row, col, 1, 0)) {
                 return false
             }
         } 

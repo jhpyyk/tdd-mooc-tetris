@@ -125,7 +125,7 @@ export class Board {
     }
 }
 
-const isShapeAbleToMove = (cells: Cells, shape: Shape, shapeRow:number, shapeCol: number, row: number, col: number, moveRows: number, moveCols: number) =>{
+const isShapeCellAbleToMove = (cells: Cells, shape: Shape, shapeRow:number, shapeCol: number, row: number, col: number, moveRows: number, moveCols: number) =>{
     if (isShapeCellEmpty(shape, shapeRow, shapeCol)) {
         return true
     }
@@ -141,7 +141,7 @@ const isShapeAbleToMove = (cells: Cells, shape: Shape, shapeRow:number, shapeCol
 const isAllFallingCellsAbleToMoveRight = (cells: Cells, shape: Shape, row: number, col: number) => {
     for (let shapeRow=0; shapeRow < shape.cells.length; shapeRow++) {
         for (let shapeCol=0; shapeCol < shape.cells[0].length; shapeCol++) {
-            if (!isShapeAbleToMove(cells, shape, shapeRow, shapeCol, row, col, 0, 1)) {
+            if (!isShapeCellAbleToMove(cells, shape, shapeRow, shapeCol, row, col, 0, 1)) {
                 return false
             }
         } 
@@ -152,7 +152,7 @@ const isAllFallingCellsAbleToMoveRight = (cells: Cells, shape: Shape, row: numbe
 const isAllFallingCellsAbleToMoveLeft = (cells: Cells, shape: Shape, row: number, col: number) => {
     for (let shapeRow=0; shapeRow < shape.cells.length; shapeRow++) {
         for (let shapeCol=0; shapeCol < shape.cells[0].length; shapeCol++) {
-            if (!isShapeAbleToMove(cells, shape, shapeRow, shapeCol, row, col, 0, -1)) {
+            if (!isShapeCellAbleToMove(cells, shape, shapeRow, shapeCol, row, col, 0, -1)) {
                 return false
             }
         } 
@@ -163,7 +163,7 @@ const isAllFallingCellsAbleToMoveLeft = (cells: Cells, shape: Shape, row: number
 const isAllFallingCellsAbleToMoveDown = (cells: Cells, shape: Shape, row: number, col: number) => {
     for (let shapeRow=0; shapeRow < shape.cells.length; shapeRow++) {
         for (let shapeCol=0; shapeCol < shape.cells[0].length; shapeCol++) {
-            if (!isShapeAbleToMove(cells, shape, shapeRow, shapeCol, row, col, 1, 0)) {
+            if (!isShapeCellAbleToMove(cells, shape, shapeRow, shapeCol, row, col, 1, 0)) {
                 return false
             }
         } 

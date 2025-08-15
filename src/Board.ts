@@ -60,7 +60,7 @@ export class Board {
         const columnIndex = Math.floor((this.width - this.fallingShape.cells.length) / 2);
         this.fallingPosRow = 0
         this.fallingPosCol = columnIndex
-        this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingPosRow, this.fallingPosCol, this.fallingShape);
+        this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol);
     };
 
     tick = () => {
@@ -225,7 +225,18 @@ const isBoardCellEmpty = (boardCells: Cells, row: number, col: number) => {
     return boardCells[row][col] === '.'
 }
 
-const insertFallingCharsIntoBoardCells = (boardCells: Cells, row: number, column: number, shape: Shape): Cells => {
+const eraseFallingShape = (boardCells: Cells, shape: Shape, row: number, column: number): Cells => {
+    for (let rowIdx=0; rowIdx < shape.cells.length; rowIdx++) {
+        for (let colIdx=0; colIdx < shape.cells[0].length; colIdx++) {
+            if (!isShapeCellEmpty(shape, rowIdx, colIdx)) {
+                boardCells[row + rowIdx][column + colIdx] = '.'
+            }
+        }
+    }
+    return boardCells;
+}
+
+const insertFallingCharsIntoBoardCells = (boardCells: Cells, shape: Shape, row: number, column: number): Cells => {
     for (let rowIdx=0; rowIdx < shape.cells.length; rowIdx++) {
         for (let colIdx=0; colIdx < shape.cells[0].length; colIdx++) {
             if (!isShapeCellEmpty(shape, rowIdx, colIdx) && isBoardCellEmpty(boardCells, row + rowIdx, column + colIdx)) {

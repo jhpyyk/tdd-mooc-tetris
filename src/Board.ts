@@ -85,15 +85,7 @@ export class Board {
     };
 
     moveLeft = () => {
-        if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
-            return
-        }
-        if (!isShapeAbleToMove(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol, 0, -1)) {
-            return
-        }
-        this.cells = eraseFallingShape(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
-        this.fallingPosCol = this.fallingPosCol - 1
-        this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
+        this.moveShape(0, -1)
     }
 
     moveRight = () => {
@@ -123,7 +115,7 @@ export class Board {
         this.fallingPosRow = this.fallingPosRow + 1
         this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
     }
-    
+
     private moveShape = (moveRows: number, moveCols: number) => {
         if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
             return
@@ -132,8 +124,8 @@ export class Board {
             return
         }
         this.cells = eraseFallingShape(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
-        this.fallingPosRow = this.fallingPosRow - moveRows
-        this.fallingPosCol = this.fallingPosCol - moveCols
+        this.fallingPosRow = this.fallingPosRow + moveRows
+        this.fallingPosCol = this.fallingPosCol + moveCols
         this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
     } 
 }

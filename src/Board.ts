@@ -69,8 +69,6 @@ export class Board {
             this.fallingPosRow = this.fallingPosRow - 2
             this.fallingPosCol = this.fallingPosCol + 1
         }
-
-        this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol);
     };
 
     tick = () => {

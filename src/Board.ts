@@ -1,6 +1,5 @@
 import { OneByOneBlock } from "./OneByOneBlock";
 import { Shape, ShapeChar } from "./Shape";
-import { Tetromino } from "./Tetromino";
 
 type CellState = ShapeChar;
 type Row = Array<CellState>;
@@ -101,18 +100,14 @@ export class Board {
         if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
             return false
         }
-        this.cells = eraseFallingShape(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
         this.fallingShape = this.fallingShape.rotateLeft()
-        this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
     }
 
     rotateRight = () => {
         if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
             return false
         }
-        this.cells = eraseFallingShape(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
         this.fallingShape = this.fallingShape.rotateRight()
-        this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
     }
 
     private moveShape = (moveRows: number, moveCols: number) => {

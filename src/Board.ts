@@ -36,7 +36,7 @@ export class Board {
 
     toString() {
         let cellsCopy = structuredClone(this.cells)
-        if (this.fallingShape && this.fallingPosRow && this.fallingPosCol) {
+        if (this.fallingShape && this.fallingPosRow !== undefined && this.fallingPosCol !== undefined) {
             cellsCopy = insertFallingCharsIntoBoardCells(cellsCopy, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
         }
         let boardString = "";
@@ -149,7 +149,8 @@ const isShapeAbleToBeInsertedTo = (cells: Cells, shape: Shape, row: number, col:
                 return false
             }
         } 
-    } 
+    }
+
     return true;
 }
 
@@ -199,7 +200,7 @@ const isBoardCellExists = (boardCells: Cells, row: number, col: number) => {
 const eraseFallingShape = (boardCells: Cells, shape: Shape, row: number, column: number): Cells => {
     for (let rowIdx=0; rowIdx < shape.cells.length; rowIdx++) {
         for (let colIdx=0; colIdx < shape.cells[0].length; colIdx++) {
-            if (!isShapeCellEmpty(shape, rowIdx, colIdx) && isBoardCellExists(boardCells, row + rowIdx, column + colIdx)) {
+            if (!isShapeCellEmpty(shape, rowIdx, colIdx)) {
                 boardCells[row + rowIdx][column + colIdx] = '.'
             }
         }
@@ -210,7 +211,7 @@ const eraseFallingShape = (boardCells: Cells, shape: Shape, row: number, column:
 const insertFallingCharsIntoBoardCells = (boardCells: Cells, shape: Shape, row: number, column: number): Cells => {
     for (let rowIdx=0; rowIdx < shape.cells.length; rowIdx++) {
         for (let colIdx=0; colIdx < shape.cells[0].length; colIdx++) {
-            if (!isShapeCellEmpty(shape, rowIdx, colIdx) && isBoardCellEmpty(boardCells, row + rowIdx, column + colIdx)) {
+            if (!isShapeCellEmpty(shape, rowIdx, colIdx)) {
                 boardCells[row + rowIdx][column + colIdx] = shape.shapeChar
             }
         }

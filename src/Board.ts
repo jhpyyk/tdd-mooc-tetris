@@ -36,6 +36,9 @@ export class Board {
 
     toString() {
         let cellsCopy = structuredClone(this.cells)
+        if (this.fallingShape && this.fallingPosRow && this.fallingPosCol) {
+            cellsCopy = insertFallingCharsIntoBoardCells(cellsCopy, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
+        }
         let boardString = "";
         for (const row of cellsCopy.toSpliced(0, this.hiddenLayers)) {
             let rowString = "";

@@ -119,40 +119,33 @@ export class Board {
         if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
             return false
         }
-        if (!isShapeAbleToMove(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol, moveRows, moveCols)) {
+        if (!isShapeAbleToBeInsertedTo(this.cells, this.fallingShape, this.fallingPosRow + moveRows, this.fallingPosCol + moveCols)) {
             return false
         }
-        this.cells = eraseFallingShape(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
         this.fallingPosRow = this.fallingPosRow + moveRows
         this.fallingPosCol = this.fallingPosCol + moveCols
-        this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
         return true
     }
 
     private lockShape = () => {
+        if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
+            return
+        }
+        this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
         this.fallingShape = undefined
         this.fallingPosRow = undefined
         this.fallingPosCol = undefined
     }
 }
 
-const isShapeCellAbleToMove = (cells: Cells, shape: Shape, shapeRow:number, shapeCol: number, row: number, col: number, moveRows: number, moveCols: number) =>{
-    if (isShapeCellEmpty(shape, shapeRow, shapeCol)) {
-        return true
-    }
-    if (isShapeCellExists(shape, shapeRow + moveRows, shapeCol + moveCols) && !isShapeCellEmpty(shape, shapeRow + moveRows, shapeCol + moveCols)) {
-        return true
-    }
-    if (isBoardCellEmpty(cells, row + shapeRow + moveRows, col + shapeCol + moveCols)) {
-        return true
-    }
-    return false
+const isShapeCellAbleToBeInserted = (cells: Cells, shape: Shape, shapeRow:number, shapeCol: number, row: number, col: number) => {
+    return isShapeCellEmpty(shape, shapeRow , shapeCol) || isBoardCellEmpty(cells, row + shapeRow, col + shapeCol)
 }
 
-const isShapeAbleToMove = (cells: Cells, shape: Shape, row: number, col: number, moveRows: number, moveCols: number) => {
+const isShapeAbleToBeInsertedTo = (cells: Cells, shape: Shape, row: number, col: number) => {
     for (let shapeRow=0; shapeRow < shape.cells.length; shapeRow++) {
         for (let shapeCol=0; shapeCol < shape.cells[0].length; shapeCol++) {
-            if (!isShapeCellAbleToMove(cells, shape, shapeRow, shapeCol, row, col, moveRows, moveCols)) {
+            if (!isShapeCellAbleToBeInserted(cells, shape, shapeRow, shapeCol, row, col)) {
                 return false
             }
         } 

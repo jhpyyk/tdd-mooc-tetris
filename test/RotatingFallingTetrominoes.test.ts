@@ -298,3 +298,108 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
         )
     })
 })
+
+describe("Rotating falling tetrominoes I can rotate ", () => {
+    let board: Board;
+
+    beforeEach(() => {
+        board = Board.fromString(
+            `
+            SSSSS.SSSS
+            SSSSS.SSSS
+            SSS....SSS
+            SSSSS.SSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        )
+        board.fallingShape = Tetromino.I_SHAPE
+        board.fallingPosRow = 0 + board.hiddenLayers
+        board.fallingPosCol = 3
+    })
+
+    test("tests have the correct setup", () => {
+        expect(board.toString()).to.equalShape(
+            `
+            SSSSS.SSSS
+            SSSSS.SSSS
+            SSSIIIISSS
+            SSSSS.SSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        );
+    });
+
+    test("left in tight space", () => {
+        board.rotateLeft()
+        expect(board.toString()).to.equalShape(
+            `
+            SSSSSISSSS
+            SSSSSISSSS
+            SSS..I.SSS
+            SSSSSISSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        )
+        board.rotateLeft()
+        expect(board.toString()).to.equalShape(
+            `
+            SSSSS.SSSS
+            SSSSS.SSSS
+            SSSIIIISSS
+            SSSSS.SSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        )
+        board.rotateLeft()
+        expect(board.toString()).to.equalShape(
+            `
+            SSSSSISSSS
+            SSSSSISSSS
+            SSS..I.SSS
+            SSSSSISSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        )
+    })
+
+    test("right in tght space", () => {
+        board.rotateRight()
+        expect(board.toString()).to.equalShape(
+            `
+            SSSSSISSSS
+            SSSSSISSSS
+            SSS..I.SSS
+            SSSSSISSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        )
+        board.rotateRight()
+        expect(board.toString()).to.equalShape(
+            `
+            SSSSS.SSSS
+            SSSSS.SSSS
+            SSSIIIISSS
+            SSSSS.SSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        )
+        board.rotateRight()
+        expect(board.toString()).to.equalShape(
+            `
+            SSSSSISSSS
+            SSSSSISSSS
+            SSS..I.SSS
+            SSSSSISSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        )
+    })
+})

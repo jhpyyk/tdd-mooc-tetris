@@ -35,8 +35,9 @@ export class Board {
     }
 
     toString() {
+        let cellsCopy = structuredClone(this.cells)
         let boardString = "";
-        for (const row of this.cells.toSpliced(0, this.hiddenLayers)) {
+        for (const row of cellsCopy.toSpliced(0, this.hiddenLayers)) {
             let rowString = "";
             for (const rowCell of row) {
                 rowString = rowString.concat(rowCell);

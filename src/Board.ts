@@ -14,8 +14,6 @@ export class Board {
     height: number;
     cells: Cells;
     fallingShape: Shape | undefined;
-    fallingPosRow: number | undefined;
-    fallingPosCol: number | undefined;
     shapePos: Position | undefined;
     hiddenLayers: number = 2;
 
@@ -40,12 +38,7 @@ export class Board {
 
     toString() {
         let cellsCopy = structuredClone(this.cells);
-        if (
-            this.fallingShape &&
-            this.fallingPosRow !== undefined &&
-            this.fallingPosCol !== undefined &&
-            this.shapePos
-        ) {
+        if (this.fallingShape && this.shapePos) {
             cellsCopy = insertFallingCharsIntoBoardCells(cellsCopy, this.fallingShape, this.shapePos);
         }
         let boardString = "";
@@ -71,13 +64,9 @@ export class Board {
         }
 
         const columnIndex = Math.floor((this.width - this.fallingShape.cells.length) / 2);
-        this.fallingPosRow = 0 + this.hiddenLayers;
-        this.fallingPosCol = columnIndex;
         this.shapePos = { row: 0 + this.hiddenLayers, col: columnIndex };
 
         if (this.fallingShape.shapeChar === "I") {
-            this.fallingPosRow = this.fallingPosRow - 2;
-            this.fallingPosCol = this.fallingPosCol + 1;
             this.shapePos = { row: this.shapePos.row - 2, col: this.shapePos.col + 1 };
         }
     };
@@ -109,12 +98,7 @@ export class Board {
     };
 
     rotateLeft = () => {
-        if (
-            !this.fallingShape ||
-            this.fallingPosRow === undefined ||
-            this.fallingPosCol === undefined ||
-            !this.shapePos
-        ) {
+        if (!this.fallingShape || !this.shapePos) {
             return false;
         }
         if (!isShapeAbleToBeInsertedTo(this.cells, this.fallingShape.rotateLeft(), this.shapePos)) {
@@ -124,12 +108,7 @@ export class Board {
     };
 
     rotateRight = () => {
-        if (
-            !this.fallingShape ||
-            this.fallingPosRow === undefined ||
-            this.fallingPosCol === undefined ||
-            !this.shapePos
-        ) {
+        if (!this.fallingShape || !this.shapePos) {
             return false;
         }
         if (!isShapeAbleToBeInsertedTo(this.cells, this.fallingShape.rotateRight(), this.shapePos)) {
@@ -139,20 +118,13 @@ export class Board {
     };
 
     private moveShape = (moveRows: number, moveCols: number) => {
-        if (
-            !this.fallingShape ||
-            this.fallingPosRow === undefined ||
-            this.fallingPosCol === undefined ||
-            !this.shapePos
-        ) {
+        if (!this.fallingShape || !this.shapePos) {
             return false;
         }
         const newPos: Position = { row: this.shapePos.row + moveRows, col: this.shapePos.col + moveCols };
         if (!isShapeAbleToBeInsertedTo(this.cells, this.fallingShape, newPos)) {
             return false;
         }
-        this.fallingPosRow = this.fallingPosRow + moveRows;
-        this.fallingPosCol = this.fallingPosCol + moveCols;
         if (this.shapePos !== undefined) {
             this.shapePos = { row: this.shapePos.row + moveRows, col: this.shapePos.col + moveCols };
         }
@@ -160,18 +132,11 @@ export class Board {
     };
 
     private lockShape = () => {
-        if (
-            !this.fallingShape ||
-            this.fallingPosRow === undefined ||
-            this.fallingPosCol === undefined ||
-            !this.shapePos
-        ) {
+        if (!this.fallingShape || !this.shapePos) {
             return;
         }
         this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.shapePos);
         this.fallingShape = undefined;
-        this.fallingPosRow = undefined;
-        this.fallingPosCol = undefined;
         this.shapePos = undefined;
     };
 }

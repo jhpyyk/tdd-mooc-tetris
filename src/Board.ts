@@ -46,13 +46,7 @@ export class Board {
             this.fallingPosCol !== undefined &&
             this.shapePos
         ) {
-            cellsCopy = insertFallingCharsIntoBoardCells(
-                cellsCopy,
-                this.fallingShape,
-                this.fallingPosRow,
-                this.fallingPosCol,
-                this.shapePos
-            );
+            cellsCopy = insertFallingCharsIntoBoardCells(cellsCopy, this.fallingShape, this.shapePos);
         }
         let boardString = "";
         for (const row of cellsCopy.toSpliced(0, this.hiddenLayers)) {
@@ -179,13 +173,7 @@ export class Board {
         ) {
             return;
         }
-        this.cells = insertFallingCharsIntoBoardCells(
-            this.cells,
-            this.fallingShape,
-            this.fallingPosRow,
-            this.fallingPosCol,
-            this.shapePos
-        );
+        this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.shapePos);
         this.fallingShape = undefined;
         this.fallingPosRow = undefined;
         this.fallingPosCol = undefined;
@@ -251,13 +239,7 @@ const isBoardCellEmpty = (boardCells: Cells, row: number, col: number) => {
     return boardCells[row] && boardCells[row][col] && boardCells[row][col] === ".";
 };
 
-const insertFallingCharsIntoBoardCells = (
-    boardCells: Cells,
-    shape: Shape,
-    row: number,
-    column: number,
-    pos: Position
-): Cells => {
+const insertFallingCharsIntoBoardCells = (boardCells: Cells, shape: Shape, pos: Position): Cells => {
     for (let rowIdx = 0; rowIdx < shape.cells.length; rowIdx++) {
         for (let colIdx = 0; colIdx < shape.cells[0].length; colIdx++) {
             if (!isShapeCellEmpty(shape, rowIdx, colIdx)) {

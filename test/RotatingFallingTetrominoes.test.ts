@@ -528,3 +528,126 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
         )
     })
 })
+
+
+describe("Rotating falling tetrominoes I can not rotate ", () => {
+    let board: Board;
+
+    beforeEach(() => {
+        board = Board.fromString(
+            `
+            SSSSSSSSSS
+            SSSSSSSSSS
+            SSS....SSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        )
+        board.fallingShape = Tetromino.I_SHAPE
+        board.fallingPosRow = 0 + board.hiddenLayers
+        board.fallingPosCol = 3
+    })
+
+    test("tests have the correct setup", () => {
+        expect(board.toString()).to.equalShape(
+            `
+            SSSSSSSSSS
+            SSSSSSSSSS
+            SSSIIIISSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        );
+    });
+
+    test("left on a full board space", () => {
+        rotateLeftNTimes(board, 10)
+        expect(board.toString()).to.equalShape(
+            `
+            SSSSSSSSSS
+            SSSSSSSSSS
+            SSSIIIISSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        )
+    })
+
+     test("right on a full board space", () => {
+        rotateRightNTimes(board, 10)
+        expect(board.toString()).to.equalShape(
+            `
+            SSSSSSSSSS
+            SSSSSSSSSS
+            SSSIIIISSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        )
+    })
+})
+
+describe("Rotating falling tetrominoes T can not rotate ", () => {
+    let board: Board;
+
+    beforeEach(() => {
+        board = Board.fromString(
+            `
+            SSSSSSSSSS
+            SSS....SSS
+            SSS....SSS
+            SSS....SSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        )
+        board.fallingShape = Tetromino.I_SHAPE
+        board.fallingPosRow = 0 + board.hiddenLayers
+        board.fallingPosCol = 3
+    })
+
+    test("tests have the correct setup", () => {
+        expect(board.toString()).to.equalShape(
+            `
+            SSSSSSSSSS
+            SSS....SSS
+            SSSIIIISSS
+            SSS....SSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        );
+    });
+
+    test("left in three tall row space", () => {
+        rotateLeftNTimes(board, 10)
+        expect(board.toString()).to.equalShape(
+            `
+            SSSSSSSSSS
+            SSS....SSS
+            SSSIIIISSS
+            SSS....SSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        )
+    })
+
+    test("right in three tall row space", () => {
+        rotateRightNTimes(board, 10)
+        expect(board.toString()).to.equalShape(
+            `
+            SSSSSSSSSS
+            SSS....SSS
+            SSSIIIISSS
+            SSS....SSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        )
+    })
+})

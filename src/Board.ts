@@ -158,6 +158,9 @@ export class Board {
         }
         this.fallingPosRow = this.fallingPosRow + moveRows;
         this.fallingPosCol = this.fallingPosCol + moveCols;
+        if (this.shapePos !== undefined) {
+            this.shapePos = { row: this.shapePos.row + moveRows, col: this.shapePos.col + moveCols };
+        }
         return true;
     };
 
@@ -174,6 +177,7 @@ export class Board {
         this.fallingShape = undefined;
         this.fallingPosRow = undefined;
         this.fallingPosCol = undefined;
+        this.shapePos = undefined;
     };
 }
 

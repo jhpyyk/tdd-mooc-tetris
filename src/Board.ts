@@ -117,7 +117,8 @@ export class Board {
                 this.cells,
                 this.fallingShape.rotateLeft(),
                 this.fallingPosRow,
-                this.fallingPosCol
+                this.fallingPosCol,
+                this.shapePos
             )
         ) {
             return false;
@@ -134,7 +135,8 @@ export class Board {
                 this.cells,
                 this.fallingShape.rotateRight(),
                 this.fallingPosRow,
-                this.fallingPosCol
+                this.fallingPosCol,
+                this.shapePos
             )
         ) {
             return false;
@@ -151,7 +153,8 @@ export class Board {
                 this.cells,
                 this.fallingShape,
                 this.fallingPosRow + moveRows,
-                this.fallingPosCol + moveCols
+                this.fallingPosCol + moveCols,
+                this.shapePos
             )
         ) {
             return false;

@@ -1,4 +1,6 @@
 import { Board } from "../src/Board";
+import { Shape } from "../src/Shape";
+import { Tetromino } from "../src/Tetromino";
 
 export const moveLeftNTimes = (board: Board, n: number) => {
     for (let i = 0; i < n; i++) {
@@ -28,4 +30,10 @@ export const rotateRightNTimes = (board: Board, n: number) => {
     for (let i = 0; i < n; i++) {
         board.rotateRight();
     }
+};
+
+export const setupFallingShape = (board: Board, shape: Shape, row: number, col: number) => {
+    board.fallingShape = Tetromino.T_SHAPE;
+    board.fallingPosRow = row + board.hiddenLayers;
+    board.fallingPosCol = col;
 };

@@ -8,10 +8,10 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
     let board: Board;
 
     beforeEach(() => {
-        board = new Board(10, 6)
-        board.drop(Tetromino.T_SHAPE)
-        board.moveDown()
-    })
+        board = new Board(10, 6);
+        board.drop(Tetromino.T_SHAPE);
+        board.moveDown();
+    });
 
     test("tests have the correct setup", () => {
         expect(board.toString()).to.equalShape(
@@ -27,7 +27,7 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
     });
 
     test("left in empty space", () => {
-        board.rotateLeft()
+        board.rotateLeft();
         expect(board.toString()).to.equalShape(
             `
             ..........
@@ -37,8 +37,8 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             ..........
             ..........
             `
-        )
-        board.rotateLeft()
+        );
+        board.rotateLeft();
         expect(board.toString()).to.equalShape(
             `
             ..........
@@ -48,8 +48,8 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             ..........
             ..........
             `
-        )
-        board.rotateLeft()
+        );
+        board.rotateLeft();
         expect(board.toString()).to.equalShape(
             `
             ..........
@@ -59,11 +59,11 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             ..........
             ..........
             `
-        )
-    })
+        );
+    });
 
     test("right in empty space", () => {
-        board.rotateRight()
+        board.rotateRight();
         expect(board.toString()).to.equalShape(
             `
             ..........
@@ -73,8 +73,8 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             ..........
             ..........
             `
-        )
-        board.rotateRight()
+        );
+        board.rotateRight();
         expect(board.toString()).to.equalShape(
             `
             ..........
@@ -84,8 +84,8 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             ..........
             ..........
             `
-        )
-        board.rotateRight()
+        );
+        board.rotateRight();
         expect(board.toString()).to.equalShape(
             `
             ..........
@@ -95,19 +95,19 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             ..........
             ..........
             `
-        )
-    })
-})
+        );
+    });
+});
 
 describe("Rotating falling tetrominoes I can rotate ", () => {
     let board: Board;
 
     beforeEach(() => {
-        board = new Board(10, 6)
-        board.drop(Tetromino.I_SHAPE)
-        board.moveDown()
-        board.moveDown()
-    })
+        board = new Board(10, 6);
+        board.drop(Tetromino.I_SHAPE);
+        board.moveDown();
+        board.moveDown();
+    });
 
     test("tests have the correct setup", () => {
         expect(board.toString()).to.equalShape(
@@ -123,7 +123,7 @@ describe("Rotating falling tetrominoes I can rotate ", () => {
     });
 
     test("left in empty space", () => {
-        board.rotateLeft()
+        board.rotateLeft();
         expect(board.toString()).to.equalShape(
             `
             .....I....
@@ -133,8 +133,8 @@ describe("Rotating falling tetrominoes I can rotate ", () => {
             ..........
             ..........
             `
-        )
-        board.rotateLeft()
+        );
+        board.rotateLeft();
         expect(board.toString()).to.equalShape(
             `
             ..........
@@ -144,8 +144,8 @@ describe("Rotating falling tetrominoes I can rotate ", () => {
             ..........
             ..........
             `
-        )
-        board.rotateLeft()
+        );
+        board.rotateLeft();
         expect(board.toString()).to.equalShape(
             `
             .....I....
@@ -155,11 +155,11 @@ describe("Rotating falling tetrominoes I can rotate ", () => {
             ..........
             ..........
             `
-        )
-    })
+        );
+    });
 
     test("right in empty space", () => {
-        board.rotateRight()
+        board.rotateRight();
         expect(board.toString()).to.equalShape(
             `
             .....I....
@@ -169,8 +169,8 @@ describe("Rotating falling tetrominoes I can rotate ", () => {
             ..........
             ..........
             `
-        )
-        board.rotateRight()
+        );
+        board.rotateRight();
         expect(board.toString()).to.equalShape(
             `
             ..........
@@ -180,8 +180,8 @@ describe("Rotating falling tetrominoes I can rotate ", () => {
             ..........
             ..........
             `
-        )
-        board.rotateRight()
+        );
+        board.rotateRight();
         expect(board.toString()).to.equalShape(
             `
             .....I....
@@ -191,9 +191,9 @@ describe("Rotating falling tetrominoes I can rotate ", () => {
             ..........
             ..........
             `
-        )
-    })
-})
+        );
+    });
+});
 
 describe("Rotating falling tetrominoes T can rotate ", () => {
     let board: Board;
@@ -208,11 +208,11 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-        board.fallingShape = Tetromino.T_SHAPE
-        board.fallingPosRow = 1 + board.hiddenLayers
-        board.fallingPosCol = 3
-    })
+        );
+        board.fallingShape = Tetromino.T_SHAPE;
+        board.fallingPosRow = 1 + board.hiddenLayers;
+        board.fallingPosCol = 3;
+    });
 
     test("tests have the correct setup", () => {
         expect(board.toString()).to.equalShape(
@@ -228,7 +228,7 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
     });
 
     test("left in tight space", () => {
-        board.rotateLeft()
+        board.rotateLeft();
         expect(board.toString()).to.equalShape(
             `
             SSSSSSSSSS
@@ -238,8 +238,8 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-        board.rotateLeft()
+        );
+        board.rotateLeft();
         expect(board.toString()).to.equalShape(
             `
             SSSSSSSSSS
@@ -249,8 +249,8 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-        board.rotateLeft()
+        );
+        board.rotateLeft();
         expect(board.toString()).to.equalShape(
             `
             SSSSSSSSSS
@@ -260,11 +260,11 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-    })
+        );
+    });
 
     test("right in tght space", () => {
-        board.rotateRight()
+        board.rotateRight();
         expect(board.toString()).to.equalShape(
             `
             SSSSSSSSSS
@@ -274,8 +274,8 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-        board.rotateRight()
+        );
+        board.rotateRight();
         expect(board.toString()).to.equalShape(
             `
             SSSSSSSSSS
@@ -285,8 +285,8 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-        board.rotateRight()
+        );
+        board.rotateRight();
         expect(board.toString()).to.equalShape(
             `
             SSSSSSSSSS
@@ -296,9 +296,9 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-    })
-})
+        );
+    });
+});
 
 describe("Rotating falling tetrominoes I can rotate ", () => {
     let board: Board;
@@ -313,11 +313,11 @@ describe("Rotating falling tetrominoes I can rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-        board.fallingShape = Tetromino.I_SHAPE
-        board.fallingPosRow = 0 + board.hiddenLayers
-        board.fallingPosCol = 3
-    })
+        );
+        board.fallingShape = Tetromino.I_SHAPE;
+        board.fallingPosRow = 0 + board.hiddenLayers;
+        board.fallingPosCol = 3;
+    });
 
     test("tests have the correct setup", () => {
         expect(board.toString()).to.equalShape(
@@ -333,7 +333,7 @@ describe("Rotating falling tetrominoes I can rotate ", () => {
     });
 
     test("left in tight space", () => {
-        board.rotateLeft()
+        board.rotateLeft();
         expect(board.toString()).to.equalShape(
             `
             SSSSSISSSS
@@ -343,8 +343,8 @@ describe("Rotating falling tetrominoes I can rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-        board.rotateLeft()
+        );
+        board.rotateLeft();
         expect(board.toString()).to.equalShape(
             `
             SSSSS.SSSS
@@ -354,8 +354,8 @@ describe("Rotating falling tetrominoes I can rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-        board.rotateLeft()
+        );
+        board.rotateLeft();
         expect(board.toString()).to.equalShape(
             `
             SSSSSISSSS
@@ -365,11 +365,11 @@ describe("Rotating falling tetrominoes I can rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-    })
+        );
+    });
 
     test("right in tght space", () => {
-        board.rotateRight()
+        board.rotateRight();
         expect(board.toString()).to.equalShape(
             `
             SSSSSISSSS
@@ -379,8 +379,8 @@ describe("Rotating falling tetrominoes I can rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-        board.rotateRight()
+        );
+        board.rotateRight();
         expect(board.toString()).to.equalShape(
             `
             SSSSS.SSSS
@@ -390,8 +390,8 @@ describe("Rotating falling tetrominoes I can rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-        board.rotateRight()
+        );
+        board.rotateRight();
         expect(board.toString()).to.equalShape(
             `
             SSSSSISSSS
@@ -401,10 +401,9 @@ describe("Rotating falling tetrominoes I can rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-    })
-})
-
+        );
+    });
+});
 
 describe("Rotating falling tetrominoes T can not rotate ", () => {
     let board: Board;
@@ -419,11 +418,11 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-        board.fallingShape = Tetromino.T_SHAPE
-        board.fallingPosRow = 1 + board.hiddenLayers
-        board.fallingPosCol = 3
-    })
+        );
+        board.fallingShape = Tetromino.T_SHAPE;
+        board.fallingPosRow = 1 + board.hiddenLayers;
+        board.fallingPosCol = 3;
+    });
 
     test("tests have the correct setup", () => {
         expect(board.toString()).to.equalShape(
@@ -439,7 +438,7 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
     });
 
     test("left on a full board space", () => {
-        rotateLeftNTimes(board, 10)
+        rotateLeftNTimes(board, 10);
         expect(board.toString()).to.equalShape(
             `
             SSSSSSSSSS
@@ -449,11 +448,11 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-    })
+        );
+    });
 
-     test("right on a full board space", () => {
-        rotateRightNTimes(board, 10)
+    test("right on a full board space", () => {
+        rotateRightNTimes(board, 10);
         expect(board.toString()).to.equalShape(
             `
             SSSSSSSSSS
@@ -463,9 +462,9 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-    })
-})
+        );
+    });
+});
 
 describe("Rotating falling tetrominoes T can not rotate ", () => {
     let board: Board;
@@ -480,12 +479,12 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-        board.fallingShape = Tetromino.T_SHAPE.rotateLeft()
+        );
+        board.fallingShape = Tetromino.T_SHAPE.rotateLeft();
 
-        board.fallingPosRow = 1 + board.hiddenLayers
-        board.fallingPosCol = 3
-    })
+        board.fallingPosRow = 1 + board.hiddenLayers;
+        board.fallingPosCol = 3;
+    });
 
     test("tests have the correct setup", () => {
         expect(board.toString()).to.equalShape(
@@ -501,7 +500,7 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
     });
 
     test("left in two wide column space", () => {
-        rotateLeftNTimes(board, 10)
+        rotateLeftNTimes(board, 10);
         expect(board.toString()).to.equalShape(
             `
             SSSSSSSSSS
@@ -511,11 +510,11 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-    })
+        );
+    });
 
     test("right in two wide column space", () => {
-        rotateRightNTimes(board, 10)
+        rotateRightNTimes(board, 10);
         expect(board.toString()).to.equalShape(
             `
             SSSSSSSSSS
@@ -525,10 +524,9 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-    })
-})
-
+        );
+    });
+});
 
 describe("Rotating falling tetrominoes I can not rotate ", () => {
     let board: Board;
@@ -543,11 +541,11 @@ describe("Rotating falling tetrominoes I can not rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-        board.fallingShape = Tetromino.I_SHAPE
-        board.fallingPosRow = 0 + board.hiddenLayers
-        board.fallingPosCol = 3
-    })
+        );
+        board.fallingShape = Tetromino.I_SHAPE;
+        board.fallingPosRow = 0 + board.hiddenLayers;
+        board.fallingPosCol = 3;
+    });
 
     test("tests have the correct setup", () => {
         expect(board.toString()).to.equalShape(
@@ -563,7 +561,7 @@ describe("Rotating falling tetrominoes I can not rotate ", () => {
     });
 
     test("left on a full board space", () => {
-        rotateLeftNTimes(board, 10)
+        rotateLeftNTimes(board, 10);
         expect(board.toString()).to.equalShape(
             `
             SSSSSSSSSS
@@ -573,11 +571,11 @@ describe("Rotating falling tetrominoes I can not rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-    })
+        );
+    });
 
-     test("right on a full board space", () => {
-        rotateRightNTimes(board, 10)
+    test("right on a full board space", () => {
+        rotateRightNTimes(board, 10);
         expect(board.toString()).to.equalShape(
             `
             SSSSSSSSSS
@@ -587,9 +585,9 @@ describe("Rotating falling tetrominoes I can not rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-    })
-})
+        );
+    });
+});
 
 describe("Rotating falling tetrominoes T can not rotate ", () => {
     let board: Board;
@@ -604,11 +602,11 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-        board.fallingShape = Tetromino.I_SHAPE
-        board.fallingPosRow = 0 + board.hiddenLayers
-        board.fallingPosCol = 3
-    })
+        );
+        board.fallingShape = Tetromino.I_SHAPE;
+        board.fallingPosRow = 0 + board.hiddenLayers;
+        board.fallingPosCol = 3;
+    });
 
     test("tests have the correct setup", () => {
         expect(board.toString()).to.equalShape(
@@ -624,7 +622,7 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
     });
 
     test("left in three tall row space", () => {
-        rotateLeftNTimes(board, 10)
+        rotateLeftNTimes(board, 10);
         expect(board.toString()).to.equalShape(
             `
             SSSSSSSSSS
@@ -634,11 +632,11 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-    })
+        );
+    });
 
     test("right in three tall row space", () => {
-        rotateRightNTimes(board, 10)
+        rotateRightNTimes(board, 10);
         expect(board.toString()).to.equalShape(
             `
             SSSSSSSSSS
@@ -648,6 +646,6 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
             SSSSSSSSSS
             SSSSSSSSSS
             `
-        )
-    })
-})
+        );
+    });
+});

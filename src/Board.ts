@@ -12,7 +12,7 @@ export class Board {
     fallingShape: Shape | undefined;
     fallingPosRow: number | undefined;
     fallingPosCol: number | undefined;
-    hiddenLayers: number = 2
+    hiddenLayers: number = 2;
 
     constructor(width: number, height: number) {
         this.width = width;
@@ -21,7 +21,7 @@ export class Board {
     }
 
     static fromString = (str: string): Board => {
-        const trimmed = str.trim()
+        const trimmed = str.trim();
         const rows = trimmed.split("\n");
         let resultRows: Cells = [];
         for (const row of rows) {
@@ -29,14 +29,19 @@ export class Board {
             resultRows = resultRows.concat([trimmedRow as Row]);
         }
         let board = new Board(resultRows[0].length, resultRows.length);
-        board.cells = board.cells.toSpliced(board.hiddenLayers, board.cells.length - board.hiddenLayers, ...resultRows)
-        return board
-    }
+        board.cells = board.cells.toSpliced(board.hiddenLayers, board.cells.length - board.hiddenLayers, ...resultRows);
+        return board;
+    };
 
     toString() {
-        let cellsCopy = structuredClone(this.cells)
+        let cellsCopy = structuredClone(this.cells);
         if (this.fallingShape && this.fallingPosRow !== undefined && this.fallingPosCol !== undefined) {
-            cellsCopy = insertFallingCharsIntoBoardCells(cellsCopy, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
+            cellsCopy = insertFallingCharsIntoBoardCells(
+                cellsCopy,
+                this.fallingShape,
+                this.fallingPosRow,
+                this.fallingPosCol
+            );
         }
         let boardString = "";
         for (const row of cellsCopy.toSpliced(0, this.hiddenLayers)) {
@@ -59,101 +64,134 @@ export class Board {
         } else {
             this.fallingShape = element;
         }
-        
+
         const columnIndex = Math.floor((this.width - this.fallingShape.cells.length) / 2);
-        this.fallingPosRow = 0 + this.hiddenLayers
-        this.fallingPosCol = columnIndex
+        this.fallingPosRow = 0 + this.hiddenLayers;
+        this.fallingPosCol = columnIndex;
 
         if (this.fallingShape.shapeChar === "I") {
-            this.fallingPosRow = this.fallingPosRow - 2
-            this.fallingPosCol = this.fallingPosCol + 1
+            this.fallingPosRow = this.fallingPosRow - 2;
+            this.fallingPosCol = this.fallingPosCol + 1;
         }
     };
 
     tick = () => {
-        this.moveDown()
+        this.moveDown();
     };
 
     hasFalling = () => {
         if (!this.fallingShape) {
-            return false 
+            return false;
         }
-        return true
+        return true;
     };
 
     moveLeft = () => {
-        this.moveShape(0, -1)
-    }
+        this.moveShape(0, -1);
+    };
 
     moveRight = () => {
-       this.moveShape(0, 1)
-    }
+        this.moveShape(0, 1);
+    };
 
     moveDown = () => {
-        const successful = this.moveShape(1, 0)
+        const successful = this.moveShape(1, 0);
         if (!successful) {
-            this.lockShape()
+            this.lockShape();
         }
-    }
+    };
 
     rotateLeft = () => {
         if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
-            return false
+            return false;
         }
-        if (!isShapeAbleToBeInsertedTo(this.cells, this.fallingShape.rotateLeft(), this.fallingPosRow, this.fallingPosCol)) {
-            return false
+        if (
+            !isShapeAbleToBeInsertedTo(
+                this.cells,
+                this.fallingShape.rotateLeft(),
+                this.fallingPosRow,
+                this.fallingPosCol
+            )
+        ) {
+            return false;
         }
-        this.fallingShape = this.fallingShape.rotateLeft()
-    }
+        this.fallingShape = this.fallingShape.rotateLeft();
+    };
 
     rotateRight = () => {
         if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
-            return false
+            return false;
         }
-        if (!isShapeAbleToBeInsertedTo(this.cells, this.fallingShape.rotateRight(), this.fallingPosRow, this.fallingPosCol)) {
-            return false
+        if (
+            !isShapeAbleToBeInsertedTo(
+                this.cells,
+                this.fallingShape.rotateRight(),
+                this.fallingPosRow,
+                this.fallingPosCol
+            )
+        ) {
+            return false;
         }
-        this.fallingShape = this.fallingShape.rotateRight()
-    }
+        this.fallingShape = this.fallingShape.rotateRight();
+    };
 
     private moveShape = (moveRows: number, moveCols: number) => {
         if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
-            return false
+            return false;
         }
-        if (!isShapeAbleToBeInsertedTo(this.cells, this.fallingShape, this.fallingPosRow + moveRows, this.fallingPosCol + moveCols)) {
-            return false
+        if (
+            !isShapeAbleToBeInsertedTo(
+                this.cells,
+                this.fallingShape,
+                this.fallingPosRow + moveRows,
+                this.fallingPosCol + moveCols
+            )
+        ) {
+            return false;
         }
-        this.fallingPosRow = this.fallingPosRow + moveRows
-        this.fallingPosCol = this.fallingPosCol + moveCols
-        return true
-    }
+        this.fallingPosRow = this.fallingPosRow + moveRows;
+        this.fallingPosCol = this.fallingPosCol + moveCols;
+        return true;
+    };
 
     private lockShape = () => {
         if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
-            return
+            return;
         }
-        this.cells = insertFallingCharsIntoBoardCells(this.cells, this.fallingShape, this.fallingPosRow, this.fallingPosCol)
-        this.fallingShape = undefined
-        this.fallingPosRow = undefined
-        this.fallingPosCol = undefined
-    }
+        this.cells = insertFallingCharsIntoBoardCells(
+            this.cells,
+            this.fallingShape,
+            this.fallingPosRow,
+            this.fallingPosCol
+        );
+        this.fallingShape = undefined;
+        this.fallingPosRow = undefined;
+        this.fallingPosCol = undefined;
+    };
 }
 
-const isShapeCellAbleToBeInserted = (cells: Cells, shape: Shape, shapeRow:number, shapeCol: number, row: number, col: number) => {
-    return isShapeCellEmpty(shape, shapeRow , shapeCol) || isBoardCellEmpty(cells, row + shapeRow, col + shapeCol)
-}
+const isShapeCellAbleToBeInserted = (
+    cells: Cells,
+    shape: Shape,
+    shapeRow: number,
+    shapeCol: number,
+    row: number,
+    col: number
+) => {
+    return isShapeCellEmpty(shape, shapeRow, shapeCol) || isBoardCellEmpty(cells, row + shapeRow, col + shapeCol);
+};
 
 const isShapeAbleToBeInsertedTo = (cells: Cells, shape: Shape, row: number, col: number) => {
-    for (let shapeRow=0; shapeRow < shape.cells.length; shapeRow++) {
-        for (let shapeCol=0; shapeCol < shape.cells[0].length; shapeCol++) {
+    for (let shapeRow = 0; shapeRow < shape.cells.length; shapeRow++) {
+        for (let shapeCol = 0; shapeCol < shape.cells[0].length; shapeCol++) {
             if (!isShapeCellAbleToBeInserted(cells, shape, shapeRow, shapeCol, row, col)) {
-                return false
+                return false;
             }
-        } 
+        }
     }
 
     return true;
-}
+};
 
 const createEmptyRow = (width: number): Row => {
     let row: Row = [];
@@ -183,37 +221,37 @@ const getShapeByChar = (char: ShapeChar): Shape => {
 };
 
 const isShapeCellEmpty = (shape: Shape, row: number, col: number) => {
-    return shape.cells[row] && shape.cells[row][col] && shape.cells[row][col] === '.'
-}
+    return shape.cells[row] && shape.cells[row][col] && shape.cells[row][col] === ".";
+};
 
 const isShapeCellExists = (shape: Shape, row: number, col: number) => {
-    return shape.cells[row] && shape.cells[row][col]
-}
+    return shape.cells[row] && shape.cells[row][col];
+};
 
 const isBoardCellEmpty = (boardCells: Cells, row: number, col: number) => {
-    return boardCells[row] && boardCells[row][col] && boardCells[row][col] === '.'
-}
+    return boardCells[row] && boardCells[row][col] && boardCells[row][col] === ".";
+};
 
 const isBoardCellExists = (boardCells: Cells, row: number, col: number) => {
-    return boardCells[row] && boardCells[row][col]
-}
+    return boardCells[row] && boardCells[row][col];
+};
 
 const eraseFallingShape = (boardCells: Cells, shape: Shape, row: number, column: number): Cells => {
-    for (let rowIdx=0; rowIdx < shape.cells.length; rowIdx++) {
-        for (let colIdx=0; colIdx < shape.cells[0].length; colIdx++) {
+    for (let rowIdx = 0; rowIdx < shape.cells.length; rowIdx++) {
+        for (let colIdx = 0; colIdx < shape.cells[0].length; colIdx++) {
             if (!isShapeCellEmpty(shape, rowIdx, colIdx)) {
-                boardCells[row + rowIdx][column + colIdx] = '.'
+                boardCells[row + rowIdx][column + colIdx] = ".";
             }
         }
     }
     return boardCells;
-}
+};
 
 const insertFallingCharsIntoBoardCells = (boardCells: Cells, shape: Shape, row: number, column: number): Cells => {
-    for (let rowIdx=0; rowIdx < shape.cells.length; rowIdx++) {
-        for (let colIdx=0; colIdx < shape.cells[0].length; colIdx++) {
+    for (let rowIdx = 0; rowIdx < shape.cells.length; rowIdx++) {
+        for (let colIdx = 0; colIdx < shape.cells[0].length; colIdx++) {
             if (!isShapeCellEmpty(shape, rowIdx, colIdx)) {
-                boardCells[row + rowIdx][column + colIdx] = shape.shapeChar
+                boardCells[row + rowIdx][column + colIdx] = shape.shapeChar;
             }
         }
     }

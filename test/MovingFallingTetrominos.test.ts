@@ -24,120 +24,117 @@ describe("Moving falling tetrominoes ", () => {
     });
 
     test("can be moved left", async () => {
-        board.moveLeft()
+        board.moveLeft();
         expect(board.toString()).to.equalShape(
-          `..ZZ......
+            `..ZZ......
            ...ZZ.....
            ..........
            ..........
            ..........
            ..........`
-        )
+        );
     });
 
     test("can be moved right", async () => {
-        board.moveRight()
+        board.moveRight();
         expect(board.toString()).to.equalShape(
-          `....ZZ....
+            `....ZZ....
            .....ZZ...
            ..........
            ..........
            ..........
            ..........`
-        )
+        );
     });
 
     test("can be moved down", async () => {
-        board.moveDown()
+        board.moveDown();
         expect(board.toString()).to.equalShape(
-          `..........
+            `..........
            ...ZZ.....
            ....ZZ....
            ..........
            ..........
            ..........`
-        )
+        );
     });
 
-    test('cannot be moved left when on the left edge of the board', () => {
-      const edgeZ =
-        `
+    test("cannot be moved left when on the left edge of the board", () => {
+        const edgeZ = `
         ZZ........
         .ZZ.......
         ..........
         ..........
         ..........
         ..........
-        `
-      
-      board.moveLeft()
-      board.moveLeft()
-      board.moveLeft()
+        `;
 
-      expect(board.toString()).to.equalShape(edgeZ)
+        board.moveLeft();
+        board.moveLeft();
+        board.moveLeft();
 
-      board.moveLeft()
+        expect(board.toString()).to.equalShape(edgeZ);
 
-      expect(board.toString()).to.equalShape(edgeZ)
-    })
+        board.moveLeft();
 
-    test('cannot be moved right when on the right edge of the board', () => {
-      const edgeZ =
-        `
+        expect(board.toString()).to.equalShape(edgeZ);
+    });
+
+    test("cannot be moved right when on the right edge of the board", () => {
+        const edgeZ = `
         .......ZZ.
         ........ZZ
         ..........
         ..........
         ..........
         ..........
-        `
-      
-      board.moveRight()
-      board.moveRight()
-      board.moveRight()
-      board.moveRight()
+        `;
 
-      expect(board.toString()).to.equalShape(edgeZ)
+        board.moveRight();
+        board.moveRight();
+        board.moveRight();
+        board.moveRight();
 
-      board.moveRight()
+        expect(board.toString()).to.equalShape(edgeZ);
 
-      expect(board.toString()).to.equalShape(edgeZ)
-    })
+        board.moveRight();
 
-    test('cannot be moved down when on the bottom edge of the board and stops moving', () => {
-      const edgeZ =
-        `
+        expect(board.toString()).to.equalShape(edgeZ);
+    });
+
+    test("cannot be moved down when on the bottom edge of the board and stops moving", () => {
+        const edgeZ = `
         ..........
         ..........
         ..........
         ..........
         ...ZZ.....
         ....ZZ....
-        `
-      
-      board.moveDown()
-      board.moveDown()
-      board.moveDown()
-      board.moveDown()
+        `;
 
-      expect(board.toString()).to.equalShape(edgeZ)
+        board.moveDown();
+        board.moveDown();
+        board.moveDown();
+        board.moveDown();
 
-      board.moveDown()
+        expect(board.toString()).to.equalShape(edgeZ);
 
-      expect(board.toString()).to.equalShape(edgeZ)
+        board.moveDown();
 
-      board.moveDown()
+        expect(board.toString()).to.equalShape(edgeZ);
 
-      expect(board.toString()).to.equalShape(edgeZ)
-    })
+        board.moveDown();
+
+        expect(board.toString()).to.equalShape(edgeZ);
+    });
 });
 
 describe("Moving falling tetrominoes ", () => {
-  let board: Board;
+    let board: Board;
 
-  beforeEach(() => {
-    board = Board.fromString(
-      `
+    beforeEach(() => {
+        board = Board.fromString(
+            `
       III....III
       I........I
       I........I
@@ -145,13 +142,13 @@ describe("Moving falling tetrominoes ", () => {
       I........I
       IIIIIIIIII
       `
-    )
-    board.drop(Tetromino.S_SHAPE)
-  })
+        );
+        board.drop(Tetromino.S_SHAPE);
+    });
 
-  test('tests have the correct setup', () => {
-    expect(board.toString()).to.equalShape(
-      `
+    test("tests have the correct setup", () => {
+        expect(board.toString()).to.equalShape(
+            `
       III.SS.III
       I..SS....I
       I........I
@@ -159,63 +156,59 @@ describe("Moving falling tetrominoes ", () => {
       I........I
       IIIIIIIIII
       `
-    )
-  })
+        );
+    });
 
-  test('cannot move left through other blocks', () => {
-    moveLeftNTimes(board, 10)
+    test("cannot move left through other blocks", () => {
+        moveLeftNTimes(board, 10);
 
-    const sBlockedByILeft =
-      `
+        const sBlockedByILeft = `
       IIISS..III
       I.SS.....I
       I........I
       I........I
       I........I
       IIIIIIIIII
-      `
+      `;
 
-    expect(board.toString()).to.equalShape(sBlockedByILeft)
-  })
+        expect(board.toString()).to.equalShape(sBlockedByILeft);
+    });
 
-  test('cannot move right through other blocks', () => {
-    moveRightNTimes(board, 10)
+    test("cannot move right through other blocks", () => {
+        moveRightNTimes(board, 10);
 
-    const sBlockedByIRight =
-      `
+        const sBlockedByIRight = `
       III..SSIII
       I...SS...I
       I........I
       I........I
       I........I
       IIIIIIIIII
-      `
+      `;
 
-    expect(board.toString()).to.equalShape(sBlockedByIRight)
-  })
+        expect(board.toString()).to.equalShape(sBlockedByIRight);
+    });
 
+    test("cannot move down through other blocks and stops falling", () => {
+        moveDownNTimes(board, 10);
 
-  test('cannot move down through other blocks and stops falling', () => {
-    moveDownNTimes(board, 10)
-
-    const sBlockedByIDown =
-      `
+        const sBlockedByIDown = `
       III....III
       I........I
       I........I
       I...SS...I
       I..SS....I
       IIIIIIIIII
-      `
+      `;
 
-    expect(board.toString()).to.equalShape(sBlockedByIDown)
+        expect(board.toString()).to.equalShape(sBlockedByIDown);
 
-    moveLeftNTimes(board, 3)
+        moveLeftNTimes(board, 3);
 
-    expect(board.toString()).to.equalShape(sBlockedByIDown)
+        expect(board.toString()).to.equalShape(sBlockedByIDown);
 
-    moveRightNTimes(board, 3)
+        moveRightNTimes(board, 3);
 
-    expect(board.toString()).to.equalShape(sBlockedByIDown)
-  })
-})
+        expect(board.toString()).to.equalShape(sBlockedByIDown);
+    });
+});

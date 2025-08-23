@@ -33,7 +33,8 @@ export const rotateRightNTimes = (board: Board, n: number) => {
 };
 
 export const setupFallingShape = (board: Board, shape: Shape, row: number, col: number) => {
-    board.fallingShape = Tetromino.T_SHAPE;
+    board.fallingShape = shape;
     board.fallingPosRow = row + board.hiddenLayers;
     board.fallingPosCol = col;
+    return board;
 };

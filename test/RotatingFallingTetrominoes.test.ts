@@ -2,7 +2,7 @@ import { beforeEach, describe, test } from "vitest";
 import { Board } from "../src/Board";
 import { expect } from "chai";
 import { Tetromino } from "../src/Tetromino";
-import { rotateLeftNTimes, rotateRightNTimes } from "./testUtils";
+import { rotateLeftNTimes, rotateRightNTimes, setupFallingShape } from "./testUtils";
 
 describe("Rotating falling tetrominoes T can rotate ", () => {
     let board: Board;
@@ -209,9 +209,7 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             SSSSSSSSSS
             `
         );
-        board.fallingShape = Tetromino.T_SHAPE;
-        board.fallingPosRow = 1 + board.hiddenLayers;
-        board.fallingPosCol = 3;
+        board = setupFallingShape(board, Tetromino.T_SHAPE, 1, 3);
     });
 
     test("tests have the correct setup", () => {
@@ -314,9 +312,7 @@ describe("Rotating falling tetrominoes I can rotate ", () => {
             SSSSSSSSSS
             `
         );
-        board.fallingShape = Tetromino.I_SHAPE;
-        board.fallingPosRow = 0 + board.hiddenLayers;
-        board.fallingPosCol = 3;
+        board = setupFallingShape(board, Tetromino.I_SHAPE, 0, 3);
     });
 
     test("tests have the correct setup", () => {
@@ -419,9 +415,7 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
             SSSSSSSSSS
             `
         );
-        board.fallingShape = Tetromino.T_SHAPE;
-        board.fallingPosRow = 1 + board.hiddenLayers;
-        board.fallingPosCol = 3;
+        board = setupFallingShape(board, Tetromino.T_SHAPE, 1, 3);
     });
 
     test("tests have the correct setup", () => {
@@ -480,10 +474,7 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
             SSSSSSSSSS
             `
         );
-        board.fallingShape = Tetromino.T_SHAPE.rotateLeft();
-
-        board.fallingPosRow = 1 + board.hiddenLayers;
-        board.fallingPosCol = 3;
+        board = setupFallingShape(board, Tetromino.T_SHAPE.rotateLeft(), 1, 3);
     });
 
     test("tests have the correct setup", () => {
@@ -542,9 +533,7 @@ describe("Rotating falling tetrominoes I can not rotate ", () => {
             SSSSSSSSSS
             `
         );
-        board.fallingShape = Tetromino.I_SHAPE;
-        board.fallingPosRow = 0 + board.hiddenLayers;
-        board.fallingPosCol = 3;
+        board = setupFallingShape(board, Tetromino.I_SHAPE, 0, 3);
     });
 
     test("tests have the correct setup", () => {
@@ -603,9 +592,7 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
             SSSSSSSSSS
             `
         );
-        board.fallingShape = Tetromino.I_SHAPE;
-        board.fallingPosRow = 0 + board.hiddenLayers;
-        board.fallingPosCol = 3;
+        board = setupFallingShape(board, Tetromino.I_SHAPE, 0, 3);
     });
 
     test("tests have the correct setup", () => {

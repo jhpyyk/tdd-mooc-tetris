@@ -117,15 +117,7 @@ export class Board {
         ) {
             return false;
         }
-        if (
-            !isShapeAbleToBeInsertedTo(
-                this.cells,
-                this.fallingShape.rotateLeft(),
-                this.fallingPosRow,
-                this.fallingPosCol,
-                this.shapePos
-            )
-        ) {
+        if (!isShapeAbleToBeInsertedTo(this.cells, this.fallingShape.rotateLeft(), this.shapePos)) {
             return false;
         }
         this.fallingShape = this.fallingShape.rotateLeft();
@@ -140,15 +132,7 @@ export class Board {
         ) {
             return false;
         }
-        if (
-            !isShapeAbleToBeInsertedTo(
-                this.cells,
-                this.fallingShape.rotateRight(),
-                this.fallingPosRow,
-                this.fallingPosCol,
-                this.shapePos
-            )
-        ) {
+        if (!isShapeAbleToBeInsertedTo(this.cells, this.fallingShape.rotateRight(), this.shapePos)) {
             return false;
         }
         this.fallingShape = this.fallingShape.rotateRight();
@@ -164,15 +148,7 @@ export class Board {
             return false;
         }
         const newPos: Position = { row: this.shapePos.row + moveRows, col: this.shapePos.col + moveCols };
-        if (
-            !isShapeAbleToBeInsertedTo(
-                this.cells,
-                this.fallingShape,
-                this.fallingPosRow + moveRows,
-                this.fallingPosCol + moveCols,
-                newPos
-            )
-        ) {
+        if (!isShapeAbleToBeInsertedTo(this.cells, this.fallingShape, newPos)) {
             return false;
         }
         this.fallingPosRow = this.fallingPosRow + moveRows;
@@ -206,7 +182,7 @@ const isShapeCellAbleToBeInserted = (cells: Cells, shape: Shape, shapeRow: numbe
     );
 };
 
-const isShapeAbleToBeInsertedTo = (cells: Cells, shape: Shape, row: number, col: number, pos: Position) => {
+const isShapeAbleToBeInsertedTo = (cells: Cells, shape: Shape, pos: Position) => {
     for (let shapeRow = 0; shapeRow < shape.cells.length; shapeRow++) {
         for (let shapeCol = 0; shapeCol < shape.cells[0].length; shapeCol++) {
             if (!isShapeCellAbleToBeInserted(cells, shape, shapeRow, shapeCol, pos)) {

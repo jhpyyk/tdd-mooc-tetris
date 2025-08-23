@@ -224,27 +224,8 @@ const isShapeCellEmpty = (shape: Shape, row: number, col: number) => {
     return shape.cells[row] && shape.cells[row][col] && shape.cells[row][col] === ".";
 };
 
-const isShapeCellExists = (shape: Shape, row: number, col: number) => {
-    return shape.cells[row] && shape.cells[row][col];
-};
-
 const isBoardCellEmpty = (boardCells: Cells, row: number, col: number) => {
     return boardCells[row] && boardCells[row][col] && boardCells[row][col] === ".";
-};
-
-const isBoardCellExists = (boardCells: Cells, row: number, col: number) => {
-    return boardCells[row] && boardCells[row][col];
-};
-
-const eraseFallingShape = (boardCells: Cells, shape: Shape, row: number, column: number): Cells => {
-    for (let rowIdx = 0; rowIdx < shape.cells.length; rowIdx++) {
-        for (let colIdx = 0; colIdx < shape.cells[0].length; colIdx++) {
-            if (!isShapeCellEmpty(shape, rowIdx, colIdx)) {
-                boardCells[row + rowIdx][column + colIdx] = ".";
-            }
-        }
-    }
-    return boardCells;
 };
 
 const insertFallingCharsIntoBoardCells = (boardCells: Cells, shape: Shape, row: number, column: number): Cells => {

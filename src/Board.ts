@@ -109,7 +109,12 @@ export class Board {
     };
 
     rotateLeft = () => {
-        if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
+        if (
+            !this.fallingShape ||
+            this.fallingPosRow === undefined ||
+            this.fallingPosCol === undefined ||
+            !this.shapePos
+        ) {
             return false;
         }
         if (
@@ -127,7 +132,12 @@ export class Board {
     };
 
     rotateRight = () => {
-        if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
+        if (
+            !this.fallingShape ||
+            this.fallingPosRow === undefined ||
+            this.fallingPosCol === undefined ||
+            !this.shapePos
+        ) {
             return false;
         }
         if (
@@ -145,7 +155,12 @@ export class Board {
     };
 
     private moveShape = (moveRows: number, moveCols: number) => {
-        if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
+        if (
+            !this.fallingShape ||
+            this.fallingPosRow === undefined ||
+            this.fallingPosCol === undefined ||
+            !this.shapePos
+        ) {
             return false;
         }
         if (
@@ -190,16 +205,30 @@ const isShapeCellAbleToBeInserted = (
     shapeRow: number,
     shapeCol: number,
     row: number,
-    col: number,
-    pos?: Position
+    col: number
 ) => {
     return isShapeCellEmpty(shape, shapeRow, shapeCol) || isBoardCellEmpty(cells, row + shapeRow, col + shapeCol);
 };
 
-const isShapeAbleToBeInsertedTo = (cells: Cells, shape: Shape, row: number, col: number, pos?: Position) => {
+const isShapeCellAbleToBeInsertedPOS = (
+    cells: Cells,
+    shape: Shape,
+    shapeRow: number,
+    shapeCol: number,
+    pos: Position
+) => {
+    return (
+        isShapeCellEmpty(shape, shapeRow, shapeCol) || isBoardCellEmpty(cells, pos.row + shapeRow, pos.col + shapeCol)
+    );
+};
+
+const isShapeAbleToBeInsertedTo = (cells: Cells, shape: Shape, row: number, col: number, pos: Position) => {
     for (let shapeRow = 0; shapeRow < shape.cells.length; shapeRow++) {
         for (let shapeCol = 0; shapeCol < shape.cells[0].length; shapeCol++) {
-            if (!isShapeCellAbleToBeInserted(cells, shape, shapeRow, shapeCol, row, col)) {
+            if (
+                !isShapeCellAbleToBeInserted(cells, shape, shapeRow, shapeCol, row, col) ||
+                !isShapeCellAbleToBeInsertedPOS(cells, shape, shapeRow, shapeCol, pos)
+            ) {
                 return false;
             }
         }

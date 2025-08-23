@@ -2,7 +2,7 @@ import { beforeEach, describe, test } from "vitest";
 import { Board } from "../src/Board";
 import { expect } from "chai";
 import { Tetromino } from "../src/Tetromino";
-import { rotateLeftNTimes } from "./testUtils";
+import { rotateLeftNTimes, rotateRightNTimes } from "./testUtils";
 
 describe("Rotating falling tetrominoes T can rotate ", () => {
     let board: Board;
@@ -438,8 +438,22 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
         );
     });
 
-    test("left in tight space", () => {
+    test("left in too tight space", () => {
         rotateLeftNTimes(board, 10)
+        expect(board.toString()).to.equalShape(
+            `
+            SSSSSSSSSS
+            SSSSTSSSSS
+            SSSTTTSSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        )
+    })
+
+     test("right in too tight space", () => {
+        rotateRightNTimes(board, 10)
         expect(board.toString()).to.equalShape(
             `
             SSSSSSSSSS

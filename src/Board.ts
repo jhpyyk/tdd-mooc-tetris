@@ -110,6 +110,9 @@ export class Board {
         if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
             return false
         }
+        if (!isShapeAbleToBeInsertedTo(this.cells, this.fallingShape.rotateRight(), this.fallingPosRow, this.fallingPosCol)) {
+            return false
+        }
         this.fallingShape = this.fallingShape.rotateRight()
     }
 

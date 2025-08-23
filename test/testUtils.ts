@@ -23,3 +23,9 @@ export const rotateLeftNTimes = (board: Board, n: number) => {
         board.rotateLeft()
     }
 }
+
+export const rotateRightNTimes = (board: Board, n: number) => {
+    for (let i=0; i<n; i++) {
+        board.rotateRight()
+    }
+}

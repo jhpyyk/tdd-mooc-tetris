@@ -16,6 +16,7 @@ export class Board {
     fallingShape: Shape | undefined;
     fallingPosRow: number | undefined;
     fallingPosCol: number | undefined;
+    shapePos: Position | undefined;
     hiddenLayers: number = 2;
 
     constructor(width: number, height: number) {
@@ -72,10 +73,12 @@ export class Board {
         const columnIndex = Math.floor((this.width - this.fallingShape.cells.length) / 2);
         this.fallingPosRow = 0 + this.hiddenLayers;
         this.fallingPosCol = columnIndex;
+        this.shapePos = { row: 0 + this.hiddenLayers, col: columnIndex };
 
         if (this.fallingShape.shapeChar === "I") {
             this.fallingPosRow = this.fallingPosRow - 2;
             this.fallingPosCol = this.fallingPosCol + 1;
+            this.shapePos = { row: 0 + this.fallingPosRow - 2, col: this.fallingPosCol + 1 };
         }
     };
 

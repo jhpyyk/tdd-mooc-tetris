@@ -163,13 +163,14 @@ export class Board {
         ) {
             return false;
         }
+        const newPos: Position = { row: this.shapePos.row + moveRows, col: this.shapePos.col + moveCols };
         if (
             !isShapeAbleToBeInsertedTo(
                 this.cells,
                 this.fallingShape,
                 this.fallingPosRow + moveRows,
                 this.fallingPosCol + moveCols,
-                this.shapePos
+                newPos
             )
         ) {
             return false;
@@ -199,24 +200,7 @@ export class Board {
     };
 }
 
-const isShapeCellAbleToBeInserted = (
-    cells: Cells,
-    shape: Shape,
-    shapeRow: number,
-    shapeCol: number,
-    row: number,
-    col: number
-) => {
-    return isShapeCellEmpty(shape, shapeRow, shapeCol) || isBoardCellEmpty(cells, row + shapeRow, col + shapeCol);
-};
-
-const isShapeCellAbleToBeInsertedPOS = (
-    cells: Cells,
-    shape: Shape,
-    shapeRow: number,
-    shapeCol: number,
-    pos: Position
-) => {
+const isShapeCellAbleToBeInserted = (cells: Cells, shape: Shape, shapeRow: number, shapeCol: number, pos: Position) => {
     return (
         isShapeCellEmpty(shape, shapeRow, shapeCol) || isBoardCellEmpty(cells, pos.row + shapeRow, pos.col + shapeCol)
     );
@@ -225,10 +209,7 @@ const isShapeCellAbleToBeInsertedPOS = (
 const isShapeAbleToBeInsertedTo = (cells: Cells, shape: Shape, row: number, col: number, pos: Position) => {
     for (let shapeRow = 0; shapeRow < shape.cells.length; shapeRow++) {
         for (let shapeCol = 0; shapeCol < shape.cells[0].length; shapeCol++) {
-            if (
-                !isShapeCellAbleToBeInserted(cells, shape, shapeRow, shapeCol, row, col) ||
-                !isShapeCellAbleToBeInsertedPOS(cells, shape, shapeRow, shapeCol, pos)
-            ) {
+            if (!isShapeCellAbleToBeInserted(cells, shape, shapeRow, shapeCol, pos)) {
                 return false;
             }
         }

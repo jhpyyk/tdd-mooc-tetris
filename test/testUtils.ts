@@ -17,3 +17,9 @@ export const moveDownNTimes = (board: Board, n: number) => {
         board.moveDown()
     }
 }
+
+export const rotateLeftNTimes = (board: Board, n: number) => {
+    for (let i=0; i<n; i++) {
+        board.rotateLeft()
+    }
+}

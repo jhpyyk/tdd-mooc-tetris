@@ -2,6 +2,7 @@ import { beforeEach, describe, test } from "vitest";
 import { Board } from "../src/Board";
 import { expect } from "chai";
 import { Tetromino } from "../src/Tetromino";
+import { rotateLeftNTimes } from "./testUtils";
 
 describe("Rotating falling tetrominoes T can rotate ", () => {
     let board: Board;
@@ -403,3 +404,52 @@ describe("Rotating falling tetrominoes I can rotate ", () => {
         )
     })
 })
+
+
+describe("Rotating falling tetrominoes T can not rotate ", () => {
+    let board: Board;
+
+    beforeEach(() => {
+        board = Board.fromString(
+            `
+            SSSSSSSSSS
+            SSSS.SSSSS
+            SSS...SSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        )
+        board.fallingShape = Tetromino.T_SHAPE
+        board.fallingPosRow = 1 + board.hiddenLayers
+        board.fallingPosCol = 3
+    })
+
+    test("tests have the correct setup", () => {
+        expect(board.toString()).to.equalShape(
+            `
+            SSSSSSSSSS
+            SSSSTSSSSS
+            SSSTTTSSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        );
+    });
+
+    test("left in tight space", () => {
+        rotateLeftNTimes(board, 10)
+        expect(board.toString()).to.equalShape(
+            `
+            SSSSSSSSSS
+            SSSSTSSSSS
+            SSSTTTSSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        )
+    })
+})
+

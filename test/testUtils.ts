@@ -36,5 +36,6 @@ export const setupFallingShape = (board: Board, shape: Shape, row: number, col: 
     board.fallingShape = shape;
     board.fallingPosRow = row + board.hiddenLayers;
     board.fallingPosCol = col;
+    board.shapePos = { row: row + board.hiddenLayers, col: col };
     return board;
 };

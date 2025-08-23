@@ -40,12 +40,18 @@ export class Board {
 
     toString() {
         let cellsCopy = structuredClone(this.cells);
-        if (this.fallingShape && this.fallingPosRow !== undefined && this.fallingPosCol !== undefined) {
+        if (
+            this.fallingShape &&
+            this.fallingPosRow !== undefined &&
+            this.fallingPosCol !== undefined &&
+            this.shapePos
+        ) {
             cellsCopy = insertFallingCharsIntoBoardCells(
                 cellsCopy,
                 this.fallingShape,
                 this.fallingPosRow,
-                this.fallingPosCol
+                this.fallingPosCol,
+                this.shapePos
             );
         }
         let boardString = "";
@@ -78,7 +84,7 @@ export class Board {
         if (this.fallingShape.shapeChar === "I") {
             this.fallingPosRow = this.fallingPosRow - 2;
             this.fallingPosCol = this.fallingPosCol + 1;
-            this.shapePos = { row: 0 + this.fallingPosRow - 2, col: this.fallingPosCol + 1 };
+            this.shapePos = { row: this.shapePos.row - 2, col: this.shapePos.col + 1 };
         }
     };
 
@@ -165,14 +171,20 @@ export class Board {
     };
 
     private lockShape = () => {
-        if (!this.fallingShape || this.fallingPosRow === undefined || this.fallingPosCol === undefined) {
+        if (
+            !this.fallingShape ||
+            this.fallingPosRow === undefined ||
+            this.fallingPosCol === undefined ||
+            !this.shapePos
+        ) {
             return;
         }
         this.cells = insertFallingCharsIntoBoardCells(
             this.cells,
             this.fallingShape,
             this.fallingPosRow,
-            this.fallingPosCol
+            this.fallingPosCol,
+            this.shapePos
         );
         this.fallingShape = undefined;
         this.fallingPosRow = undefined;
@@ -239,11 +251,17 @@ const isBoardCellEmpty = (boardCells: Cells, row: number, col: number) => {
     return boardCells[row] && boardCells[row][col] && boardCells[row][col] === ".";
 };
 
-const insertFallingCharsIntoBoardCells = (boardCells: Cells, shape: Shape, row: number, column: number): Cells => {
+const insertFallingCharsIntoBoardCells = (
+    boardCells: Cells,
+    shape: Shape,
+    row: number,
+    column: number,
+    pos: Position
+): Cells => {
     for (let rowIdx = 0; rowIdx < shape.cells.length; rowIdx++) {
         for (let colIdx = 0; colIdx < shape.cells[0].length; colIdx++) {
             if (!isShapeCellEmpty(shape, rowIdx, colIdx)) {
-                boardCells[row + rowIdx][column + colIdx] = shape.shapeChar;
+                boardCells[pos.row + rowIdx][pos.col + colIdx] = shape.shapeChar;
             }
         }
     }

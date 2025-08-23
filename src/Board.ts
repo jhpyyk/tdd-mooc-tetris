@@ -4,6 +4,10 @@ import { Shape, ShapeChar } from "./Shape";
 type CellState = ShapeChar;
 type Row = Array<CellState>;
 export type Cells = Array<Row>;
+type Position = {
+    row: number;
+    col: number;
+};
 
 export class Board {
     width: number;

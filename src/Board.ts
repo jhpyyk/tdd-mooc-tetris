@@ -187,12 +187,13 @@ const isShapeCellAbleToBeInserted = (
     shapeRow: number,
     shapeCol: number,
     row: number,
-    col: number
+    col: number,
+    pos?: Position
 ) => {
     return isShapeCellEmpty(shape, shapeRow, shapeCol) || isBoardCellEmpty(cells, row + shapeRow, col + shapeCol);
 };
 
-const isShapeAbleToBeInsertedTo = (cells: Cells, shape: Shape, row: number, col: number) => {
+const isShapeAbleToBeInsertedTo = (cells: Cells, shape: Shape, row: number, col: number, pos?: Position) => {
     for (let shapeRow = 0; shapeRow < shape.cells.length; shapeRow++) {
         for (let shapeCol = 0; shapeCol < shape.cells[0].length; shapeCol++) {
             if (!isShapeCellAbleToBeInserted(cells, shape, shapeRow, shapeCol, row, col)) {

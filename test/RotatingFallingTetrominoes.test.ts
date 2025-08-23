@@ -438,7 +438,7 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
         );
     });
 
-    test("left in too tight space", () => {
+    test("left on a full board space", () => {
         rotateLeftNTimes(board, 10)
         expect(board.toString()).to.equalShape(
             `
@@ -452,7 +452,7 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
         )
     })
 
-     test("right in too tight space", () => {
+     test("right on a full board space", () => {
         rotateRightNTimes(board, 10)
         expect(board.toString()).to.equalShape(
             `
@@ -467,3 +467,64 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
     })
 })
 
+describe("Rotating falling tetrominoes T can not rotate ", () => {
+    let board: Board;
+
+    beforeEach(() => {
+        board = Board.fromString(
+            `
+            SSSSSSSSSS
+            SSS..SSSSS
+            SSS..SSSSS
+            SSS..SSSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        )
+        board.fallingShape = Tetromino.T_SHAPE.rotateLeft()
+
+        board.fallingPosRow = 1 + board.hiddenLayers
+        board.fallingPosCol = 3
+    })
+
+    test("tests have the correct setup", () => {
+        expect(board.toString()).to.equalShape(
+            `
+            SSSSSSSSSS
+            SSS.TSSSSS
+            SSSTTSSSSS
+            SSS.TSSSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        );
+    });
+
+    test("left in two wide column space", () => {
+        rotateLeftNTimes(board, 10)
+        expect(board.toString()).to.equalShape(
+            `
+            SSSSSSSSSS
+            SSS.TSSSSS
+            SSSTTSSSSS
+            SSS.TSSSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        )
+    })
+
+    test("right in two wide column space", () => {
+        rotateRightNTimes(board, 10)
+        expect(board.toString()).to.equalShape(
+            `
+            SSSSSSSSSS
+            SSS.TSSSSS
+            SSSTTSSSSS
+            SSS.TSSSSS
+            SSSSSSSSSS
+            SSSSSSSSSS
+            `
+        )
+    })
+})

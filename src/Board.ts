@@ -99,12 +99,19 @@ export class Board {
 
     rotateLeft = () => {
         if (!this.fallingShape || !this.shapePos) {
-            return false;
+            return;
         }
-        if (!isShapeAbleToBeInsertedTo(this.cells, this.fallingShape.rotateLeft(), this.shapePos)) {
-            return false;
+        let isAble = false;
+        let newPos = { ...this.shapePos };
+        if (isShapeAbleToBeInsertedTo(this.cells, this.fallingShape.rotateLeft(), this.shapePos)) {
+            isAble = true;
         }
-        this.fallingShape = this.fallingShape.rotateLeft();
+
+        if (isAble) {
+            this.fallingShape = this.fallingShape.rotateLeft();
+        }
+
+        this.shapePos = newPos;
     };
 
     rotateRight = () => {
@@ -140,6 +147,14 @@ export class Board {
         this.shapePos = undefined;
     };
 }
+
+const isAbleToSimpleWallKickToPosition = (cells: Cells, shape: Shape, pos: Position): Position | undefined => {
+    const kickRight = { ...pos, col: pos.col + 1 };
+    if (isShapeAbleToBeInsertedTo(cells, shape, kickRight)) {
+        return pos;
+    }
+    return undefined;
+};
 
 const isShapeCellAbleToBeInserted = (cells: Cells, shape: Shape, shapeRow: number, shapeCol: number, pos: Position) => {
     return (

@@ -203,21 +203,21 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             SSSSSSSSSS
             SSSS.SSSSS
             SSS...SSSS
-            SSSS.SSSSS
+            SSS...SSSS
             SSSSSSSSSS
             SSSSSSSSSS
             `
         );
-        board = setupFallingShape(board, Tetromino.T_SHAPE, 1, 3);
+        board = setupFallingShape(board, Tetromino.ARIKA_T, 1, 3);
     });
 
     test("tests have the correct setup", () => {
         expect(board.toString()).to.equalShape(
             `
             SSSSSSSSSS
-            SSSSTSSSSS
-            SSSTTTSSSS
             SSSS.SSSSS
+            SSSTTTSSSS
+            SSS.T.SSSS
             SSSSSSSSSS
             SSSSSSSSSS
             `
@@ -230,8 +230,8 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             `
             SSSSSSSSSS
             SSSSTSSSSS
-            SSSTT.SSSS
-            SSSSTSSSSS
+            SSS.TTSSSS
+            SSS.T.SSSS
             SSSSSSSSSS
             SSSSSSSSSS
             `
@@ -241,8 +241,8 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             `
             SSSSSSSSSS
             SSSS.SSSSS
+            SSS.T.SSSS
             SSSTTTSSSS
-            SSSSTSSSSS
             SSSSSSSSSS
             SSSSSSSSSS
             `
@@ -252,22 +252,22 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             `
             SSSSSSSSSS
             SSSSTSSSSS
-            SSS.TTSSSS
-            SSSSTSSSSS
+            SSSTT.SSSS
+            SSS.T.SSSS
             SSSSSSSSSS
             SSSSSSSSSS
             `
         );
     });
 
-    test("right in tght space", () => {
+    test("right in tight space", () => {
         board.rotateRight();
         expect(board.toString()).to.equalShape(
             `
             SSSSSSSSSS
             SSSSTSSSSS
-            SSS.TTSSSS
-            SSSSTSSSSS
+            SSSTT.SSSS
+            SSS.T.SSSS
             SSSSSSSSSS
             SSSSSSSSSS
             `
@@ -277,8 +277,8 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             `
             SSSSSSSSSS
             SSSS.SSSSS
+            SSS.T.SSSS
             SSSTTTSSSS
-            SSSSTSSSSS
             SSSSSSSSSS
             SSSSSSSSSS
             `
@@ -288,8 +288,8 @@ describe("Rotating falling tetrominoes T can rotate ", () => {
             `
             SSSSSSSSSS
             SSSSTSSSSS
-            SSSTT.SSSS
-            SSSSTSSSSS
+            SSS.TTSSSS
+            SSS.T.SSSS
             SSSSSSSSSS
             SSSSSSSSSS
             `

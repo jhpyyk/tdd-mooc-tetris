@@ -57,7 +57,37 @@ export const TETROMINO_S_SHAPE: ShapeCells = [
     [".", ".", "."],
 ];
 
+export const ARIKA_S: Array<ShapeCells> = [
+    [
+        [".", ".", ".", "."],
+        [".", "S", "S", "."],
+        ["S", "S", ".", "."],
+        [".", ".", ".", "."],
+    ],
+    [
+        ["S", ".", ".", "."],
+        ["S", "S", ".", "."],
+        [".", "S", ".", "."],
+        [".", ".", ".", "."],
+    ],
+];
+
 export const TETROMINO_S = createOrientations(TETROMINO_S_SHAPE, 4);
+
+export const ARIKA_Z: Array<ShapeCells> = [
+    [
+        [".", ".", ".", "."],
+        ["Z", "Z", ".", "."],
+        [".", "Z", "Z", "."],
+        [".", ".", ".", "."],
+    ],
+    [
+        [".", ".", "Z", "."],
+        [".", "Z", "Z", "."],
+        [".", "Z", ".", "."],
+        [".", ".", ".", "."],
+    ],
+];
 
 export const TETROMINO_Z_SHAPE: ShapeCells = [
     ["Z", "Z", "."],
@@ -67,6 +97,33 @@ export const TETROMINO_Z_SHAPE: ShapeCells = [
 
 export const TETROMINO_Z = createOrientations(TETROMINO_Z_SHAPE, 4);
 
+export const ARIKA_L: Array<ShapeCells> = [
+    [
+        [".", ".", ".", "."],
+        ["L", "L", "L", "."],
+        ["L", ".", ".", "."],
+        [".", ".", ".", "."],
+    ],
+    [
+        ["L", "L", ".", "."],
+        [".", "L", ".", "."],
+        [".", "L", ".", "."],
+        [".", ".", ".", "."],
+    ],
+    [
+        [".", ".", ".", "."],
+        [".", ".", "L", "."],
+        ["L", "L", "L", "."],
+        [".", ".", ".", "."],
+    ],
+    [
+        [".", "L", ".", "."],
+        [".", "L", ".", "."],
+        [".", "L", "L", "."],
+        [".", ".", ".", "."],
+    ],
+];
+
 export const TETROMINO_L_SHAPE: ShapeCells = [
     [".", ".", "L"],
     ["L", "L", "L"],
@@ -74,6 +131,33 @@ export const TETROMINO_L_SHAPE: ShapeCells = [
 ];
 
 export const TETROMINO_L = createOrientations(TETROMINO_L_SHAPE, 4);
+
+export const ARIKA_J: Array<ShapeCells> = [
+    [
+        [".", ".", ".", "."],
+        ["J", "J", "J", "."],
+        [".", ".", "J", "."],
+        [".", ".", ".", "."],
+    ],
+    [
+        [".", "J", ".", "."],
+        [".", "J", ".", "."],
+        ["J", "J", ".", "."],
+        [".", ".", ".", "."],
+    ],
+    [
+        [".", ".", ".", "."],
+        ["J", ".", ".", "."],
+        ["J", "J", "J", "."],
+        [".", ".", ".", "."],
+    ],
+    [
+        [".", "J", "J", "."],
+        [".", "J", ".", "."],
+        [".", "J", ".", "."],
+        [".", ".", ".", "."],
+    ],
+];
 
 export const TETROMINO_J_SHAPE: ShapeCells = [
     [".", ".", "J"],
@@ -93,6 +177,21 @@ export const TETROMINO_I_SHAPE: ShapeCells = [
 
 export const TETROMINO_I = createOrientations(TETROMINO_I_SHAPE, 2);
 
+export const ARIKA_I: Array<ShapeCells> = [
+    [
+        [".", ".", ".", "."],
+        ["I", "I", "I", "I"],
+        [".", ".", ".", "."],
+        [".", ".", ".", "."],
+    ],
+    [
+        [".", ".", "I", "."],
+        [".", ".", "I", "."],
+        [".", ".", "I", "."],
+        [".", ".", "I", "."],
+    ],
+];
+
 export const TETROMINO_O_SHAPE: ShapeCells = [
     [".", "O", "O"],
     [".", "O", "O"],
@@ -100,3 +199,12 @@ export const TETROMINO_O_SHAPE: ShapeCells = [
 ];
 
 export const TETROMINO_O = createOrientations(TETROMINO_O_SHAPE, 1);
+
+export const ARIKA_O: Array<ShapeCells> = [
+    [
+        [".", ".", ".", "."],
+        [".", "O", "O", "."],
+        [".", "O", "O", "."],
+        [".", ".", ".", "."],
+    ],
+];

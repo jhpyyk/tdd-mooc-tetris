@@ -22,6 +22,33 @@ export const TETROMINO_T_SHAPE: ShapeCells = [
     [".", ".", "."],
 ];
 
+export const ARIKA_T: Array<ShapeCells> = [
+    [
+        [".", ".", ".", "."],
+        ["T", "T", "T", "."],
+        [".", "T", ".", "."],
+        [".", ".", ".", "."],
+    ],
+    [
+        [".", "T", ".", "."],
+        ["T", "T", ".", "."],
+        [".", "T", ".", "."],
+        [".", ".", ".", "."],
+    ],
+    [
+        [".", ".", ".", "."],
+        [".", "T", ".", "."],
+        ["T", "T", "T", "."],
+        [".", ".", ".", "."],
+    ],
+    [
+        [".", "T", ".", "."],
+        [".", "T", "T", "."],
+        [".", "T", ".", "."],
+        [".", ".", ".", "."],
+    ],
+];
+
 export const TETROMINO_T = createOrientations(TETROMINO_T_SHAPE, 4);
 
 export const TETROMINO_S_SHAPE: ShapeCells = [

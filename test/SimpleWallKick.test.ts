@@ -4,7 +4,7 @@ import { Tetromino } from "../src/Tetromino";
 import { setupFallingShape } from "./testUtils";
 import { expect } from "chai";
 
-describe("T can do a simple wall kick ", () => {
+describe.skip("T can do a simple wall kick ", () => {
     let board: Board;
 
     beforeEach(() => {

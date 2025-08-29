@@ -1,13 +1,10 @@
 import { OneByOneBlock } from "./OneByOneBlock";
+import { noWallKicks, Position, RotationSystem } from "./RotationSystem";
 import { Shape, ShapeChar } from "./Shape";
 
 type CellState = ShapeChar;
 type Row = Array<CellState>;
 export type Cells = Array<Row>;
-type Position = {
-    row: number;
-    col: number;
-};
 
 export class Board {
     width: number;
@@ -16,6 +13,7 @@ export class Board {
     fallingShape: Shape | undefined;
     shapePos: Position | undefined;
     hiddenLayers: number = 2;
+    rotationSystem: RotationSystem = noWallKicks;
 
     constructor(width: number, height: number) {
         this.width = width;
@@ -140,6 +138,19 @@ export class Board {
         this.shapePos = undefined;
     };
 }
+
+const checkFirstPossibleRotationPosition = (
+    cells: Cells,
+    shape: Shape,
+    positions: Position[]
+): Position | undefined => {
+    for (const pos of positions) {
+        if (isShapeAbleToBeInsertedTo(cells, shape, pos)) {
+            return pos;
+        }
+    }
+    return undefined;
+};
 
 const isShapeCellAbleToBeInserted = (cells: Cells, shape: Shape, shapeRow: number, shapeCol: number, pos: Position) => {
     return (

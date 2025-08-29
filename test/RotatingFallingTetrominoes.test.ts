@@ -532,7 +532,7 @@ describe("Rotating falling tetrominoes I can not rotate ", () => {
             SSSSSSSSSS
             `
         );
-        board = setupFallingShape(board, Tetromino.I_SHAPE, 0, 3);
+        board = setupFallingShape(board, Tetromino.ARIKA_I, 1, 3);
     });
 
     test("tests have the correct setup", () => {

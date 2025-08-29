@@ -16,29 +16,36 @@ function distinctOrientations(shape: Tetromino) {
 }
 
 describe("The T shape", () => {
-    const shape = Tetromino.T_SHAPE;
+    const shape = Tetromino.ARIKA_T;
 
     test("initial orientation", () => {
         expect(shape.toString()).to.equalShape(
-            `.T.
-       TTT
-       ...`
+            `....
+        TTT.
+        .T..
+        ....`
         );
     });
 
     test("can be rotated right/clockwise", () => {
         expect(shape.rotateRight().toString()).to.equalShape(
-            `.T.
-       .TT
-       .T.`
+            `
+        .T..
+        TT..
+        .T..
+        ....
+        `
         );
     });
 
     test("can be rotated left/counter-clockwise", () => {
         expect(shape.rotateLeft().toString()).to.equalShape(
-            `.T.
-       TT.
-       .T.`
+            `
+        .T..
+       .TT.
+       .T..
+       ....
+       `
         );
     });
 

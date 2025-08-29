@@ -473,7 +473,7 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
             SSSSSSSSSS
             `
         );
-        board = setupFallingShape(board, Tetromino.T_SHAPE.rotateLeft(), 1, 3);
+        board = setupFallingShape(board, Tetromino.ARIKA_T.rotateRight(), 1, 3);
     });
 
     test("tests have the correct setup", () => {

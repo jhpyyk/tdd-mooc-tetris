@@ -303,25 +303,25 @@ describe("Rotating falling tetrominoes I can rotate ", () => {
     beforeEach(() => {
         board = Board.fromString(
             `
-            SSSSS.SSSS
+            SSSSSSSSSS
             SSSSS.SSSS
             SSS....SSS
             SSSSS.SSSS
-            SSSSSSSSSS
+            SSSSS.SSSS
             SSSSSSSSSS
             `
         );
-        board = setupFallingShape(board, Tetromino.I_SHAPE, 0, 3);
+        board = setupFallingShape(board, Tetromino.ARIKA_I, 1, 3);
     });
 
     test("tests have the correct setup", () => {
         expect(board.toString()).to.equalShape(
             `
-            SSSSS.SSSS
+            SSSSSSSSSS
             SSSSS.SSSS
             SSSIIIISSS
             SSSSS.SSSS
-            SSSSSSSSSS
+            SSSSS.SSSS
             SSSSSSSSSS
             `
         );
@@ -331,69 +331,69 @@ describe("Rotating falling tetrominoes I can rotate ", () => {
         board.rotateLeft();
         expect(board.toString()).to.equalShape(
             `
-            SSSSSISSSS
+            SSSSSSSSSS
             SSSSSISSSS
             SSS..I.SSS
             SSSSSISSSS
-            SSSSSSSSSS
+            SSSSSISSSS
             SSSSSSSSSS
             `
         );
         board.rotateLeft();
         expect(board.toString()).to.equalShape(
             `
-            SSSSS.SSSS
+            SSSSSSSSSS
             SSSSS.SSSS
             SSSIIIISSS
             SSSSS.SSSS
-            SSSSSSSSSS
+            SSSSS.SSSS
             SSSSSSSSSS
             `
         );
         board.rotateLeft();
         expect(board.toString()).to.equalShape(
             `
-            SSSSSISSSS
+            SSSSSSSSSS
             SSSSSISSSS
             SSS..I.SSS
             SSSSSISSSS
-            SSSSSSSSSS
+            SSSSSISSSS
             SSSSSSSSSS
             `
         );
     });
 
-    test("right in tght space", () => {
+    test("right in tight space", () => {
         board.rotateRight();
         expect(board.toString()).to.equalShape(
             `
-            SSSSSISSSS
+            SSSSSSSSSS
             SSSSSISSSS
             SSS..I.SSS
             SSSSSISSSS
-            SSSSSSSSSS
+            SSSSSISSSS
             SSSSSSSSSS
             `
         );
         board.rotateRight();
         expect(board.toString()).to.equalShape(
             `
-            SSSSS.SSSS
+            SSSSSSSSSS
             SSSSS.SSSS
             SSSIIIISSS
             SSSSS.SSSS
-            SSSSSSSSSS
+            SSSSS.SSSS
             SSSSSSSSSS
             `
         );
         board.rotateRight();
         expect(board.toString()).to.equalShape(
             `
-            SSSSSISSSS
+            SSSSSSSSSS
             SSSSSISSSS
             SSS..I.SSS
             SSSSSISSSS
-            SSSSSSSSSS
+            SSSSSISSSS
             SSSSSSSSSS
             `
         );

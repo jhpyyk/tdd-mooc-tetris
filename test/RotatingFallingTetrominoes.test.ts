@@ -407,22 +407,22 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
         board = Board.fromString(
             `
             SSSSSSSSSS
-            SSSS.SSSSS
             SSS...SSSS
+            SSSS.SSSSS
             SSSSSSSSSS
             SSSSSSSSSS
             SSSSSSSSSS
             `
         );
-        board = setupFallingShape(board, Tetromino.T_SHAPE, 1, 3);
+        board = setupFallingShape(board, Tetromino.ARIKA_T, 0, 3);
     });
 
     test("tests have the correct setup", () => {
         expect(board.toString()).to.equalShape(
             `
             SSSSSSSSSS
-            SSSSTSSSSS
             SSSTTTSSSS
+            SSSSTSSSSS
             SSSSSSSSSS
             SSSSSSSSSS
             SSSSSSSSSS
@@ -435,8 +435,8 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
         expect(board.toString()).to.equalShape(
             `
             SSSSSSSSSS
-            SSSSTSSSSS
             SSSTTTSSSS
+            SSSSTSSSSS
             SSSSSSSSSS
             SSSSSSSSSS
             SSSSSSSSSS
@@ -449,8 +449,8 @@ describe("Rotating falling tetrominoes T can not rotate ", () => {
         expect(board.toString()).to.equalShape(
             `
             SSSSSSSSSS
-            SSSSTSSSSS
             SSSTTTSSSS
+            SSSSTSSSSS
             SSSSSSSSSS
             SSSSSSSSSS
             SSSSSSSSSS

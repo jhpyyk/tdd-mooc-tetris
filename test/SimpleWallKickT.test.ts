@@ -61,7 +61,7 @@ describe("T can do a simple right wall kick ", () => {
 
     beforeEach(() => {
         board = new Board(10, 6);
-        setupFallingShape(board, Tetromino.T_SHAPE.rotateLeft(), 0, board.cells[0].length - 2);
+        setupFallingShape(board, Tetromino.ARIKA_T.rotateRight(), 0, board.cells[0].length - 2);
     });
 
     test("tests have the correct setup", () => {
@@ -97,9 +97,9 @@ describe("T can do a simple right wall kick ", () => {
 
         expect(board.toString()).to.equalShape(
             `
+        ..........
         ........T.
         .......TTT
-        ..........
         ..........
         ..........
         ..........

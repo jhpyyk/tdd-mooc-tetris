@@ -3,10 +3,10 @@ export type Position = {
     col: number;
 };
 
-export interface RotationSystem {
+export type RotationSystem = {
     leftRotationPositions: Position[];
     rightRotationPositions: Position[];
-}
+};
 
 export const noWallKicks: RotationSystem = {
     leftRotationPositions: [

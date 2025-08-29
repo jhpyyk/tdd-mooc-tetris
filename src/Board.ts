@@ -97,12 +97,19 @@ export class Board {
 
     rotateLeft = () => {
         if (!this.fallingShape || !this.shapePos) {
-            return false;
+            return;
         }
-        if (!isShapeAbleToBeInsertedTo(this.cells, this.fallingShape.rotateLeft(), this.shapePos)) {
-            return false;
+        const newAbsolutePos = calculateFirstPossibleRotationAbsolutePosition(
+            this.cells,
+            this.fallingShape.rotateLeft(),
+            this.shapePos,
+            this.rotationSystem.leftRotationPositions
+        );
+        if (!newAbsolutePos) {
+            return;
         }
         this.fallingShape = this.fallingShape.rotateLeft();
+        this.shapePos = newAbsolutePos;
     };
 
     rotateRight = () => {
@@ -139,14 +146,16 @@ export class Board {
     };
 }
 
-const checkFirstPossibleRotationPosition = (
+const calculateFirstPossibleRotationAbsolutePosition = (
     cells: Cells,
     shape: Shape,
+    shapePos: Position,
     positions: Position[]
 ): Position | undefined => {
     for (const pos of positions) {
-        if (isShapeAbleToBeInsertedTo(cells, shape, pos)) {
-            return pos;
+        const absolutePosition: Position = { row: shapePos.row + pos.row, col: shapePos.col + pos.col };
+        if (isShapeAbleToBeInsertedTo(cells, shape, absolutePosition)) {
+            return absolutePosition;
         }
     }
     return undefined;

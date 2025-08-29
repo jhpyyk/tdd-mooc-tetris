@@ -114,12 +114,19 @@ export class Board {
 
     rotateRight = () => {
         if (!this.fallingShape || !this.shapePos) {
-            return false;
+            return;
         }
-        if (!isShapeAbleToBeInsertedTo(this.cells, this.fallingShape.rotateRight(), this.shapePos)) {
-            return false;
+        const newAbsolutePos = calculateFirstPossibleRotationAbsolutePosition(
+            this.cells,
+            this.fallingShape.rotateRight(),
+            this.shapePos,
+            this.rotationSystem.rightRotationPositions
+        );
+        if (!newAbsolutePos) {
+            return;
         }
         this.fallingShape = this.fallingShape.rotateRight();
+        this.shapePos = newAbsolutePos;
     };
 
     private moveShape = (moveRows: number, moveCols: number) => {

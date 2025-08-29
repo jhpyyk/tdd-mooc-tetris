@@ -9,7 +9,7 @@ describe("Moving falling tetrominoes ", () => {
 
     beforeEach(() => {
         board = new Board(10, 6);
-        board.drop(Tetromino.Z_SHAPE);
+        board.drop(Tetromino.ARIKA_Z);
     });
 
     test("tests have the correct setup", () => {
@@ -143,7 +143,7 @@ describe("Moving falling tetrominoes ", () => {
       IIIIIIIIII
       `
         );
-        board.drop(Tetromino.S_SHAPE);
+        board.drop(Tetromino.ARIKA_S);
     });
 
     test("tests have the correct setup", () => {

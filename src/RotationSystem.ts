@@ -22,3 +22,34 @@ export const noWallKicks: RotationSystem = {
         },
     ],
 };
+
+export const simpleWallkick: RotationSystem = {
+    leftRotationPositions: [
+        {
+            row: 0,
+            col: 0,
+        },
+        {
+            row: 0,
+            col: 1,
+        },
+        {
+            row: 0,
+            col: -1,
+        },
+    ],
+    rightRotationPositions: [
+        {
+            row: 0,
+            col: 0,
+        },
+        {
+            row: 0,
+            col: 1,
+        },
+        {
+            row: 0,
+            col: -1,
+        },
+    ],
+};

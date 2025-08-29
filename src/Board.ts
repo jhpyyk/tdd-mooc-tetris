@@ -1,5 +1,5 @@
 import { OneByOneBlock } from "./OneByOneBlock";
-import { noWallKicks, Position, RotationSystem } from "./RotationSystem";
+import { noWallKicks, Position, RotationSystem, simpleWallkick } from "./RotationSystem";
 import { Shape, ShapeChar } from "./Shape";
 
 type CellState = ShapeChar;
@@ -13,7 +13,7 @@ export class Board {
     fallingShape: Shape | undefined;
     shapePos: Position | undefined;
     hiddenLayers: number = 2;
-    rotationSystem: RotationSystem = noWallKicks;
+    rotationSystem: RotationSystem = simpleWallkick;
 
     constructor(width: number, height: number) {
         this.width = width;

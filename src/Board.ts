@@ -67,9 +67,7 @@ export class Board {
         if (this.fallingShape.cells[0].length === 4 && this.fallingShape.cells.length === 4) {
             // Arika shape
             this.shapePos = { row: this.hiddenLayers - 1, col: columnIndex };
-        }
-
-        if (this.fallingShape.shapeChar === "I") {
+        } else if (this.fallingShape.shapeChar === "I") {
             this.shapePos = { row: this.shapePos.row - 2, col: this.shapePos.col + 1 };
         }
     };

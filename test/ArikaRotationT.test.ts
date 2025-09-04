@@ -230,4 +230,43 @@ describe("Arika rotation ", () => {
             );
         });
     });
+
+    describe("T respects the center column rule and ", () => {
+        describe("will not rotate when shape position (0,1) is occupied ", () => {
+            let board: Board;
+
+            beforeEach(() => {
+                board = Board.fromString(
+                    `
+                    ....Z.....
+                    ..........
+                    ..........
+                    ..........
+                    ..........
+                    ..........
+                    `
+                );
+            });
+
+            test("when T is in initial rotation and rotating left", () => {
+                board = setupFallingShape(board, Tetromino.ARIKA_T, 0, 3);
+
+                const expected = `
+                ....Z.....
+                ...TTT....
+                ....T.....
+                ..........
+                ..........
+                ..........
+                `;
+
+                expect(board.toString()).to.equalShape(expected);
+
+                board.rotateLeft();
+                board.rotateLeft();
+
+                expect(board.toString()).to.equalShape(expected);
+            });
+        });
+    });
 });

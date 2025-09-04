@@ -158,4 +158,61 @@ describe("Arika J respects the center column rule and ", () => {
             expect(board.toString()).to.equalShape(expected);
         });
     });
+
+    describe("will not rotate when shape position (2,1) is occupied ", () => {
+        let board: Board;
+
+        beforeEach(() => {
+            board = Board.fromString(
+                `
+                    ..........
+                    ..........
+                    ....Z.....
+                    ..........
+                    ..........
+                    ..........
+                    `
+            );
+        });
+
+        test("when J is in initial rotation and rotating left", () => {
+            board = setupFallingShape(board, Tetromino.ARIKA_J, 0, 3);
+
+            const expected = `
+                ..........
+                ...JJJ....
+                ....ZJ....
+                ..........
+                ..........
+                ..........
+                `;
+
+            expect(board.toString()).to.equalShape(expected);
+
+            board.rotateLeft();
+            board.rotateLeft();
+
+            expect(board.toString()).to.equalShape(expected);
+        });
+
+        test("when J is in initial rotation and rotating right", () => {
+            board = setupFallingShape(board, Tetromino.ARIKA_J, 0, 3);
+
+            const expected = `
+                ..........
+                ...JJJ....
+                ....ZJ....
+                ..........
+                ..........
+                ..........
+                `;
+
+            expect(board.toString()).to.equalShape(expected);
+
+            board.rotateRight();
+            board.rotateRight();
+
+            expect(board.toString()).to.equalShape(expected);
+        });
+    });
 });

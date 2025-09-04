@@ -56,3 +56,35 @@ export const simpleWallkick: RotationSystem = {
         },
     ],
 };
+
+export const arika: RotationSystem = {
+    shouldBeEmtpy: [],
+    leftRotationPositions: [
+        {
+            row: 0,
+            col: 0,
+        },
+        {
+            row: 0,
+            col: 1,
+        },
+        {
+            row: 0,
+            col: -1,
+        },
+    ],
+    rightRotationPositions: [
+        {
+            row: 0,
+            col: 0,
+        },
+        {
+            row: 0,
+            col: 1,
+        },
+        {
+            row: 0,
+            col: -1,
+        },
+    ],
+};

@@ -4,17 +4,18 @@ import { Tetromino } from "../src/Tetromino";
 import { setupFallingShape } from "./testUtils";
 import { expect } from "chai";
 
-describe("T can do a simple left wall kick ", () => {
-    let board: Board;
+describe("Arika rotation ", () => {
+    describe("T can do a simple left wall kick ", () => {
+        let board: Board;
 
-    beforeEach(() => {
-        board = new Board(10, 6);
-        setupFallingShape(board, Tetromino.ARIKA_T.rotateLeft(), 0, -1);
-    });
+        beforeEach(() => {
+            board = new Board(10, 6);
+            setupFallingShape(board, Tetromino.ARIKA_T.rotateLeft(), 0, -1);
+        });
 
-    test("tests have the correct setup", () => {
-        expect(board.toString()).to.equalShape(
-            `
+        test("tests have the correct setup", () => {
+            expect(board.toString()).to.equalShape(
+                `
         T.........
         TT........
         T.........
@@ -22,14 +23,14 @@ describe("T can do a simple left wall kick ", () => {
         ..........
         ..........
         `
-        );
-    });
+            );
+        });
 
-    test("when rotating left", () => {
-        board.rotateLeft();
+        test("when rotating left", () => {
+            board.rotateLeft();
 
-        expect(board.toString()).to.equalShape(
-            `
+            expect(board.toString()).to.equalShape(
+                `
         ..........
         .T........
         TTT.......
@@ -37,14 +38,14 @@ describe("T can do a simple left wall kick ", () => {
         ..........
         ..........
         `
-        );
-    });
+            );
+        });
 
-    test("when rotating right", () => {
-        board.rotateRight();
+        test("when rotating right", () => {
+            board.rotateRight();
 
-        expect(board.toString()).to.equalShape(
-            `
+            expect(board.toString()).to.equalShape(
+                `
         ..........
         TTT.......
         .T........
@@ -52,21 +53,21 @@ describe("T can do a simple left wall kick ", () => {
         ..........
         ..........
         `
-        );
-    });
-});
-
-describe("T can do a simple right wall kick ", () => {
-    let board: Board;
-
-    beforeEach(() => {
-        board = new Board(10, 6);
-        setupFallingShape(board, Tetromino.ARIKA_T.rotateRight(), 0, board.cells[0].length - 2);
+            );
+        });
     });
 
-    test("tests have the correct setup", () => {
-        expect(board.toString()).to.equalShape(
-            `
+    describe("T can do a simple right wall kick ", () => {
+        let board: Board;
+
+        beforeEach(() => {
+            board = new Board(10, 6);
+            setupFallingShape(board, Tetromino.ARIKA_T.rotateRight(), 0, board.cells[0].length - 2);
+        });
+
+        test("tests have the correct setup", () => {
+            expect(board.toString()).to.equalShape(
+                `
         .........T
         ........TT
         .........T
@@ -74,14 +75,14 @@ describe("T can do a simple right wall kick ", () => {
         ..........
         ..........
         `
-        );
-    });
+            );
+        });
 
-    test("rotating left when facing right wall", () => {
-        board.rotateLeft();
+        test("rotating left when facing right wall", () => {
+            board.rotateLeft();
 
-        expect(board.toString()).to.equalShape(
-            `
+            expect(board.toString()).to.equalShape(
+                `
         ..........
         .......TTT
         ........T.
@@ -89,14 +90,14 @@ describe("T can do a simple right wall kick ", () => {
         ..........
         ..........
         `
-        );
-    });
+            );
+        });
 
-    test("rotating right when facing right wall", () => {
-        board.rotateRight();
+        test("rotating right when facing right wall", () => {
+            board.rotateRight();
 
-        expect(board.toString()).to.equalShape(
-            `
+            expect(board.toString()).to.equalShape(
+                `
         ..........
         ........T.
         .......TTT
@@ -104,16 +105,16 @@ describe("T can do a simple right wall kick ", () => {
         ..........
         ..........
         `
-        );
+            );
+        });
     });
-});
 
-describe("T can do a simple left wall kick from other pieces ", () => {
-    let board: Board;
+    describe("T can do a simple left wall kick from other pieces ", () => {
+        let board: Board;
 
-    beforeEach(() => {
-        board = Board.fromString(
-            `
+        beforeEach(() => {
+            board = Board.fromString(
+                `
         Z.........
         Z.........
         Z.........
@@ -121,13 +122,13 @@ describe("T can do a simple left wall kick from other pieces ", () => {
         ..........
         ..........
         `
-        );
-        setupFallingShape(board, Tetromino.ARIKA_T.rotateLeft(), 0, 0);
-    });
+            );
+            setupFallingShape(board, Tetromino.ARIKA_T.rotateLeft(), 0, 0);
+        });
 
-    test("tests have the correct setup", () => {
-        expect(board.toString()).to.equalShape(
-            `
+        test("tests have the correct setup", () => {
+            expect(board.toString()).to.equalShape(
+                `
         ZT........
         ZTT.......
         ZT........
@@ -135,14 +136,14 @@ describe("T can do a simple left wall kick from other pieces ", () => {
         ..........
         ..........
         `
-        );
-    });
+            );
+        });
 
-    test("when rotating left", () => {
-        board.rotateLeft();
+        test("when rotating left", () => {
+            board.rotateLeft();
 
-        expect(board.toString()).to.equalShape(
-            `
+            expect(board.toString()).to.equalShape(
+                `
         Z.........
         Z.T.......
         ZTTT......
@@ -150,14 +151,14 @@ describe("T can do a simple left wall kick from other pieces ", () => {
         ..........
         ..........
         `
-        );
-    });
+            );
+        });
 
-    test("when rotating right", () => {
-        board.rotateRight();
+        test("when rotating right", () => {
+            board.rotateRight();
 
-        expect(board.toString()).to.equalShape(
-            `
+            expect(board.toString()).to.equalShape(
+                `
         Z.........
         ZTTT......
         Z.T.......
@@ -165,16 +166,16 @@ describe("T can do a simple left wall kick from other pieces ", () => {
         ..........
         ..........
         `
-        );
+            );
+        });
     });
-});
 
-describe("T can do a simple right wall kick from other pieces ", () => {
-    let board: Board;
+    describe("T can do a simple right wall kick from other pieces ", () => {
+        let board: Board;
 
-    beforeEach(() => {
-        board = Board.fromString(
-            `
+        beforeEach(() => {
+            board = Board.fromString(
+                `
         .........Z
         .........Z
         .........Z
@@ -182,13 +183,13 @@ describe("T can do a simple right wall kick from other pieces ", () => {
         ..........
         ..........
         `
-        );
-        setupFallingShape(board, Tetromino.ARIKA_T.rotateRight(), 0, 7);
-    });
+            );
+            setupFallingShape(board, Tetromino.ARIKA_T.rotateRight(), 0, 7);
+        });
 
-    test("tests have the correct setup", () => {
-        expect(board.toString()).to.equalShape(
-            `
+        test("tests have the correct setup", () => {
+            expect(board.toString()).to.equalShape(
+                `
         ........TZ
         .......TTZ
         ........TZ
@@ -196,14 +197,14 @@ describe("T can do a simple right wall kick from other pieces ", () => {
         ..........
         ..........
         `
-        );
-    });
+            );
+        });
 
-    test("when rotating left", () => {
-        board.rotateLeft();
+        test("when rotating left", () => {
+            board.rotateLeft();
 
-        expect(board.toString()).to.equalShape(
-            `
+            expect(board.toString()).to.equalShape(
+                `
         .........Z
         ......TTTZ
         .......T.Z
@@ -211,14 +212,14 @@ describe("T can do a simple right wall kick from other pieces ", () => {
         ..........
         ..........
         `
-        );
-    });
+            );
+        });
 
-    test("when rotating right", () => {
-        board.rotateRight();
+        test("when rotating right", () => {
+            board.rotateRight();
 
-        expect(board.toString()).to.equalShape(
-            `
+            expect(board.toString()).to.equalShape(
+                `
         .........Z
         .......T.Z
         ......TTTZ
@@ -226,6 +227,7 @@ describe("T can do a simple right wall kick from other pieces ", () => {
         ..........
         ..........
         `
-        );
+            );
+        });
     });
 });

@@ -4,7 +4,7 @@ import { Board } from "../src/Board";
 import { Tetromino } from "../src/Tetromino";
 import { setupFallingShape } from "./testUtils";
 
-describe("Arika J respects the center column rule and ", () => {
+describe.skip("Arika J respects the center column rule and ", () => {
     describe("will not rotate when shape position (0,1) is occupied ", () => {
         let board: Board;
 

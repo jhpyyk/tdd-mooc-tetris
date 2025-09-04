@@ -1,5 +1,6 @@
 import { OneByOneBlock } from "./OneByOneBlock";
-import { arika, noWallKicks, Position, RotationSystem, simpleWallkick } from "./RotationSystem";
+import { arika, noWallKicks, Position, simpleWallkick } from "./RotationSystem";
+import { RotationSystem, SimpleWallKick } from "./RotationSystem2";
 import { Shape, ShapeChar } from "./Shape";
 
 type CellState = ShapeChar;
@@ -13,7 +14,7 @@ export class Board {
     fallingShape: Shape | undefined;
     shapePos: Position | undefined;
     hiddenLayers: number = 1;
-    rotationSystem: RotationSystem = arika;
+    rotationSystem: RotationSystem = new SimpleWallKick();
 
     constructor(width: number, height: number) {
         this.width = width;
@@ -100,17 +101,10 @@ export class Board {
         if (!this.fallingShape || !this.shapePos) {
             return;
         }
-        if (
-            this.rotationSystem.shouldBeEmtpyChars.includes(this.fallingShape.shapeChar) &&
-            !isShouldBeEmptyPositionsEmpty(this.cells, this.shapePos, this.rotationSystem.shouldBeEmtpy)
-        ) {
-            return;
-        }
-        const newAbsolutePos = calculateFirstPossibleRotationAbsolutePosition(
+        const newAbsolutePos = this.rotationSystem.calculateNewAbsolutePosition(
             this.cells,
             this.fallingShape.rotateLeft(),
-            this.shapePos,
-            this.rotationSystem.leftRotationPositions
+            this.shapePos
         );
         if (!newAbsolutePos) {
             return;
@@ -123,17 +117,10 @@ export class Board {
         if (!this.fallingShape || !this.shapePos) {
             return;
         }
-        if (
-            this.rotationSystem.shouldBeEmtpyChars.includes(this.fallingShape.shapeChar) &&
-            !isShouldBeEmptyPositionsEmpty(this.cells, this.shapePos, this.rotationSystem.shouldBeEmtpy)
-        ) {
-            return;
-        }
-        const newAbsolutePos = calculateFirstPossibleRotationAbsolutePosition(
+        const newAbsolutePos = this.rotationSystem.calculateNewAbsolutePosition(
             this.cells,
-            this.fallingShape.rotateRight(),
-            this.shapePos,
-            this.rotationSystem.rightRotationPositions
+            this.fallingShape.rotateLeft(),
+            this.shapePos
         );
         if (!newAbsolutePos) {
             return;

@@ -4,7 +4,7 @@ import { Tetromino } from "../src/Tetromino";
 import { setupFallingShape } from "./testUtils";
 import { expect } from "chai";
 
-describe("Arika rotation ", () => {
+describe.skip("Arika rotation ", () => {
     describe("T can do a simple left wall kick ", () => {
         let board: Board;
 

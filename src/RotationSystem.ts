@@ -73,6 +73,10 @@ export const arika: RotationSystem = {
             row: 1,
             col: 1,
         },
+        {
+            row: 2,
+            col: 1,
+        },
     ],
     leftRotationPositions: [
         {

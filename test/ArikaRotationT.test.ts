@@ -267,6 +267,26 @@ describe("Arika rotation ", () => {
 
                 expect(board.toString()).to.equalShape(expected);
             });
+
+            test("when T is in initial rotation and rotating right", () => {
+                board = setupFallingShape(board, Tetromino.ARIKA_T, 0, 3);
+
+                const expected = `
+                ....Z.....
+                ...TTT....
+                ....T.....
+                ..........
+                ..........
+                ..........
+                `;
+
+                expect(board.toString()).to.equalShape(expected);
+
+                board.rotateRight();
+                board.rotateRight();
+
+                expect(board.toString()).to.equalShape(expected);
+            });
         });
     });
 });

@@ -123,6 +123,12 @@ export class Board {
         if (!this.fallingShape || !this.shapePos) {
             return;
         }
+        if (
+            this.rotationSystem.shouldBeEmtpyChars.includes(this.fallingShape.shapeChar) &&
+            !isShouldBeEmptyPositionsEmpty(this.cells, this.shapePos, this.rotationSystem.shouldBeEmtpy)
+        ) {
+            return;
+        }
         const newAbsolutePos = calculateFirstPossibleRotationAbsolutePosition(
             this.cells,
             this.fallingShape.rotateRight(),

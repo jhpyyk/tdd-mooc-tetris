@@ -1,20 +1,4 @@
-import { rotateClockwise, ShapeCells } from "./Shape";
-
-const rotateNTimes = (matrix: ShapeCells, n: number): ShapeCells => {
-    let rotated = matrix;
-    for (let i = 0; i < n; i++) {
-        rotated = rotateClockwise(rotated);
-    }
-    return rotated;
-};
-
-const createOrientations = (matrix: ShapeCells, orientations: number): Array<ShapeCells> => {
-    let orientationArray: Array<ShapeCells> = [];
-    for (let i = 0; i < orientations; i++) {
-        orientationArray.push(rotateNTimes(matrix, i));
-    }
-    return orientationArray;
-};
+import { ShapeCells } from "./Shape";
 
 export const ARIKA_T: Array<ShapeCells> = [
     [

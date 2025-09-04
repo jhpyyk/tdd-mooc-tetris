@@ -1,11 +1,14 @@
 import { OneByOneBlock } from "./OneByOneBlock";
-import { arika, noWallKicks, Position, simpleWallkick } from "./RotationSystem";
-import { RotationSystem, SimpleWallKick } from "./RotationSystem2";
+import { RotationSystem, SimpleWallKick } from "./RotationSystem";
 import { Shape, ShapeChar } from "./Shape";
 
 type CellState = ShapeChar;
 type Row = Array<CellState>;
 export type Cells = Array<Row>;
+export type Position = {
+    row: number;
+    col: number;
+};
 
 export class Board {
     width: number;

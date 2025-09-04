@@ -3,7 +3,7 @@ import { Board } from "../src/Board";
 import { Tetromino } from "../src/Tetromino";
 import { setupFallingShape } from "./testUtils";
 import { expect } from "chai";
-import { SimpleWallKick } from "../src/RotationSystem2";
+import { SimpleWallKick } from "../src/RotationSystem";
 
 describe("T can do a simple left wall kick ", () => {
     let board: Board;

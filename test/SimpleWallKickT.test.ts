@@ -3,12 +3,14 @@ import { Board } from "../src/Board";
 import { Tetromino } from "../src/Tetromino";
 import { setupFallingShape } from "./testUtils";
 import { expect } from "chai";
+import { simpleWallkick } from "../src/RotationSystem";
 
 describe("T can do a simple left wall kick ", () => {
     let board: Board;
 
     beforeEach(() => {
         board = new Board(10, 6);
+        board.rotationSystem = simpleWallkick;
         setupFallingShape(board, Tetromino.ARIKA_T.rotateLeft(), 0, -1);
     });
 
@@ -61,6 +63,7 @@ describe("T can do a simple right wall kick ", () => {
 
     beforeEach(() => {
         board = new Board(10, 6);
+        board.rotationSystem = simpleWallkick;
         setupFallingShape(board, Tetromino.ARIKA_T.rotateRight(), 0, board.cells[0].length - 2);
     });
 

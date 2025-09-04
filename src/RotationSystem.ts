@@ -4,11 +4,13 @@ export type Position = {
 };
 
 export type RotationSystem = {
+    shouldBeEmtpy: Position[];
     leftRotationPositions: Position[];
     rightRotationPositions: Position[];
 };
 
 export const noWallKicks: RotationSystem = {
+    shouldBeEmtpy: [],
     leftRotationPositions: [
         {
             row: 0,
@@ -24,6 +26,7 @@ export const noWallKicks: RotationSystem = {
 };
 
 export const simpleWallkick: RotationSystem = {
+    shouldBeEmtpy: [],
     leftRotationPositions: [
         {
             row: 0,

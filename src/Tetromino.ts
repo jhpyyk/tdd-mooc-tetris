@@ -1,33 +1,9 @@
 import { Shape, ShapeCells, ShapeChar } from "./Shape";
-import {
-    ARIKA_I,
-    ARIKA_J,
-    ARIKA_L,
-    ARIKA_O,
-    ARIKA_S,
-    ARIKA_T,
-    ARIKA_Z,
-    TETROMINO_I,
-    TETROMINO_J,
-    TETROMINO_L,
-    TETROMINO_O,
-    TETROMINO_S,
-    TETROMINO_T,
-    TETROMINO_T_SHAPE,
-    TETROMINO_Z,
-} from "./tetrominoShapes";
+import { ARIKA_I, ARIKA_J, ARIKA_L, ARIKA_O, ARIKA_S, ARIKA_T, ARIKA_Z } from "./tetrominoShapes";
 
 type TetrominoOrientations = Array<ShapeCells>;
 
 export class Tetromino implements Shape {
-    static I_SHAPE = new Tetromino(TETROMINO_I, 0, "I");
-    static O_SHAPE = new Tetromino(TETROMINO_O, 0, "O");
-    static T_SHAPE = new Tetromino(TETROMINO_T, 0, "T");
-    static J_SHAPE = new Tetromino(TETROMINO_J, 0, "J");
-    static L_SHAPE = new Tetromino(TETROMINO_L, 0, "L");
-    static S_SHAPE = new Tetromino(TETROMINO_S, 0, "S");
-    static Z_SHAPE = new Tetromino(TETROMINO_Z, 0, "Z");
-
     static ARIKA_I = new Tetromino(ARIKA_I, 0, "I");
     static ARIKA_O = new Tetromino(ARIKA_O, 0, "O");
     static ARIKA_T = new Tetromino(ARIKA_T, 0, "T");

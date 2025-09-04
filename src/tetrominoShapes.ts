@@ -16,12 +16,6 @@ const createOrientations = (matrix: ShapeCells, orientations: number): Array<Sha
     return orientationArray;
 };
 
-export const TETROMINO_T_SHAPE: ShapeCells = [
-    [".", "T", "."],
-    ["T", "T", "T"],
-    [".", ".", "."],
-];
-
 export const ARIKA_T: Array<ShapeCells> = [
     [
         [".", ".", ".", "."],
@@ -49,14 +43,6 @@ export const ARIKA_T: Array<ShapeCells> = [
     ],
 ];
 
-export const TETROMINO_T = createOrientations(TETROMINO_T_SHAPE, 4);
-
-export const TETROMINO_S_SHAPE: ShapeCells = [
-    [".", "S", "S"],
-    ["S", "S", "."],
-    [".", ".", "."],
-];
-
 export const ARIKA_S: Array<ShapeCells> = [
     [
         [".", ".", ".", "."],
@@ -72,8 +58,6 @@ export const ARIKA_S: Array<ShapeCells> = [
     ],
 ];
 
-export const TETROMINO_S = createOrientations(TETROMINO_S_SHAPE, 4);
-
 export const ARIKA_Z: Array<ShapeCells> = [
     [
         [".", ".", ".", "."],
@@ -88,14 +72,6 @@ export const ARIKA_Z: Array<ShapeCells> = [
         [".", ".", ".", "."],
     ],
 ];
-
-export const TETROMINO_Z_SHAPE: ShapeCells = [
-    ["Z", "Z", "."],
-    [".", "Z", "Z"],
-    [".", ".", "."],
-];
-
-export const TETROMINO_Z = createOrientations(TETROMINO_Z_SHAPE, 4);
 
 export const ARIKA_L: Array<ShapeCells> = [
     [
@@ -124,14 +100,6 @@ export const ARIKA_L: Array<ShapeCells> = [
     ],
 ];
 
-export const TETROMINO_L_SHAPE: ShapeCells = [
-    [".", ".", "L"],
-    ["L", "L", "L"],
-    [".", ".", "."],
-];
-
-export const TETROMINO_L = createOrientations(TETROMINO_L_SHAPE, 4);
-
 export const ARIKA_J: Array<ShapeCells> = [
     [
         [".", ".", ".", "."],
@@ -159,24 +127,6 @@ export const ARIKA_J: Array<ShapeCells> = [
     ],
 ];
 
-export const TETROMINO_J_SHAPE: ShapeCells = [
-    [".", ".", "J"],
-    ["J", "J", "J"],
-    [".", ".", "."],
-];
-
-export const TETROMINO_J = createOrientations(TETROMINO_J_SHAPE, 4);
-
-export const TETROMINO_I_SHAPE: ShapeCells = [
-    [".", ".", ".", ".", "."],
-    [".", ".", ".", ".", "."],
-    ["I", "I", "I", "I", "."],
-    [".", ".", ".", ".", "."],
-    [".", ".", ".", ".", "."],
-];
-
-export const TETROMINO_I = createOrientations(TETROMINO_I_SHAPE, 2);
-
 export const ARIKA_I: Array<ShapeCells> = [
     [
         [".", ".", ".", "."],
@@ -191,14 +141,6 @@ export const ARIKA_I: Array<ShapeCells> = [
         [".", ".", "I", "."],
     ],
 ];
-
-export const TETROMINO_O_SHAPE: ShapeCells = [
-    [".", "O", "O"],
-    [".", "O", "O"],
-    [".", ".", "."],
-];
-
-export const TETROMINO_O = createOrientations(TETROMINO_O_SHAPE, 1);
 
 export const ARIKA_O: Array<ShapeCells> = [
     [

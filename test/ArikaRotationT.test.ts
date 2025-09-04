@@ -287,6 +287,46 @@ describe("Arika rotation ", () => {
 
                 expect(board.toString()).to.equalShape(expected);
             });
+
+            test("when T is rotated 180 and rotating left", () => {
+                board = setupFallingShape(board, Tetromino.ARIKA_T.rotateLeft().rotateLeft(), 0, 3);
+
+                const expected = `
+                ....Z.....
+                ....T.....
+                ...TTT....
+                ..........
+                ..........
+                ..........
+                `;
+
+                expect(board.toString()).to.equalShape(expected);
+
+                board.rotateLeft();
+                board.rotateLeft();
+
+                expect(board.toString()).to.equalShape(expected);
+            });
+
+            test("when T is rotated 180 and rotating right", () => {
+                board = setupFallingShape(board, Tetromino.ARIKA_T.rotateLeft().rotateLeft(), 0, 3);
+
+                const expected = `
+                ....Z.....
+                ....T.....
+                ...TTT....
+                ..........
+                ..........
+                ..........
+                `;
+
+                expect(board.toString()).to.equalShape(expected);
+
+                board.rotateRight();
+                board.rotateRight();
+
+                expect(board.toString()).to.equalShape(expected);
+            });
         });
     });
 });

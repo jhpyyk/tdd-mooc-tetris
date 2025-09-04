@@ -100,6 +100,12 @@ export class Board {
         if (!this.fallingShape || !this.shapePos) {
             return;
         }
+        if (
+            this.rotationSystem.shouldBeEmtpyChars.includes(this.fallingShape.shapeChar) &&
+            !isShouldBeEmptyPositionsEmpty(this.cells, this.shapePos, this.rotationSystem.shouldBeEmtpy)
+        ) {
+            return;
+        }
         const newAbsolutePos = calculateFirstPossibleRotationAbsolutePosition(
             this.cells,
             this.fallingShape.rotateLeft(),
@@ -153,6 +159,15 @@ export class Board {
         this.shapePos = undefined;
     };
 }
+
+const isShouldBeEmptyPositionsEmpty = (cells: Cells, shapePos: Position, positions: Position[]) => {
+    for (const pos of positions) {
+        if (!isBoardCellEmpty(cells, shapePos.row + pos.row, shapePos.col + pos.col)) {
+            return false;
+        }
+    }
+    return true;
+};
 
 const calculateFirstPossibleRotationAbsolutePosition = (
     cells: Cells,

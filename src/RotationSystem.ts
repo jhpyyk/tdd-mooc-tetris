@@ -1,3 +1,5 @@
+import { ShapeChar } from "./Shape";
+
 export type Position = {
     row: number;
     col: number;
@@ -5,12 +7,14 @@ export type Position = {
 
 export type RotationSystem = {
     shouldBeEmtpy: Position[];
+    shouldBeEmtpyChars: Array<ShapeChar>;
     leftRotationPositions: Position[];
     rightRotationPositions: Position[];
 };
 
 export const noWallKicks: RotationSystem = {
     shouldBeEmtpy: [],
+    shouldBeEmtpyChars: [],
     leftRotationPositions: [
         {
             row: 0,
@@ -27,6 +31,7 @@ export const noWallKicks: RotationSystem = {
 
 export const simpleWallkick: RotationSystem = {
     shouldBeEmtpy: [],
+    shouldBeEmtpyChars: [],
     leftRotationPositions: [
         {
             row: 0,
@@ -58,7 +63,13 @@ export const simpleWallkick: RotationSystem = {
 };
 
 export const arika: RotationSystem = {
-    shouldBeEmtpy: [],
+    shouldBeEmtpyChars: ["T", "J", "L"],
+    shouldBeEmtpy: [
+        {
+            row: 0,
+            col: 1,
+        },
+    ],
     leftRotationPositions: [
         {
             row: 0,

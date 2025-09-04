@@ -61,25 +61,25 @@ describe("Arika L respects the center column rule and ", () => {
             expect(board.toString()).to.equalShape(expected);
         });
 
-        //     test("when J is rotated 180 and rotating left", () => {
-        //         board = setupFallingShape(board, Tetromino.ARIKA_J.rotateLeft().rotateLeft(), 0, 3);
+        test("when J is rotated 180 and rotating left", () => {
+            board = setupFallingShape(board, Tetromino.ARIKA_L.rotateLeft().rotateLeft(), 0, 3);
 
-        //         const expected = `
-        //             ....Z.....
-        //             ...J......
-        //             ...JJJ....
-        //             ..........
-        //             ..........
-        //             ..........
-        //             `;
+            const expected = `
+                    ....Z.....
+                    .....L....
+                    ...LLL....
+                    ..........
+                    ..........
+                    ..........
+                    `;
 
-        //         expect(board.toString()).to.equalShape(expected);
+            expect(board.toString()).to.equalShape(expected);
 
-        //         board.rotateLeft();
-        //         board.rotateLeft();
+            board.rotateLeft();
+            board.rotateLeft();
 
-        //         expect(board.toString()).to.equalShape(expected);
-        //     });
+            expect(board.toString()).to.equalShape(expected);
+        });
 
         //     test("when J is rotated 180 and rotating right", () => {
         //         board = setupFallingShape(board, Tetromino.ARIKA_J.rotateLeft().rotateLeft(), 0, 3);

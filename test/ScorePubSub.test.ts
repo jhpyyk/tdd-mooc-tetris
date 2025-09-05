@@ -7,7 +7,7 @@ import { LineClearSubscriber } from "../src/Subscribers/LineClearSubscriber";
 import { LineClearPublisher } from "../src/Publishers/LineClearPublisher";
 
 test("A Subscriber can be attached to a Publisher", () => {
-    const sub = new LineClearSubscriber("Score");
+    const sub = new LineClearSubscriber("LineClear");
     const pub = new LineClearPublisher();
 
     pub.attach(sub);
@@ -15,54 +15,54 @@ test("A Subscriber can be attached to a Publisher", () => {
     expect(pub.subscribers).to.include(sub);
 });
 
-// describe("A Publisher ", () => {
-//     let sub: MinimalSubscriber;
-//     let pub: MinimalPublisher;
+describe("A Publisher ", () => {
+    let sub: LineClearSubscriber;
+    let pub: LineClearPublisher;
 
-//     beforeEach(() => {
-//         sub = new MinimalSubscriber("Minimal Subscriber");
-//         pub = new MinimalPublisher();
+    beforeEach(() => {
+        sub = new LineClearSubscriber("LineClear");
+        pub = new LineClearPublisher();
 
-//         pub.attach(sub);
-//     });
+        pub.attach(sub);
+    });
 
-//     test("can list subscriber names", () => {
-//         expect(pub.list()).to.include("Minimal Subscriber");
-//     });
+    test("can list subscriber names", () => {
+        expect(pub.list()).to.include("LineClear");
+    });
 
-//     test("can attach multiple subscribers", () => {
-//         const sub2 = new MinimalSubscriber("Minimal Subscriber 2");
-//         pub.attach(sub2);
+    //     test("can attach multiple subscribers", () => {
+    //         const sub2 = new MinimalSubscriber("Minimal Subscriber 2");
+    //         pub.attach(sub2);
 
-//         expect(pub.list()).to.include("Minimal Subscriber 2");
-//     });
+    //         expect(pub.list()).to.include("Minimal Subscriber 2");
+    //     });
 
-//     test("can only attach Subscribers with unique names", () => {
-//         const sub2 = new MinimalSubscriber("Minimal Subscriber");
-//         pub.attach(sub2);
+    //     test("can only attach Subscribers with unique names", () => {
+    //         const sub2 = new MinimalSubscriber("Minimal Subscriber");
+    //         pub.attach(sub2);
 
-//         expect(pub.list().length).to.equal(1);
-//     });
+    //         expect(pub.list().length).to.equal(1);
+    //     });
 
-//     test("can detach a subscriber", () => {
-//         pub.detach(sub);
+    //     test("can detach a subscriber", () => {
+    //         pub.detach(sub);
 
-//         expect(pub.list().length).to.equal(0);
-//     });
+    //         expect(pub.list().length).to.equal(0);
+    //     });
 
-//     test("can not detach a non-attached subscriber", () => {
-//         expect(pub.list().length).to.equal(1);
-//         const sub2 = new MinimalSubscriber("MS2");
-//         pub.detach(sub2);
+    //     test("can not detach a non-attached subscriber", () => {
+    //         expect(pub.list().length).to.equal(1);
+    //         const sub2 = new MinimalSubscriber("MS2");
+    //         pub.detach(sub2);
 
-//         expect(pub.list().length).to.equal(1);
-//     });
+    //         expect(pub.list().length).to.equal(1);
+    //     });
 
-//     test("can publish a message", () => {
-//         const message = "message";
-//         const receiveSpy = chai.spy.on(sub, "receive");
-//         pub.publish(message);
+    //     test("can publish a message", () => {
+    //         const message = "message";
+    //         const receiveSpy = chai.spy.on(sub, "receive");
+    //         pub.publish(message);
 
-//         expect(receiveSpy).to.have.been.called.with(message);
-//     });
-// });
+    //         expect(receiveSpy).to.have.been.called.with(message);
+    //     });
+});

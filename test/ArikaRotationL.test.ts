@@ -21,7 +21,7 @@ describe("Arika L respects the center column rule and ", () => {
             );
         });
 
-        test("when J is in initial rotation and rotating left", () => {
+        test("when L is in initial rotation and rotating left", () => {
             board = setupFallingShape(board, Tetromino.ARIKA_L, 0, 3);
 
             const expected = `
@@ -41,7 +41,7 @@ describe("Arika L respects the center column rule and ", () => {
             expect(board.toString()).to.equalShape(expected);
         });
 
-        test("when J is in initial rotation and rotating right", () => {
+        test("when L is in initial rotation and rotating right", () => {
             board = setupFallingShape(board, Tetromino.ARIKA_L, 0, 3);
 
             const expected = `
@@ -61,7 +61,7 @@ describe("Arika L respects the center column rule and ", () => {
             expect(board.toString()).to.equalShape(expected);
         });
 
-        test("when J is rotated 180 and rotating left", () => {
+        test("when L is rotated 180 and rotating left", () => {
             board = setupFallingShape(board, Tetromino.ARIKA_L.rotateLeft().rotateLeft(), 0, 3);
 
             const expected = `
@@ -81,7 +81,7 @@ describe("Arika L respects the center column rule and ", () => {
             expect(board.toString()).to.equalShape(expected);
         });
 
-        test("when J is rotated 180 and rotating right", () => {
+        test("when L is rotated 180 and rotating right", () => {
             board = setupFallingShape(board, Tetromino.ARIKA_L.rotateLeft().rotateLeft(), 0, 3);
 
             const expected = `
@@ -116,7 +116,7 @@ describe("Arika L respects the center column rule and ", () => {
                         `
             );
         });
-        test("when J is rotated 180 and rotating left", () => {
+        test("when L is rotated 180 and rotating left", () => {
             board = setupFallingShape(board, Tetromino.ARIKA_L.rotateLeft().rotateLeft(), 0, 3);
             const expected = `
                     ..........
@@ -131,7 +131,7 @@ describe("Arika L respects the center column rule and ", () => {
             board.rotateLeft();
             expect(board.toString()).to.equalShape(expected);
         });
-        test("when J is rotated 180 and rotating right", () => {
+        test("when L is rotated 180 and rotating right", () => {
             board = setupFallingShape(board, Tetromino.ARIKA_L.rotateLeft().rotateLeft(), 0, 3);
             const expected = `
                     ..........
@@ -161,7 +161,7 @@ describe("Arika L respects the center column rule and ", () => {
                     `
             );
         });
-        test("when J is in initial rotation and rotating left", () => {
+        test("when L is in initial rotation and rotating left", () => {
             board = setupFallingShape(board, Tetromino.ARIKA_L, 0, 3);
             const expected = `
                 ..........
@@ -176,7 +176,7 @@ describe("Arika L respects the center column rule and ", () => {
             board.rotateLeft();
             expect(board.toString()).to.equalShape(expected);
         });
-        test("when J is in initial rotation and rotating right", () => {
+        test("when L is in initial rotation and rotating right", () => {
             board = setupFallingShape(board, Tetromino.ARIKA_L, 0, 3);
             const expected = `
                 ..........

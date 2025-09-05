@@ -1,11 +1,19 @@
 import { expect } from "chai";
-import { describe, test } from "vitest";
+import { beforeAll, beforeEach, describe, test } from "vitest";
 import { SimpleLineScoringSystem } from "../src/ScoringSystems/SimpleLineScoringSystem";
 
 describe("The scoring system ", () => {
-    test("has an initial score of 0", () => {
-        const scoringSystem = new SimpleLineScoringSystem();
+    let scoringSystem: SimpleLineScoringSystem;
 
+    beforeEach(() => {
+        scoringSystem = new SimpleLineScoringSystem();
+    });
+
+    test("has an initial score of 0", () => {
         expect(scoringSystem.getCurrentScore()).to.equal(0);
+    });
+
+    test("starts at level one", () => {
+        expect(scoringSystem.getCurrentLevel()).to.equal(1);
     });
 });

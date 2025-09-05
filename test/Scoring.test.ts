@@ -40,4 +40,11 @@ describe("The scoring system ", () => {
         scoringSystem.scoreLines(4);
         expect(scoringSystem.getCurrentScore()).to.equal(1200);
     });
+
+    test("clearing two lines two times will add 400 points to the score in level zero", () => {
+        expect(scoringSystem.getCurrentLevel()).to.equal(0);
+        scoringSystem.scoreLines(2);
+        scoringSystem.scoreLines(2);
+        expect(scoringSystem.getCurrentScore()).to.equal(400);
+    });
 });

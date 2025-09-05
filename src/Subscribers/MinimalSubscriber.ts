@@ -5,4 +5,6 @@ export class MinimalSubscriber implements Subscriber {
     constructor(name: string) {
         this.name = name;
     }
+
+    receive = (message: string) => {};
 }

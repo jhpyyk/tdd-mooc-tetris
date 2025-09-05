@@ -44,11 +44,11 @@ describe("A Publisher ", () => {
         expect(pub.list().length).to.equal(1);
     });
 
-    //     test("can detach a subscriber", () => {
-    //         pub.detach(sub);
+    test("can detach a subscriber", () => {
+        pub.detach(sub);
 
-    //         expect(pub.list().length).to.equal(0);
-    //     });
+        expect(pub.list().length).to.equal(0);
+    });
 
     //     test("can not detach a non-attached subscriber", () => {
     //         expect(pub.list().length).to.equal(1);

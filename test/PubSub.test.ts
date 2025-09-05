@@ -46,4 +46,12 @@ describe("A Publisher ", () => {
 
         expect(pub.list().length).to.equal(0);
     });
+
+    test("can not detach a non-attached subscriber", () => {
+        expect(pub.list().length).to.equal(1);
+        const sub2 = new MinimalSubscriber("MS2");
+        pub.detach(sub2);
+
+        expect(pub.list().length).to.equal(1);
+    });
 });

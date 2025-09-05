@@ -97,6 +97,7 @@ export class Board {
         const successful = this.moveShape(1, 0);
         if (!successful) {
             this.lockShape();
+            this.cells = clearLines(this.cells);
         }
     };
 
@@ -218,4 +219,24 @@ const insertFallingCharsIntoBoardCells = (boardCells: Cells, shape: Shape, pos: 
         }
     }
     return boardCells;
+};
+
+const clearLines = (boardCells: Cells) => {
+    let newCells: Cells = [];
+    let removedRows: Cells = [];
+    for (const row of boardCells) {
+        if (isRowFull(row)) {
+            removedRows.push(row);
+        } else {
+            newCells.push(row);
+        }
+    }
+    for (const remRow of removedRows) {
+        newCells.unshift(createEmptyRow(remRow.length));
+    }
+    return newCells;
+};
+
+const isRowFull = (row: Row) => {
+    return !row.includes(".");
 };

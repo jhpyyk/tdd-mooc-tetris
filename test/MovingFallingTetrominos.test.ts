@@ -140,7 +140,7 @@ describe("Moving falling tetrominoes ", () => {
       I........I
       I........I
       I........I
-      IIIIIIIIII
+      IIIIIIII.I
       `
         );
         board.drop(Tetromino.ARIKA_S);
@@ -154,7 +154,7 @@ describe("Moving falling tetrominoes ", () => {
       I........I
       I........I
       I........I
-      IIIIIIIIII
+      IIIIIIII.I
       `
         );
     });
@@ -168,7 +168,7 @@ describe("Moving falling tetrominoes ", () => {
       I........I
       I........I
       I........I
-      IIIIIIIIII
+      IIIIIIII.I
       `;
 
         expect(board.toString()).to.equalShape(sBlockedByILeft);
@@ -183,7 +183,7 @@ describe("Moving falling tetrominoes ", () => {
       I........I
       I........I
       I........I
-      IIIIIIIIII
+      IIIIIIII.I
       `;
 
         expect(board.toString()).to.equalShape(sBlockedByIRight);
@@ -198,7 +198,7 @@ describe("Moving falling tetrominoes ", () => {
       I........I
       I...SS...I
       I..SS....I
-      IIIIIIIIII
+      IIIIIIII.I
       `;
 
         expect(board.toString()).to.equalShape(sBlockedByIDown);

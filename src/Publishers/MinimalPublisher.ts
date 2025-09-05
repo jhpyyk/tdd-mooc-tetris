@@ -5,6 +5,10 @@ export class MinimalPublisher implements Publisher {
     subscribers: Subscriber[] = [];
 
     attach = (subscriber: Subscriber) => {
+        if (this.list().includes(subscriber.name)) {
+            console.log("Subscribers must have unique names");
+            return;
+        }
         this.subscribers = this.subscribers.concat(subscriber);
     };
 

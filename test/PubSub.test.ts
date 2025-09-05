@@ -33,4 +33,11 @@ describe("A Publisher ", () => {
 
         expect(pub.list()).to.include("Minimal Subscriber 2");
     });
+
+    test("can only attach Subscribers with unique names", () => {
+        const sub2 = new MinimalSubscriber("Minimal Subscriber");
+        pub.attach(sub2);
+
+        expect(pub.list().length).to.equal(1);
+    });
 });

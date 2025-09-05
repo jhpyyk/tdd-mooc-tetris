@@ -216,7 +216,7 @@ describe("Arika J respects the center column rule and ", () => {
         });
     });
 
-    describe.only("column rule special cases and ", () => {
+    describe("column rule special cases and ", () => {
         test("will rotate left when (0, 2) and (2,1) are occupied ", () => {
             let board = Board.fromString(
                 `
@@ -255,7 +255,7 @@ describe("Arika J respects the center column rule and ", () => {
             );
         });
 
-        test.only("will rotate right when (1, 1) and (0,2) are occupied ", () => {
+        test("will rotate right when (1, 1) and (0,2) are occupied ", () => {
             let board = Board.fromString(
                 `
             .....Z....

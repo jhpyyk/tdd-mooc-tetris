@@ -122,7 +122,7 @@ export class Board {
         }
         const newAbsolutePos = this.rotationSystem.calculateNewAbsolutePosition(
             this.cells,
-            this.fallingShape.rotateLeft(),
+            this.fallingShape.rotateRight(),
             this.shapePos
         );
         if (!newAbsolutePos) {

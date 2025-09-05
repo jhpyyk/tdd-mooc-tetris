@@ -55,7 +55,6 @@ export class Arika implements RotationSystem {
             // Center column rule
             if (pos.row === 0 && pos.col === 0 && this.kickSpecialChars.includes(shape.shapeChar)) {
                 const collision = shapeWouldCollideInPos(cells, shape, absolutePosition);
-                console.log(collision);
                 if (collision && collision.col === 1) {
                     return undefined;
                 }
@@ -72,9 +71,6 @@ export class Arika implements RotationSystem {
 const shapeWouldCollideInPos = (cells: Cells, shape: Shape, pos: Position): Position | undefined => {
     for (let shapeRow = 0; shapeRow < shape.cells.length; shapeRow++) {
         for (let shapeCol = 0; shapeCol < shape.cells[0].length; shapeCol++) {
-            console.log("shapeRow: ", shapeRow, "shapeCol: ", shapeCol);
-            console.log(cells[shapeRow + pos.row][shapeCol + pos.col]);
-            console.log(shape.cells[shapeRow][shapeCol]);
             if (cellWouldCollide(cells, shape, shapeRow, shapeCol, pos)) {
                 return { row: shapeRow, col: shapeCol };
             }

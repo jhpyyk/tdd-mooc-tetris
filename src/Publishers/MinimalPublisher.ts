@@ -1,7 +1,7 @@
 import { Subscriber } from "../Subscribers/Subscriber";
 import { Publisher } from "./Publisher";
 
-export class MinimalPublisher implements Publisher {
+export class MinimalPublisher implements Publisher<string> {
     subscribers: Subscriber[] = [];
 
     attach = (subscriber: Subscriber) => {
@@ -20,6 +20,12 @@ export class MinimalPublisher implements Publisher {
         }
 
         this.subscribers = this.subscribers.toSpliced(subIndex, 1);
+    };
+
+    publish = (message: string) => {
+        this.subscribers.forEach((sub) => {
+            sub.receive(message);
+        });
     };
 
     list = () => {

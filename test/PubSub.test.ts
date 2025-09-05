@@ -1,9 +1,10 @@
-import { expect, spy } from "chai";
-import { beforeEach, describe, test, vi } from "vitest";
+import * as chaiModule from "chai";
+import spies from "chai-spies";
+const chai = chaiModule.use(spies);
+import { beforeEach, describe, test } from "vitest";
 import { MinimalSubscriber } from "../src/Subscribers/MinimalSubscriber";
 import { MinimalPublisher } from "../src/Publishers/MinimalPublisher";
-import spies from "chai-spies";
-chai.use(spies);
+import { expect } from "chai";
 
 test("A Subscriber can be attached to a Publisher", () => {
     const sub = new MinimalSubscriber("Minimal Subscriber");
@@ -59,7 +60,7 @@ describe("A Publisher ", () => {
 
     test("can publish a message", () => {
         const message = "message";
-        const receiveSpy = spy.on(sub, "receive");
+        const receiveSpy = chai.spy.on(sub, "receive");
         pub.publish(message);
 
         expect(receiveSpy).to.have.been.called.with(message);

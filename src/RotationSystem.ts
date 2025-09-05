@@ -48,6 +48,7 @@ export class Arika implements RotationSystem {
         },
     ];
     kickSpecialChars = ["T", "J", "L"];
+
     calculateNewAbsolutePosition = (cells: Cells, shape: Shape, shapePos: Position): Position | undefined => {
         for (const pos of this.kickPositions) {
             const absolutePosition: Position = { row: shapePos.row + pos.row, col: shapePos.col + pos.col };
@@ -71,6 +72,9 @@ export class Arika implements RotationSystem {
 const shapeWouldCollideInPos = (cells: Cells, shape: Shape, pos: Position): Position | undefined => {
     for (let shapeRow = 0; shapeRow < shape.cells.length; shapeRow++) {
         for (let shapeCol = 0; shapeCol < shape.cells[0].length; shapeCol++) {
+            console.log("shapeRow: ", shapeRow, "shapeCol: ", shapeCol);
+            console.log(cells[shapeRow + pos.row][shapeCol + pos.col]);
+            console.log(shape.cells[shapeRow][shapeCol]);
             if (cellWouldCollide(cells, shape, shapeRow, shapeCol, pos)) {
                 return { row: shapeRow, col: shapeCol };
             }

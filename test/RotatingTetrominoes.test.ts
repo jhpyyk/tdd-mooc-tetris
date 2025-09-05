@@ -54,6 +54,46 @@ describe("The T shape", () => {
     });
 });
 
+describe("The J shape", () => {
+    const shape = Tetromino.ARIKA_J;
+
+    test("initial orientation", () => {
+        expect(shape.toString()).to.equalShape(
+            `
+        ....
+        JJJ.
+        ..J.
+        ....`
+        );
+    });
+
+    test("can be rotated right/clockwise", () => {
+        expect(shape.rotateRight().toString()).to.equalShape(
+            `
+        .J..
+        .J..
+        JJ..
+        ....
+        `
+        );
+    });
+
+    test("can be rotated left/counter-clockwise", () => {
+        expect(shape.rotateLeft().toString()).to.equalShape(
+            `
+        .JJ.
+        .J..
+        .J..
+        ....
+        `
+        );
+    });
+
+    test("has 4 distinct orientations", () => {
+        expect(distinctOrientations(shape).size).to.equal(4);
+    });
+});
+
 describe("The I shape", () => {
     const shape = Tetromino.ARIKA_I;
 

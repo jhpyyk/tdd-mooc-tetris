@@ -16,4 +16,10 @@ describe("The scoring system ", () => {
     test("starts at level one", () => {
         expect(scoringSystem.getCurrentLevel()).to.equal(1);
     });
+
+    test("clearing one line will score 40 points in level one", () => {
+        expect(scoringSystem.getCurrentLevel()).to.equal(1);
+        scoringSystem.scoreLines(1);
+        expect(scoringSystem.getCurrentScore()).to.equal(40);
+    });
 });

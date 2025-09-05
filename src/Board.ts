@@ -156,30 +156,6 @@ export class Board {
     };
 }
 
-const isShouldBeEmptyPositionsEmpty = (cells: Cells, shapePos: Position, positions: Position[]) => {
-    for (const pos of positions) {
-        if (!isBoardCellEmpty(cells, shapePos.row + pos.row, shapePos.col + pos.col)) {
-            return false;
-        }
-    }
-    return true;
-};
-
-const calculateFirstPossibleRotationAbsolutePosition = (
-    cells: Cells,
-    shape: Shape,
-    shapePos: Position,
-    positions: Position[]
-): Position | undefined => {
-    for (const pos of positions) {
-        const absolutePosition: Position = { row: shapePos.row + pos.row, col: shapePos.col + pos.col };
-        if (isShapeAbleToBeInsertedTo(cells, shape, absolutePosition)) {
-            return absolutePosition;
-        }
-    }
-    return undefined;
-};
-
 const isShapeCellAbleToBeInserted = (cells: Cells, shape: Shape, shapeRow: number, shapeCol: number, pos: Position) => {
     return (
         isShapeCellEmpty(shape, shapeRow, shapeCol) || isBoardCellEmpty(cells, pos.row + shapeRow, pos.col + shapeCol)

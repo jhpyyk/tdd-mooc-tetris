@@ -47,4 +47,12 @@ describe("The scoring system ", () => {
         scoringSystem.scoreLines(2);
         expect(scoringSystem.getCurrentScore()).to.equal(400);
     });
+
+    test("clearing 3 lines will add 3000 points to the score in level nine", () => {
+        scoringSystem = new SimpleLineScoringSystem(1000, 9);
+        expect(scoringSystem.getCurrentLevel()).to.equal(9);
+        expect(scoringSystem.getCurrentScore()).to.equal(1000);
+        scoringSystem.scoreLines(3);
+        expect(scoringSystem.getCurrentScore()).to.equal(4000);
+    });
 });

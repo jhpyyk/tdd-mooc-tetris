@@ -5,5 +5,7 @@ export interface Publisher {
 
     attach: (subscriber: Subscriber) => void;
 
+    detach: (subscriber: Subscriber) => void;
+
     list: () => string[];
 }

@@ -12,6 +12,16 @@ export class MinimalPublisher implements Publisher {
         this.subscribers = this.subscribers.concat(subscriber);
     };
 
+    detach = (subscriber: Subscriber) => {
+        const subIndex = this.subscribers.indexOf(subscriber);
+        if (subIndex === -1) {
+            console.log("The subscriber is not attached to this publisher");
+            return;
+        }
+
+        this.subscribers = this.subscribers.toSpliced(subIndex, 1);
+    };
+
     list = () => {
         return this.subscribers.map((sub: Subscriber) => {
             return sub.name;

@@ -1,1 +1,3 @@
-export interface Subscriber {}
+export interface Subscriber {
+    name: string;
+}

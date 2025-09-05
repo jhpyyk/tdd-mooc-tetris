@@ -7,4 +7,10 @@ export class MinimalPublisher implements Publisher {
     attach = (subscriber: Subscriber) => {
         this.subscribers = this.subscribers.concat(subscriber);
     };
+
+    list = () => {
+        return this.subscribers.map((sub: Subscriber) => {
+            return sub.name;
+        });
+    };
 }

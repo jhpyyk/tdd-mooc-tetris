@@ -1,3 +1,5 @@
 import { Subscriber } from "./Subscriber";
 
-export class MinimalSubscriber implements Subscriber {}
+export class MinimalSubscriber implements Subscriber {
+    name = "Minimal Subscriber";
+}

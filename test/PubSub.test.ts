@@ -40,4 +40,10 @@ describe("A Publisher ", () => {
 
         expect(pub.list().length).to.equal(1);
     });
+
+    test("can detach a subscriber", () => {
+        pub.detach(sub);
+
+        expect(pub.list().length).to.equal(0);
+    });
 });

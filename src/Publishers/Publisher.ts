@@ -1,11 +1,11 @@
 import { Subscriber } from "../Subscribers/Subscriber";
 
 export interface Publisher<T> {
-    subscribers: Array<Subscriber>;
+    subscribers: Array<Subscriber<T>>;
 
-    attach: (subscriber: Subscriber) => void;
+    attach: (subscriber: Subscriber<T>) => void;
 
-    detach: (subscriber: Subscriber) => void;
+    detach: (subscriber: Subscriber<T>) => void;
 
     publish: (message: T) => void;
 

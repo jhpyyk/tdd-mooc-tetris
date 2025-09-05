@@ -2,9 +2,9 @@ import { Subscriber } from "../Subscribers/Subscriber";
 import { Publisher } from "./Publisher";
 
 export class MinimalPublisher implements Publisher<string> {
-    subscribers: Subscriber[] = [];
+    subscribers: Subscriber<string>[] = [];
 
-    attach = (subscriber: Subscriber) => {
+    attach = (subscriber: Subscriber<string>) => {
         if (this.list().includes(subscriber.name)) {
             console.log("Subscribers must have unique names");
             return;
@@ -12,7 +12,7 @@ export class MinimalPublisher implements Publisher<string> {
         this.subscribers = this.subscribers.concat(subscriber);
     };
 
-    detach = (subscriber: Subscriber) => {
+    detach = (subscriber: Subscriber<string>) => {
         const subIndex = this.subscribers.indexOf(subscriber);
         if (subIndex === -1) {
             console.log("The subscriber is not attached to this publisher");
@@ -29,7 +29,7 @@ export class MinimalPublisher implements Publisher<string> {
     };
 
     list = () => {
-        return this.subscribers.map((sub: Subscriber) => {
+        return this.subscribers.map((sub: Subscriber<string>) => {
             return sub.name;
         });
     };

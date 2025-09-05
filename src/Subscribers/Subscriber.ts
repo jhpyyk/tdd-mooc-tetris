@@ -1,5 +1,5 @@
-export interface Subscriber {
+export interface Subscriber<T> {
     name: string;
 
-    receive: (message: string) => void;
+    receive: (message: T) => void;
 }

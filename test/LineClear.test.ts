@@ -199,5 +199,44 @@ describe("Line clear is ", () => {
                 `
             );
         });
+
+        test("when the lines are not next to each other", () => {
+            let board = Board.fromString(
+                `   
+                ..........
+                ..........
+                ..........
+                .ZZZZZZZZZ
+                .........Z
+                .ZZZZZZZZZ
+                `
+            );
+            board = setupFallingShape(board, Tetromino.ARIKA_I.rotateLeft(), 1, -2);
+
+            expect(board.toString(), "Incorrect setup").to.equalShape(
+                `   
+                ..........
+                I.........
+                I.........
+                IZZZZZZZZZ
+                I........Z
+                .ZZZZZZZZZ
+                `
+            );
+
+            board.tick();
+            board.tick();
+
+            expect(board.toString(), "Line clear failed").to.equalShape(
+                `
+                ..........
+                ..........
+                ..........
+                ..........
+                I.........
+                I........Z
+                `
+            );
+        });
     });
 });

@@ -4,7 +4,7 @@ import { MinimalSubscriber } from "../src/Subscribers/MinimalSubscriber";
 import { MinimalPublisher } from "../src/Publishers/MinimalPublisher";
 
 test("A Subscriber can be attached to a Publisher", () => {
-    const sub = new MinimalSubscriber();
+    const sub = new MinimalSubscriber("Minimal Subscriber");
     const pub = new MinimalPublisher();
 
     pub.attach(sub);
@@ -17,7 +17,7 @@ describe("A Publisher ", () => {
     let pub: MinimalPublisher;
 
     beforeEach(() => {
-        sub = new MinimalSubscriber();
+        sub = new MinimalSubscriber("Minimal Subscriber");
         pub = new MinimalPublisher();
 
         pub.attach(sub);
@@ -25,5 +25,12 @@ describe("A Publisher ", () => {
 
     test("can list subscriber names", () => {
         expect(pub.list()).to.include("Minimal Subscriber");
+    });
+
+    test("can attach multiple subscribers", () => {
+        const sub2 = new MinimalSubscriber("Minimal Subscriber 2");
+        pub.attach(sub2);
+
+        expect(pub.list()).to.include("Minimal Subscriber 2");
     });
 });

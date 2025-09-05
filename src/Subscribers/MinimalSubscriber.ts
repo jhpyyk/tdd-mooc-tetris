@@ -1,5 +1,8 @@
 import { Subscriber } from "./Subscriber";
 
 export class MinimalSubscriber implements Subscriber {
-    name = "Minimal Subscriber";
+    name: string;
+    constructor(name: string) {
+        this.name = name;
+    }
 }

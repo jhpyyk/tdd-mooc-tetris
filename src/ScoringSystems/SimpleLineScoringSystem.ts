@@ -1,6 +1,11 @@
 export class SimpleLineScoringSystem {
-    private currentScore = 0;
-    private currentLevel = 0;
+    private currentScore;
+    private currentLevel;
+
+    constructor(score: number = 0, level: number = 0) {
+        this.currentScore = score;
+        this.currentLevel = level;
+    }
 
     getCurrentScore = () => {
         return this.currentScore;

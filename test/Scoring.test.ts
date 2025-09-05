@@ -17,9 +17,9 @@ describe("The scoring system ", () => {
         expect(scoringSystem.getCurrentLevel()).to.equal(0);
     });
 
-    // test("clearing one line will score 40 points in level one", () => {
-    //     expect(scoringSystem.getCurrentLevel()).to.equal(1);
-    //     scoringSystem.scoreLines(1);
-    //     expect(scoringSystem.getCurrentScore()).to.equal(40);
-    // });
+    test("clearing one line will score 40 points in level one", () => {
+        expect(scoringSystem.getCurrentLevel()).to.equal(0);
+        scoringSystem.scoreLines(1);
+        expect(scoringSystem.getCurrentScore()).to.equal(40);
+    });
 });

@@ -10,7 +10,11 @@ export class SimpleLineScoringSystem {
         return this.currentLevel;
     };
 
-    scoreLines = (lines: number) => {};
+    scoreLines = (lines: number) => {
+        this.currentScore = this.currentScore + calculateScore(lines, this.currentLevel);
+    };
 }
 
-const calculateScore = (lines: number, level: number) => {};
+const calculateScore = (lines: number, level: number) => {
+    return 40 * (level + 1);
+};

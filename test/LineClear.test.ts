@@ -5,7 +5,7 @@ import { Tetromino } from "../src/Tetromino";
 import { expect } from "chai";
 
 describe("Clear lines is ", () => {
-    test("performed on the when the falling piece stops on the bottom", () => {
+    test("performed when the falling piece stops on the bottom", () => {
         let board = Board.fromString(
             `
         ..........    
@@ -54,5 +54,58 @@ describe("Clear lines is ", () => {
         ....T.....       
         `
         );
+    });
+
+    test("performed when the falling piece stops on other pieces", () => {
+        let board = Board.fromString(
+            `
+        ..........    
+        ..........    
+        ..........    
+        ..........    
+        ZZZ...ZZZZ    
+        ZZZ.Z.ZZZZ    
+        `
+        );
+        board = setupFallingShape(board, Tetromino.ARIKA_T.rotateLeft().rotateLeft(), 1, 3);
+
+        expect(board.toString(), "Incorrect setup").to.equalShape(
+            `
+        ..........    
+        ..........    
+        ....T.....    
+        ...TTT....    
+        ZZZ...ZZZZ    
+        ZZZ.Z.ZZZZ    
+        `
+        );
+
+        board.tick();
+
+        expect(board.toString(), "First tick").to.equalShape(
+            `
+        ..........    
+        ..........    
+        ..........    
+        ....T.....    
+        ZZZTTTZZZZ    
+        ZZZ.Z.ZZZZ    
+        `
+        );
+
+        board.tick();
+
+        expect(board.toString(), "Line clear failed").to.equalShape(
+            `
+        ..........    
+        ..........    
+        ..........    
+        ..........    
+        ....T.....    
+        ZZZ.Z.ZZZZ    
+        `
+        );
+
+        board.tick();
     });
 });

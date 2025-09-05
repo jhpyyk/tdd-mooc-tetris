@@ -3,10 +3,12 @@ import spies from "chai-spies";
 const chai = chaiModule.use(spies);
 import { beforeEach, describe, test } from "vitest";
 import { expect } from "chai";
+import { LineClearSubscriber } from "../src/Subscribers/LineClearSubscriber";
+import { LineClearPublisher } from "../src/Publishers/LineClearPublisher";
 
 test("A Subscriber can be attached to a Publisher", () => {
-    const sub = new ScoreSubscriber("Score");
-    const pub = new ScorePublisher();
+    const sub = new LineClearSubscriber("Score");
+    const pub = new LineClearPublisher();
 
     pub.attach(sub);
 

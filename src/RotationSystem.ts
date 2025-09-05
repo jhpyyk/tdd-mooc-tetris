@@ -24,30 +24,11 @@ export class SimpleWallKick implements RotationSystem {
     calculateNewAbsolutePosition = (cells: Cells, shape: Shape, shapePos: Position): Position | undefined => {
         for (const pos of this.kickPositions) {
             const absolutePosition: Position = { row: shapePos.row + pos.row, col: shapePos.col + pos.col };
-            if (this.isShapeAbleToBeInsertedTo(cells, shape, absolutePosition)) {
+            if (!shapeWouldCollideInPos(cells, shape, absolutePosition)) {
                 return absolutePosition;
             }
         }
         return undefined;
-    };
-
-    isShapeAbleToBeInsertedTo = (cells: Cells, shape: Shape, pos: Position) => {
-        for (let shapeRow = 0; shapeRow < shape.cells.length; shapeRow++) {
-            for (let shapeCol = 0; shapeCol < shape.cells[0].length; shapeCol++) {
-                if (!this.isShapeCellAbleToBeInserted(cells, shape, shapeRow, shapeCol, pos)) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    };
-
-    isShapeCellAbleToBeInserted = (cells: Cells, shape: Shape, shapeRow: number, shapeCol: number, pos: Position) => {
-        return (
-            isShapeCellEmpty(shape, shapeRow, shapeCol) ||
-            isBoardCellEmpty(cells, pos.row + shapeRow, pos.col + shapeCol)
-        );
     };
 }
 
@@ -72,38 +53,37 @@ export class Arika implements RotationSystem {
             const absolutePosition: Position = { row: shapePos.row + pos.row, col: shapePos.col + pos.col };
             // Center column rule
             if (pos.row === 0 && pos.col === 0 && this.kickSpecialChars.includes(shape.shapeChar)) {
-                const collision = this.wouldCollideInPos(cells, shape, absolutePosition);
+                const collision = shapeWouldCollideInPos(cells, shape, absolutePosition);
                 if (collision && collision.col === 1) {
                     return undefined;
                 }
             }
 
-            if (!this.wouldCollideInPos(cells, shape, absolutePosition)) {
+            if (!shapeWouldCollideInPos(cells, shape, absolutePosition)) {
                 return absolutePosition;
             }
         }
         return undefined;
     };
+}
 
-    wouldCollideInPos = (cells: Cells, shape: Shape, pos: Position): Position | undefined => {
-        for (let shapeRow = 0; shapeRow < shape.cells.length; shapeRow++) {
-            for (let shapeCol = 0; shapeCol < shape.cells[0].length; shapeCol++) {
-                if (!this.isShapeCellAbleToBeInserted(cells, shape, shapeRow, shapeCol, pos)) {
-                    return { row: shapeRow, col: shapeCol };
-                }
+const shapeWouldCollideInPos = (cells: Cells, shape: Shape, pos: Position): Position | undefined => {
+    for (let shapeRow = 0; shapeRow < shape.cells.length; shapeRow++) {
+        for (let shapeCol = 0; shapeCol < shape.cells[0].length; shapeCol++) {
+            if (!cellWouldCollide(cells, shape, shapeRow, shapeCol, pos)) {
+                return { row: shapeRow, col: shapeCol };
             }
         }
+    }
 
-        return undefined;
-    };
+    return undefined;
+};
 
-    isShapeCellAbleToBeInserted = (cells: Cells, shape: Shape, shapeRow: number, shapeCol: number, pos: Position) => {
-        return (
-            isShapeCellEmpty(shape, shapeRow, shapeCol) ||
-            isBoardCellEmpty(cells, pos.row + shapeRow, pos.col + shapeCol)
-        );
-    };
-}
+const cellWouldCollide = (cells: Cells, shape: Shape, shapeRow: number, shapeCol: number, pos: Position) => {
+    return (
+        isShapeCellEmpty(shape, shapeRow, shapeCol) || isBoardCellEmpty(cells, pos.row + shapeRow, pos.col + shapeCol)
+    );
+};
 
 const isShapeCellEmpty = (shape: Shape, row: number, col: number) => {
     return shape.cells[row] && shape.cells[row][col] && shape.cells[row][col] === ".";

@@ -16,5 +16,12 @@ export class SimpleLineScoringSystem {
 }
 
 const calculateScore = (lines: number, level: number) => {
-    return 40 * (level + 1);
+    return LINE_SCORE_BASE[lines] * (level + 1);
+};
+
+const LINE_SCORE_BASE: Record<number, number> = {
+    1: 40,
+    2: 200,
+    3: 300,
+    4: 1200,
 };

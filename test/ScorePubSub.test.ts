@@ -30,12 +30,12 @@ describe("A Publisher ", () => {
         expect(pub.list()).to.include("LineClear");
     });
 
-    //     test("can attach multiple subscribers", () => {
-    //         const sub2 = new MinimalSubscriber("Minimal Subscriber 2");
-    //         pub.attach(sub2);
+    test("can attach multiple subscribers", () => {
+        const sub2 = new LineClearSubscriber("LineClear2");
+        pub.attach(sub2);
 
-    //         expect(pub.list()).to.include("Minimal Subscriber 2");
-    //     });
+        expect(pub.list()).to.include("LineClear2");
+    });
 
     //     test("can only attach Subscribers with unique names", () => {
     //         const sub2 = new MinimalSubscriber("Minimal Subscriber");

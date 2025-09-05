@@ -51,6 +51,10 @@ export class Arika implements RotationSystem {
 
     calculateNewAbsolutePosition = (cells: Cells, shape: Shape, shapePos: Position): Position | undefined => {
         for (const pos of this.kickPositions) {
+            if (shape.shapeChar === "I" && (pos.row !== 0 || pos.col !== 0)) {
+                return undefined;
+            }
+
             const absolutePosition: Position = { row: shapePos.row + pos.row, col: shapePos.col + pos.col };
             // Center column rule
             if (pos.row === 0 && pos.col === 0 && this.kickSpecialChars.includes(shape.shapeChar)) {

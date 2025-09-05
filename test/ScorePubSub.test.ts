@@ -58,11 +58,11 @@ describe("A Publisher ", () => {
         expect(pub.list().length).to.equal(1);
     });
 
-    //     test("can publish a message", () => {
-    //         const message = "message";
-    //         const receiveSpy = chai.spy.on(sub, "receive");
-    //         pub.publish(message);
+    test("can publish a message", () => {
+        const linesCleared = 1;
+        const receiveSpy = chai.spy.on(sub, "receive");
+        pub.publish(linesCleared);
 
-    //         expect(receiveSpy).to.have.been.called.with(message);
-    //     });
+        expect(receiveSpy).to.have.been.called.with(linesCleared);
+    });
 });

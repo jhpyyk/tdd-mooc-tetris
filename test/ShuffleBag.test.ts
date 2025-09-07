@@ -64,10 +64,22 @@ describe("Shuffle bag ", () => {
         expect(charsFromBag.toSorted()).to.be.deep.equal(bag.chars.toSorted());
     });
 
-    test("will will once empty", () => {
+    test("will fill once empty", () => {
         for (let i = 0; i < bag.length; i++) {
             bag.pull();
         }
         expect(bag.contents.length).to.equal(bag.length);
+    });
+
+    test("next shuffle wont be the same", () => {
+        let initialPulls: ShapeChar[] = [];
+        for (let i = 0; i < bag.length; i++) {
+            initialPulls = initialPulls.concat(bag.pull());
+        }
+        let nextPulls: ShapeChar[] = [];
+        for (let i = 0; i < bag.length; i++) {
+            nextPulls = nextPulls.concat(bag.pull());
+        }
+        expect(initialPulls).not.to.deep.equal(nextPulls);
     });
 });

@@ -20,15 +20,11 @@ export class SimpleLineScoringSystem {
     scoreLines = (lines: number) => {
         this.currentScore = this.currentScore + calculateScore(lines, this.currentLevel);
         this.linesCleared = this.linesCleared + lines;
-        if (this.linesCleared >= 10 * arithmeticSum(this.currentLevel + 1)) {
+        if (this.linesCleared >= 10 * (this.currentLevel + 1)) {
             this.currentLevel = this.currentLevel + 1;
         }
     };
 }
-
-const arithmeticSum = (n: number) => {
-    return (n * (n + 1)) / 2;
-};
 
 const calculateScore = (lines: number, level: number) => {
     return LINE_SCORE_BASE[lines] * (level + 1);

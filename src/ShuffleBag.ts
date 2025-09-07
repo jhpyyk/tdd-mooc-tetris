@@ -1,4 +1,4 @@
-import { ShapeChar } from "./Shape";
+import { ShapeChar } from "./Shape.ts";
 
 export class ShuffleBag {
     chars: ShapeChar[];

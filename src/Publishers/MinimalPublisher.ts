@@ -1,5 +1,5 @@
-import { Subscriber } from "../Subscribers/Subscriber";
-import { Publisher } from "./Publisher";
+import { Subscriber } from "../Subscribers/Subscriber.ts";
+import { Publisher } from "./Publisher.ts";
 
 export class MinimalPublisher implements Publisher<string> {
     subscribers: Subscriber<string>[] = [];

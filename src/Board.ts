@@ -1,7 +1,7 @@
-import { OneByOneBlock } from "./OneByOneBlock";
-import { LineClearPublisher } from "./Publishers/LineClearPublisher";
-import { Arika, RotationSystem, SimpleWallKick } from "./RotationSystem";
-import { Shape, ShapeChar } from "./Shape";
+import { OneByOneBlock } from "./OneByOneBlock.ts";
+import { LineClearPublisher } from "./Publishers/LineClearPublisher.ts";
+import { Arika, RotationSystem } from "./RotationSystem.ts";
+import { Shape, ShapeChar } from "./Shape.ts";
 
 type CellState = ShapeChar;
 type Row = Array<CellState>;
@@ -162,6 +162,18 @@ export class Board {
     };
 
     cellAt = (row: number, col: number) => {
+        if (!this.shapePos || !this.fallingShape) {
+            return this.cells[row][col];
+        }
+        if (
+            row >= this.shapePos.row &&
+            row <= this.shapePos.row + 3 &&
+            col >= this.shapePos.col &&
+            col <= this.shapePos.col + 3 &&
+            !isShapeCellEmpty(this.fallingShape, row - this.shapePos.row, col - this.shapePos.col)
+        ) {
+            return this.fallingShape.cells[row - this.shapePos.row][col - this.shapePos.col];
+        }
         return this.cells[row][col];
     };
 }

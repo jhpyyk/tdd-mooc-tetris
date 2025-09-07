@@ -12,17 +12,19 @@
         "type": "git",
         "url": "https://github.com/luontola/tdd-mooc-tetris.git"
     },
+    "type": "module",
     "private": true,
     "dependencies": {
         "lodash": "^4.17.21"
     },
     "devDependencies": {
         "@types/chai-spies": "^1.0.6",
+        "@types/node": "^24.3.1",
         "chai": "^4.3.10",
         "chai-spies": "^1.1.0",
         "http-server": "^14.1.1",
         "prettier": "^3.1.1",
-        "typescript": "^5.3.3",
+        "typescript": "^5.9.2",
         "vite": "^5.0.10",
         "vitest": "^1.1.0"
     },
@@ -31,7 +33,7 @@
         "npm": ">=10"
     },
     "scripts": {
-        "start": "http-server src -o / -c-1",
+        "start": "npx vite",
         "test": "vitest run",
         "autotest": "vitest watch",
         "format": "prettier --write .",

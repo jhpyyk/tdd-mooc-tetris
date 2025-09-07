@@ -1,5 +1,5 @@
-import { Shape, ShapeCells, ShapeChar } from "./Shape";
-import { ARIKA_I, ARIKA_J, ARIKA_L, ARIKA_O, ARIKA_S, ARIKA_T, ARIKA_Z } from "./tetrominoShapes";
+import { Shape, ShapeCells, ShapeChar } from "./Shape.ts";
+import { ARIKA_I, ARIKA_J, ARIKA_L, ARIKA_O, ARIKA_S, ARIKA_T, ARIKA_Z } from "./tetrominoShapes.ts";
 
 type TetrominoOrientations = Array<ShapeCells>;
 

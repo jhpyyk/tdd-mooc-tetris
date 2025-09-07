@@ -1,5 +1,5 @@
-import { Cells, Position } from "./Board";
-import { Shape } from "./Shape";
+import { Cells, Position } from "./Board.ts";
+import { Shape } from "./Shape.ts";
 
 export interface RotationSystem {
     kickPositions: Position[];

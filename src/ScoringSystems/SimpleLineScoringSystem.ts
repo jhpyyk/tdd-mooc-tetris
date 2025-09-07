@@ -1,4 +1,4 @@
-import { LineClearSubscriber } from "../Subscribers/LineClearSubscriber";
+import { LineClearSubscriber } from "../Subscribers/LineClearSubscriber.ts";
 
 export class SimpleLineScoringSystem {
     private currentScore: number;
@@ -31,10 +31,12 @@ export class SimpleLineScoringSystem {
 }
 
 const calculateScore = (lines: number, level: number) => {
+    console.log("calculating score", lines, LINE_SCORE_BASE[lines]);
     return LINE_SCORE_BASE[lines] * (level + 1);
 };
 
 const LINE_SCORE_BASE: Record<number, number> = {
+    0: 0,
     1: 40,
     2: 200,
     3: 300,

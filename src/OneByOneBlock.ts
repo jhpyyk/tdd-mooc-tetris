@@ -1,4 +1,4 @@
-import { Shape, ShapeCells, ShapeChar } from "./Shape";
+import { Shape, ShapeCells, ShapeChar } from "./Shape.ts";
 
 type BlockOrientations = Array<ShapeCells>;
 

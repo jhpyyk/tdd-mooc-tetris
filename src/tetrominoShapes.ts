@@ -1,4 +1,4 @@
-import { ShapeCells } from "./Shape";
+import { ShapeCells } from "./Shape.ts";
 
 export const ARIKA_T: Array<ShapeCells> = [
     [

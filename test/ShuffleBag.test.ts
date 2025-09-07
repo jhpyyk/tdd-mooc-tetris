@@ -61,7 +61,7 @@ describe("Shuffle bag ", () => {
             charsFromBag = charsFromBag.concat(bag.pull());
         }
 
-        expect(charsFromBag.toSorted()).to.be.deep.equal(bag.chars.toSorted());
+        expect(charsFromBag.sort()).to.be.deep.equal(bag.chars.sort());
     });
 
     test("will fill once empty", () => {

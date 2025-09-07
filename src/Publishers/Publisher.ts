@@ -1,4 +1,4 @@
-import { Subscriber } from "../Subscribers/Subscriber";
+import { Subscriber } from "../Subscribers/Subscriber.ts";
 
 export interface Publisher<T> {
     subscribers: Array<Subscriber<T>>;

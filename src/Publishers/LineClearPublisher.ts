@@ -1,5 +1,5 @@
-import { Subscriber } from "../Subscribers/Subscriber";
-import { Publisher } from "./Publisher";
+import { Subscriber } from "../Subscribers/Subscriber.ts";
+import { Publisher } from "./Publisher.ts";
 
 export class LineClearPublisher implements Publisher<number> {
     subscribers: Subscriber<number>[] = [];

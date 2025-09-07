@@ -1,4 +1,4 @@
-import { Subscriber } from "./Subscriber";
+import { Subscriber } from "./Subscriber.ts";
 
 type Callback = (linesCleared: number) => void;
 export class LineClearSubscriber implements Subscriber<number> {

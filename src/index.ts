@@ -22,12 +22,12 @@ function initGame() {
 
     const game: Game = {
         columns: 10,
-        rows: 20,
+        rows: 21,
         tickDuration: 1000,
         nextTick: 0,
         scoring: new SimpleLineScoringSystem(),
         board: new Board(10, 20),
-        bag: new ShuffleBag(123456),
+        bag: new ShuffleBag(Math.floor(Math.random() * 100000)),
     };
     game.board.lineClearPublisher.attach(game.scoring.lineClearSubscriber);
 
@@ -112,13 +112,13 @@ function renderGame(game: Game, canvas: HTMLCanvasElement, timestamp: number) {
         throw new Error("Unable to get 2D context");
     }
     drawBackground(ctx, canvasWidth, canvasHeight);
-    for (let row = 0; row < game.rows; row++) {
+    for (let row = game.board.hiddenLayers; row < game.rows; row++) {
         for (let column = 0; column < game.columns; column++) {
             const cell = game.board.cellAt(row, column);
             drawCell(ctx, cell, row, column, cellWidth, cellHeight);
         }
     }
-    drawScoring(ctx, game.scoring.getCurrentLevel(), game.scoring.getCurrentScore(), canvasWidth);
+    drawScoring(ctx, game.scoring.getCurrentScore(), game.scoring.getCurrentLevel(), canvasWidth);
 }
 
 function drawBackground(ctx: CanvasRenderingContext2D, canvasWidth: number, canvasHeight: number) {

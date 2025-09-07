@@ -69,4 +69,13 @@ describe("The scoring system ", () => {
         scoringSystem.scoreLines(10);
         expect(scoringSystem.getCurrentLevel()).to.equal(2);
     });
+
+    test("clearing 40 lines will increase level from three to seven", () => {
+        scoringSystem = new SimpleLineScoringSystem(0, 3, 33);
+        scoringSystem.scoreLines(10);
+        scoringSystem.scoreLines(10);
+        scoringSystem.scoreLines(10);
+        scoringSystem.scoreLines(10);
+        expect(scoringSystem.getCurrentLevel()).to.equal(7);
+    });
 });

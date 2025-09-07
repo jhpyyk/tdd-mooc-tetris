@@ -13,4 +13,11 @@ describe("Shuffle bag ", () => {
 
         expect(bag.chars).to.include(char);
     });
+
+    test("will not give the same character twice in a row initially", () => {
+        const char1 = bag.pull();
+        const char2 = bag.pull();
+
+        expect(char1).not.to.equal(char2);
+    });
 });

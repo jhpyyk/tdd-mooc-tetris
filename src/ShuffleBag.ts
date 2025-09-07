@@ -1,7 +1,10 @@
 import { ShapeChar } from "./Shape";
 
-export type ShuffleBag = ShapeChar[];
-
-export const createShuffleBag = (): ShuffleBag => {
-    return ["I", "J", "L", "O", "S", "T", "Z"];
-};
+export class ShuffleBag {
+    chars: ShapeChar[];
+    length: number;
+    constructor() {
+        this.chars = ["I", "J", "L", "O", "S", "T", "Z"];
+        this.length = this.chars.length;
+    }
+}

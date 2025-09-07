@@ -1,10 +1,10 @@
 import { expect } from "chai";
 import { describe, test } from "vitest";
-import { createShuffleBag } from "../src/ShuffleBag";
+import { ShuffleBag } from "../src/ShuffleBag";
 
 describe("Shuffle bag ", () => {
+    const bag = new ShuffleBag();
     test("length is 7", () => {
-        const bag = createShuffleBag();
         expect(bag.length).to.equal(7);
     });
 });

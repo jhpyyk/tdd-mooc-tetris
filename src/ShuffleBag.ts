@@ -15,6 +15,10 @@ export class ShuffleBag {
     pull = () => {
         const toBePulled = this.contents[0];
         this.contents = this.contents.toSpliced(0, 1);
+        if (this.contents.length === 0) {
+            this.rngSeed = this.rngSeed + 1;
+            this.contents = shuffle(this.chars, this.rngSeed);
+        }
         return toBePulled;
     };
 }

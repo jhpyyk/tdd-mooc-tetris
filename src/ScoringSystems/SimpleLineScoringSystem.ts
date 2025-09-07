@@ -1,12 +1,16 @@
+import { LineClearSubscriber } from "../Subscribers/LineClearSubscriber";
+
 export class SimpleLineScoringSystem {
-    private currentScore;
-    private currentLevel;
-    private linesCleared;
+    private currentScore: number;
+    private currentLevel: number;
+    private linesCleared: number;
+    lineClearSubscriber: LineClearSubscriber;
 
     constructor(score: number = 0, level: number = 0, linesCleared: number = 0) {
         this.currentScore = score;
         this.currentLevel = level;
         this.linesCleared = linesCleared;
+        this.lineClearSubscriber = new LineClearSubscriber("Line clear", this.scoreLines);
     }
 
     getCurrentScore = () => {

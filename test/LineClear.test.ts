@@ -258,7 +258,7 @@ describe("Line clear is ", () => {
         );
         board = setupFallingShape(board, Tetromino.ARIKA_T.rotateLeft().rotateLeft(), 2, 3);
 
-        const sub = new LineClearSubscriber("testsub");
+        const sub = new LineClearSubscriber("testsub", () => {});
         board.lineClearPublisher.attach(sub);
 
         test("when clearing one line", () => {

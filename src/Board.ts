@@ -1,4 +1,5 @@
 import { OneByOneBlock } from "./OneByOneBlock";
+import { LineClearPublisher } from "./Publishers/LineClearPublisher";
 import { Arika, RotationSystem, SimpleWallKick } from "./RotationSystem";
 import { Shape, ShapeChar } from "./Shape";
 
@@ -18,6 +19,7 @@ export class Board {
     shapePos: Position | undefined;
     hiddenLayers: number = 1;
     rotationSystem: RotationSystem = new Arika();
+    lineClearPublisher = new LineClearPublisher();
 
     constructor(width: number, height: number) {
         this.width = width;
@@ -97,7 +99,9 @@ export class Board {
         const successful = this.moveShape(1, 0);
         if (!successful) {
             this.lockShape();
-            this.cells = clearLines(this.cells);
+            const cleared = clearFullLines(this.cells);
+            const removedAmount = this.cells.length - cleared.length;
+            this.cells = addNewLines(cleared, removedAmount);
         }
     };
 
@@ -221,20 +225,21 @@ const insertFallingCharsIntoBoardCells = (boardCells: Cells, shape: Shape, pos: 
     return boardCells;
 };
 
-const clearLines = (boardCells: Cells) => {
+const clearFullLines = (boardCells: Cells) => {
     let newCells: Cells = [];
-    let removedRows: Cells = [];
     for (const row of boardCells) {
-        if (isRowFull(row)) {
-            removedRows.push(row);
-        } else {
+        if (!isRowFull(row)) {
             newCells.push(row);
         }
     }
-    for (const remRow of removedRows) {
-        newCells.unshift(createEmptyRow(remRow.length));
-    }
     return newCells;
+};
+
+const addNewLines = (boardCells: Cells, lines: number) => {
+    for (let i = 0; i < lines; i++) {
+        boardCells.unshift(createEmptyRow(boardCells[0].length));
+    }
+    return boardCells;
 };
 
 const isRowFull = (row: Row) => {

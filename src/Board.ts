@@ -160,6 +160,10 @@ export class Board {
         this.fallingShape = undefined;
         this.shapePos = undefined;
     };
+
+    cellAt = (row: number, col: number) => {
+        return this.cells[row][col];
+    };
 }
 
 const isShapeCellAbleToBeInserted = (cells: Cells, shape: Shape, shapeRow: number, shapeCol: number, pos: Position) => {

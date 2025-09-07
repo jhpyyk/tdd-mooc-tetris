@@ -12,6 +12,31 @@ export class Tetromino implements Shape {
     static ARIKA_S = new Tetromino(ARIKA_S, 0, "S");
     static ARIKA_Z = new Tetromino(ARIKA_Z, 0, "Z");
 
+    static fromChar = (char: ShapeChar) => {
+        switch (char) {
+            case "I":
+                return this.ARIKA_I;
+            case "O":
+                return this.ARIKA_O;
+            case "T":
+                return this.ARIKA_T;
+            case "S":
+                return this.ARIKA_S;
+            case "Z":
+                return this.ARIKA_Z;
+            case "L":
+                return this.ARIKA_L;
+            case "J":
+                return this.ARIKA_J;
+            case ".":
+                throw new Error("Not a tetromino char");
+            case "X":
+                throw new Error("Not a tetromino char");
+            case "Y":
+                throw new Error("Not a tetromino char");
+        }
+    };
+
     orientationNumber: number;
 
     tetrominoOrientations: TetrominoOrientations;

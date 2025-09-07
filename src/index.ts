@@ -1,34 +1,35 @@
 import { Board } from "./Board.ts";
-import { ScoringSystem } from "./ScoringSystem.mjs";
-import { ShuffleBag } from "./ShuffleBag.mjs";
-import { Tetromino } from "./Tetromino.mjs";
+import { SimpleLineScoringSystem } from "./ScoringSystems/SimpleLineScoringSystem.ts";
+import { ShapeChar } from "./Shape.ts";
+import { ShuffleBag } from "./ShuffleBag.ts";
+import { Tetromino } from "./Tetromino.ts";
 
 // TODO: change this code to match the API you have created, if you want to run the game for some manual testing
 
-function initGame() {
-    const canvas = document.getElementById("game");
+interface Game {
+    columns: number;
+    rows: number;
+    tickDuration: number;
+    nextTick: number;
+    board: Board;
+    scoring: SimpleLineScoringSystem;
+    bag: ShuffleBag;
+}
 
-    const game = {
+function initGame() {
+    console.log("init game");
+    const canvas: HTMLCanvasElement = document.getElementById("game") as HTMLCanvasElement;
+
+    const game: Game = {
         columns: 10,
         rows: 20,
         tickDuration: 1000,
         nextTick: 0,
+        scoring: new SimpleLineScoringSystem(),
+        board: new Board(10, 20),
+        bag: new ShuffleBag(123456),
     };
-    game.scoring = new ScoringSystem();
-    game.board = new Board(game.columns, game.rows);
-    game.board.onClearLine = (lineCount) => {
-        game.scoring.linesCleared(lineCount);
-    };
-    game.tetrominoes = new ShuffleBag([
-        Tetromino.I_SHAPE,
-        Tetromino.T_SHAPE,
-        Tetromino.L_SHAPE,
-        Tetromino.J_SHAPE,
-        Tetromino.T_SHAPE,
-        Tetromino.S_SHAPE,
-        Tetromino.Z_SHAPE,
-        Tetromino.O_SHAPE,
-    ]);
+    game.board.lineClearPublisher.attach(game.scoring.lineClearSubscriber);
 
     document.addEventListener("keydown", (event) => {
         if (event.code === "Space") {
@@ -53,7 +54,7 @@ function initGame() {
         event.preventDefault(); // prevent game keys from scrolling the window
     });
 
-    const render = (timestamp) => {
+    const render = (timestamp: number) => {
         progressTime(game, timestamp);
         renderGame(game, canvas, timestamp);
         window.requestAnimationFrame(render);
@@ -63,7 +64,7 @@ function initGame() {
 
 // game logic
 
-function progressTime(game, timestamp) {
+function progressTime(game: Game, timestamp: number) {
     if (timestamp >= game.nextTick) {
         tick(game);
         adjustDifficulty(game);
@@ -71,22 +72,22 @@ function progressTime(game, timestamp) {
     }
 }
 
-function tick(game) {
+function tick(game: Game) {
     if (!game.board.hasFalling()) {
-        game.board.drop(game.tetrominoes.next());
+        game.board.drop(Tetromino.fromChar(game.bag.pull()));
     } else {
         game.board.tick();
     }
 }
 
-function adjustDifficulty(game) {
-    const tickDuration = TICK_DURATION_PER_LEVEL[game.scoring.level];
+function adjustDifficulty(game: Game) {
+    const tickDuration = TICK_DURATION_PER_LEVEL[game.scoring.getCurrentLevel()];
     if (tickDuration) {
         game.tickDuration = tickDuration;
     }
 }
 
-const TICK_DURATION_PER_LEVEL = {
+const TICK_DURATION_PER_LEVEL: Record<number, number> = {
     1: 33 * 15,
     2: 33 * 13,
     3: 33 * 11,
@@ -101,40 +102,45 @@ const TICK_DURATION_PER_LEVEL = {
 
 // rendering
 
-function renderGame(game, canvas, timestamp) {
+function renderGame(game: Game, canvas: HTMLCanvasElement, timestamp: number) {
     const ctx = canvas.getContext("2d");
     const canvasWidth = (canvas.width = canvas.clientWidth);
     const canvasHeight = (canvas.height = canvas.clientHeight);
     const cellWidth = canvasWidth / game.columns;
     const cellHeight = canvasHeight / game.rows;
-
+    if (!ctx) {
+        throw new Error("Unable to get 2D context");
+    }
     drawBackground(ctx, canvasWidth, canvasHeight);
     for (let row = 0; row < game.rows; row++) {
         for (let column = 0; column < game.columns; column++) {
             const cell = game.board.cellAt(row, column);
-            drawCell(ctx, { cell, row, column, cellWidth, cellHeight });
+            drawCell(ctx, cell, row, column, cellWidth, cellHeight);
         }
     }
-    drawScoring(ctx, {
-        level: game.scoring.level,
-        score: game.scoring.score,
-        canvasWidth,
-    });
+    drawScoring(ctx, game.scoring.getCurrentLevel(), game.scoring.getCurrentScore(), canvasWidth);
 }
 
-function drawBackground(ctx, canvasWidth, canvasHeight) {
+function drawBackground(ctx: CanvasRenderingContext2D, canvasWidth: number, canvasHeight: number) {
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 }
 
-function drawCell(ctx, { cell, row, column, cellWidth, cellHeight }) {
+function drawCell(
+    ctx: CanvasRenderingContext2D,
+    cell: ShapeChar,
+    row: number,
+    column: number,
+    cellWidth: number,
+    cellHeight: number
+) {
     ctx.fillStyle = CELL_COLORS[cell];
     const x = cellWidth * column;
     const y = cellHeight * row;
     ctx.fillRect(x, y, cellWidth, cellHeight);
 }
 
-const CELL_COLORS = {
+const CELL_COLORS: Record<ShapeChar, string> = {
     ".": "#ffffff",
     I: "#cc1c19",
     T: "#3a88b2",
@@ -143,31 +149,31 @@ const CELL_COLORS = {
     S: "#921392",
     Z: "#2e9915",
     O: "#9a8016",
+    X: "#c85c14",
+    Y: "#c85c14",
 };
 
-function drawScoring(ctx, { score, level, canvasWidth }) {
+function drawScoring(ctx: CanvasRenderingContext2D, score: number, level: number, canvasWidth: number) {
     const margin = 5;
     const fontSize = 22;
-    drawText(ctx, {
-        text: `Level ${level}`,
-        x: margin,
-        y: fontSize + margin,
-        font: `${fontSize}px sans-serif`,
-    });
-    drawText(ctx, {
-        text: `Score ${score}`,
-        textAlign: "right",
-        x: canvasWidth - margin,
-        y: fontSize + margin,
-        font: `${fontSize}px sans-serif`,
-    });
+    drawText(ctx, `Level ${level}`, margin, fontSize + margin, `${fontSize}px sans-serif`, undefined);
+    drawText(ctx, `Score ${score}`, canvasWidth - margin, fontSize + margin, `${fontSize}px sans-serif`, "right");
 }
 
-function drawText(ctx, { text, x, y, font, textAlign }) {
+function drawText(
+    ctx: CanvasRenderingContext2D,
+    text: string,
+    x: number,
+    y: number,
+    font: string,
+    textAlign: CanvasTextAlign | undefined
+) {
     ctx.font = font;
     ctx.textAlign = textAlign || "left";
     ctx.fillStyle = "#000000";
     ctx.fillText(text, x, y);
 }
+
+console.log("call init");
 
 initGame();

@@ -246,16 +246,8 @@ describe("Line clear is ", () => {
     });
 
     describe("published ", () => {
-        const pub = new LineClearPublisher();
-        const sub = new LineClearSubscriber("testsub");
-        pub.attach(sub);
-
-        test("when clearing one line", () => {
-            const publishSpy = chai.spy.on(pub, "publish");
-            const receiveSpy = chai.spy.on(pub, "receive");
-
-            let board = Board.fromString(
-                `
+        let board = Board.fromString(
+            `
         ..........    
         ..........    
         ..........    
@@ -263,8 +255,15 @@ describe("Line clear is ", () => {
         ..........    
         ZZZ...ZZZZ    
         `
-            );
-            board = setupFallingShape(board, Tetromino.ARIKA_T.rotateLeft().rotateLeft(), 2, 3);
+        );
+        board = setupFallingShape(board, Tetromino.ARIKA_T.rotateLeft().rotateLeft(), 2, 3);
+
+        const sub = new LineClearSubscriber("testsub");
+        board.lineClearPublisher.attach(sub);
+
+        test("when clearing one line", () => {
+            const publishSpy = chai.spy.on(board.lineClearPublisher, "publish");
+            const receiveSpy = chai.spy.on(sub, "receive");
 
             expect(board.toString(), "Incorrect setup").to.equalShape(
                 `

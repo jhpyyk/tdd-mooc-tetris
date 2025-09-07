@@ -102,6 +102,7 @@ export class Board {
             const cleared = clearFullLines(this.cells);
             const removedAmount = this.cells.length - cleared.length;
             this.cells = addNewLines(cleared, removedAmount);
+            this.lineClearPublisher.publish(removedAmount);
         }
     };
 

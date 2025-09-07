@@ -3,6 +3,11 @@ import { Board } from "../src/Board";
 import { setupFallingShape } from "./testUtils";
 import { Tetromino } from "../src/Tetromino";
 import { expect } from "chai";
+import { LineClearPublisher } from "../src/Publishers/LineClearPublisher";
+import * as chaiModule from "chai";
+import spies from "chai-spies";
+import { LineClearSubscriber } from "../src/Subscribers/LineClearSubscriber";
+const chai = chaiModule.use(spies);
 
 describe("Line clear is ", () => {
     test("performed when the falling piece stops on the bottom", () => {
@@ -237,6 +242,58 @@ describe("Line clear is ", () => {
                 I........Z
                 `
             );
+        });
+    });
+
+    describe("published ", () => {
+        const pub = new LineClearPublisher();
+        const sub = new LineClearSubscriber("testsub");
+        pub.attach(sub);
+
+        test("when clearing one line", () => {
+            const publishSpy = chai.spy.on(pub, "publish");
+            const receiveSpy = chai.spy.on(pub, "receive");
+
+            let board = Board.fromString(
+                `
+        ..........    
+        ..........    
+        ..........    
+        ..........    
+        ..........    
+        ZZZ...ZZZZ    
+        `
+            );
+            board = setupFallingShape(board, Tetromino.ARIKA_T.rotateLeft().rotateLeft(), 2, 3);
+
+            expect(board.toString(), "Incorrect setup").to.equalShape(
+                `
+        ..........    
+        ..........    
+        ..........    
+        ....T.....    
+        ...TTT....    
+        ZZZ...ZZZZ    
+        `
+            );
+
+            board.tick();
+
+            expect(board.toString(), "First tick").to.equalShape(
+                `
+        ..........    
+        ..........    
+        ..........    
+        ..........    
+        ....T.....    
+        ZZZTTTZZZZ    
+        `
+            );
+
+            board.tick();
+
+            expect(publishSpy).to.have.been.called.with(1);
+            expect(receiveSpy).to.have.been.called.with(1);
         });
     });
 });

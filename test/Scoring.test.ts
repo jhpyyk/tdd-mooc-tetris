@@ -125,7 +125,7 @@ describe("The scoring system ", () => {
 
             board.tick();
 
-            expect(scoringSystem.getCurrentScore()).to.equal(10);
+            expect(scoringSystem.getCurrentScore()).to.equal(40);
         });
     });
 });

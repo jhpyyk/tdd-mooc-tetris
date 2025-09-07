@@ -1,10 +1,12 @@
 export class SimpleLineScoringSystem {
     private currentScore;
     private currentLevel;
+    private linesCleared;
 
-    constructor(score: number = 0, level: number = 0) {
+    constructor(score: number = 0, level: number = 0, linesCleared: number = 0) {
         this.currentScore = score;
         this.currentLevel = level;
+        this.linesCleared = linesCleared;
     }
 
     getCurrentScore = () => {
@@ -17,6 +19,10 @@ export class SimpleLineScoringSystem {
 
     scoreLines = (lines: number) => {
         this.currentScore = this.currentScore + calculateScore(lines, this.currentLevel);
+        this.linesCleared = this.linesCleared + lines;
+        if (this.linesCleared >= 10) {
+            this.currentLevel = 1;
+        }
     };
 }
 

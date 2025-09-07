@@ -63,4 +63,15 @@ describe("The scoring system ", () => {
         scoringSystem.scoreLines(2);
         expect(scoringSystem.getCurrentLevel()).to.equal(1);
     });
+
+    test("clearing 20 lines will increase level from zero to two", () => {
+        expect(scoringSystem.getCurrentLevel()).to.equal(0);
+        scoringSystem.scoreLines(4);
+        scoringSystem.scoreLines(4);
+        scoringSystem.scoreLines(2);
+        scoringSystem.scoreLines(4);
+        scoringSystem.scoreLines(4);
+        scoringSystem.scoreLines(2);
+        expect(scoringSystem.getCurrentLevel()).to.equal(2);
+    });
 });

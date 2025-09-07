@@ -39,4 +39,28 @@ describe("Shuffle bag ", () => {
 
         expect(charsFromBag1).to.be.deep.equal(charsFromBag2);
     });
+
+    test("pulled characters are different for different seed", () => {
+        const bag2 = new ShuffleBag(234567);
+
+        let charsFromBag1: ShapeChar[] = [];
+        let charsFromBag2: ShapeChar[] = [];
+
+        for (let i = 0; i < bag.length; i++) {
+            charsFromBag1 = charsFromBag1.concat(bag.pull());
+            charsFromBag2 = charsFromBag2.concat(bag2.pull());
+        }
+
+        expect(charsFromBag1).not.to.be.deep.equal(charsFromBag2);
+    });
+
+    test("will give all the characters", () => {
+        let charsFromBag: ShapeChar[] = [];
+
+        for (let i = 0; i < bag.length; i++) {
+            charsFromBag = charsFromBag.concat(bag.pull());
+        }
+
+        expect(charsFromBag.toSorted()).to.be.deep.equal(bag.chars.toSorted());
+    });
 });

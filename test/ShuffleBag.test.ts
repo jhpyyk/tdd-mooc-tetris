@@ -63,4 +63,11 @@ describe("Shuffle bag ", () => {
 
         expect(charsFromBag.toSorted()).to.be.deep.equal(bag.chars.toSorted());
     });
+
+    test("will will once empty", () => {
+        for (let i = 0; i < bag.length; i++) {
+            bag.pull();
+        }
+        expect(bag.contents.length).to.equal(bag.length);
+    });
 });

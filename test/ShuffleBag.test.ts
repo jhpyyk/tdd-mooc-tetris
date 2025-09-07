@@ -7,4 +7,10 @@ describe("Shuffle bag ", () => {
     test("length is 7", () => {
         expect(bag.length).to.equal(7);
     });
+
+    test("will give a shape character", () => {
+        const char = bag.pull();
+
+        expect(bag.chars).to.include(char);
+    });
 });

@@ -1,6 +1,9 @@
 import { expect } from "chai";
 import { beforeAll, beforeEach, describe, test } from "vitest";
 import { SimpleLineScoringSystem } from "../src/ScoringSystems/SimpleLineScoringSystem";
+import { setupFallingShape } from "./testUtils";
+import { Board } from "../src/Board";
+import { Tetromino } from "../src/Tetromino";
 
 describe("The scoring system ", () => {
     let scoringSystem: SimpleLineScoringSystem;
@@ -77,5 +80,52 @@ describe("The scoring system ", () => {
         scoringSystem.scoreLines(10);
         scoringSystem.scoreLines(10);
         expect(scoringSystem.getCurrentLevel()).to.equal(7);
+    });
+
+    describe("adds score ", () => {
+        let board = Board.fromString(
+            `
+                ..........    
+                ..........    
+                ..........    
+                ..........    
+                ..........    
+                ZZZ...ZZZZ    
+                `
+        );
+        board = setupFallingShape(board, Tetromino.ARIKA_T.rotateLeft().rotateLeft(), 2, 3);
+
+        const scoringSystem = new SimpleLineScoringSystem();
+        board.lineClearPublisher.attach(scoringSystem.lineClearSubscriber);
+
+        test("when clearing one line", () => {
+            expect(board.toString(), "Incorrect setup").to.equalShape(
+                `
+        ..........    
+        ..........    
+        ..........    
+        ....T.....    
+        ...TTT....    
+        ZZZ...ZZZZ    
+        `
+            );
+
+            board.tick();
+
+            expect(board.toString(), "First tick").to.equalShape(
+                `
+        ..........    
+        ..........    
+        ..........    
+        ..........    
+        ....T.....    
+        ZZZTTTZZZZ    
+        `
+            );
+
+            board.tick();
+
+            expect(scoringSystem.getCurrentScore()).to.equal(10);
+        });
     });
 });
